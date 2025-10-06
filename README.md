@@ -1,18 +1,4 @@
-<div align="center">
-   
-    <h1>Open Source ERP / CRM Accounting Invoice Quote</h1>
-    <p align="center">
-        <p>TPD CRM | Simple To Use</p>
-    </p>
-    
 
-```
- Give a Star ⭐️ & Fork to this project ... Happy coding! 🤩`
-```
-
-
-
-</div>
 
 
 
