@@ -1,0 +1,12 @@
+{
+  "name": "autobahn-espo",
+  "version": "0.1.0",
+  "description": "AutobagnJS lib for Espo.",
+  "main": "autobahn.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yurikuzn/autobahn-espo.git"
+  },
+  "author": "",
+  "license": "MIT"
+}

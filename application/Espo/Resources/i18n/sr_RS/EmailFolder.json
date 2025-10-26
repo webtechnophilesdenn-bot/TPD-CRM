@@ -1,0 +1,10 @@
+{
+  "fields": {
+    "skipNotifications": "Preskoči obaveštenja"
+  },
+  "labels": {
+    "Create EmailFolder": "NapOpportunities ti fasciklu",
+    "Manage Folders": "Upravljanje fasciklama",
+    "Emails": "E-poruke"
+  }
+}
