@@ -1,0 +1,12 @@
+{
+    "entity": true,
+    "tab": true,
+    "acl": true,
+    "customizable": true,
+    "type": "Base",
+    "module": "Custom",
+    "object": true,
+    "layouts": true,
+    "iconClass": "fas fa-cube",
+    "color": "#3498db"
+}

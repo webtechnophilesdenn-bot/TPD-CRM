@@ -6462,6 +6462,21 @@ return (object) [
           'handler' => 'handlers/record/view-user-access',
           'groupIndex' => 4
         ]
+      ],
+      'tabList' => [
+        0 => 'Home',
+        1 => 'Account',
+        2 => 'Contact',
+        3 => 'Lead',
+        4 => 'Opportunity',
+        5 => 'Cemin',
+        6 => 'Email',
+        7 => 'Meeting',
+        8 => 'Call',
+        9 => 'Task',
+        10 => 'Calendar',
+        11 => 'Case',
+        12 => 'KnowledgeBaseArticle'
       ]
     ],
     'GlobalStream' => (object) [
@@ -31840,6 +31855,18 @@ return (object) [
         1 => 'Deferred'
       ],
       'statusFieldLocked' => true
+    ],
+    'Cemin' => (object) [
+      'entity' => true,
+      'tab' => true,
+      'acl' => true,
+      'customizable' => true,
+      'type' => 'Base',
+      'module' => 'Custom',
+      'object' => true,
+      'layouts' => true,
+      'iconClass' => 'fas fa-cube',
+      'color' => '#3498db'
     ]
   ],
   'selectDefs' => (object) [

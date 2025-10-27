@@ -190,7 +190,7 @@ return [
   'displayListViewRecordCount' => true,
   'dashboardLayout' => [
     0 => (object) [
-      'name' => 'My Espo',
+      'name' => 'My Dashboard',
       'layout' => [
         0 => (object) [
           'id' => 'default-activities',
@@ -327,7 +327,7 @@ return [
     0 => 'youtube.com',
     1 => 'google.com'
   ],
-  'microtime' => 1761425418.187056,
+  'microtime' => 1761559792.800244,
   'siteUrl' => 'http://localhost/tpdcrm',
   'fullTextSearchMinLength' => 4
 ];

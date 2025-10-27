@@ -514,6 +514,13 @@ return (object) [
       'edit' => 'all',
       'delete' => 'all',
       'create' => 'yes'
+    ],
+    'Cemin' => (object) [
+      'read' => 'all',
+      'stream' => 'all',
+      'edit' => 'all',
+      'delete' => 'all',
+      'create' => 'yes'
     ]
   ],
   'fieldTable' => (object) [
@@ -591,7 +598,8 @@ return (object) [
     'Reminder' => (object) [],
     'TargetList' => (object) [],
     'TargetListCategory' => (object) [],
-    'Task' => (object) []
+    'Task' => (object) [],
+    'Cemin' => (object) []
   ],
   'assignmentPermission' => 'all',
   'messagePermission' => 'all',
@@ -2235,6 +2243,28 @@ return (object) [
       ]
     ],
     'Task' => (object) [
+      'attributes' => (object) [
+        'read' => (object) [
+          'yes' => [],
+          'no' => []
+        ],
+        'edit' => (object) [
+          'yes' => [],
+          'no' => []
+        ]
+      ],
+      'fields' => (object) [
+        'read' => (object) [
+          'yes' => [],
+          'no' => []
+        ],
+        'edit' => (object) [
+          'yes' => [],
+          'no' => []
+        ]
+      ]
+    ],
+    'Cemin' => (object) [
       'attributes' => (object) [
         'read' => (object) [
           'yes' => [],
