@@ -114,7 +114,7 @@ class Call extends Record
         $invitees = [];
 
         foreach ($targets as $target) {
-            if (!$target instanceof stdClass) {
+            if (!$tarLog instanceof stdClass) {
                 throw new BadRequest("Bad target.");
             }
 

@@ -1,0 +1,9 @@
+{
+    "links": {
+        "tickets": {
+            "type": "hasMany",
+            "entity": "Ticket",
+            "foreign": "lead"
+        }
+    }
+}

@@ -1,0 +1,94 @@
+{
+    "controller": "controllers/record",
+    "iconClass": "fas fa-file-invoice-dollar",
+    "color": "#2ecc71",
+    "kanbanViewMode": true,
+    "dynamicLogic": {
+        "fields": {
+            "paidAmount": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "or",
+                            "value": [
+                                {
+                                    "type": "equals",
+                                    "attribute": "status",
+                                    "value": "Paid"
+                                },
+                                {
+                                    "type": "equals",
+                                    "attribute": "status",
+                                    "value": "Partially Paid"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "filterList": [
+        "all",
+        {
+            "name": "draft",
+            "label": "Draft"
+        },
+        {
+            "name": "sent",
+            "label": "Sent"
+        },
+        {
+            "name": "unpaid",
+            "label": "Unpaid"
+        },
+        {
+            "name": "paid",
+            "label": "Paid"
+        },
+        {
+            "name": "overdue",
+            "label": "Overdue"
+        }
+    ],
+    "boolFilterList": [
+        "onlyMy"
+    ],
+    "selectDefaultFilters": {
+        "filter": "unpaid"
+    },
+    "sidePanels": {
+        "detail": [
+            {
+                "name": "payments",
+                "label": "Payments",
+                "view": "views/record/panels/relationship",
+                "aclScope": "Payment"
+            },
+            {
+                "name": "activities",
+                "label": "Activities",
+                "view": "crm:views/record/panels/activities",
+                "aclScope": "Activities"
+            },
+            {
+                "name": "history",
+                "label": "History",
+                "view": "crm:views/record/panels/history",
+                "aclScope": "Activities"
+            }
+        ]
+    },
+    "relationshipPanels": {
+        "payments": {
+            "create": true,
+            "select": false,
+            "view": "views/record/panels/relationship"
+        },
+        "documents": {
+            "create": true,
+            "select": true,
+            "view": "views/record/panels/relationship"
+        }
+    }
+}

@@ -1,0 +1,225 @@
+{
+    "fields": {
+        "name": {
+            "type": "varchar",
+            "required": true,
+            "maxLength": 255,
+            "trim": true,
+            "audited": true,
+            "index": true
+        },
+        "number": {
+            "type": "varchar",
+            "len": 36,
+            "unique": true,
+            "index": true,
+            "readOnly": true,
+            "layoutDetailDisabled": false,
+            "layoutListDisabled": false,
+            "textFilterDisabled": false
+        },
+        "status": {
+            "type": "enum",
+            "options": [
+                "New",
+                "Assigned",
+                "In Progress",
+                "Pending",
+                "Resolved",
+                "Closed",
+                "Reopened",
+                "Cancelled"
+            ],
+            "default": "New",
+            "style": {
+                "New": "primary",
+                "Assigned": "info",
+                "In Progress": "warning",
+                "Pending": "default",
+                "Resolved": "success",
+                "Closed": "default",
+                "Reopened": "warning",
+                "Cancelled": "danger"
+            },
+            "audited": true,
+            "required": true
+        },
+        "priority": {
+            "type": "enum",
+            "options": [
+                "Low",
+                "Normal",
+                "High",
+                "Urgent"
+            ],
+            "default": "Normal",
+            "style": {
+                "Low": "default",
+                "Normal": "info",
+                "High": "warning",
+                "Urgent": "danger"
+            },
+            "audited": true,
+            "required": true
+        },
+        "type": {
+            "type": "enum",
+            "options": [
+                "Question",
+                "Incident",
+                "Problem",
+                "Feature Request"
+            ],
+            "audited": true
+        },
+        "category": {
+            "type": "enum",
+            "options": [
+                "Technical Support",
+                "Billing",
+                "Sales Inquiry",
+                "General",
+                "Other"
+            ],
+            "audited": true
+        },
+        "description": {
+            "type": "text",
+            "rows": 8
+        },
+        "resolution": {
+            "type": "text",
+            "rows": 6
+        },
+        "account": {
+            "type": "link",
+            "view": "views/fields/parent"
+        },
+        "contact": {
+            "type": "link"
+        },
+        "lead": {
+            "type": "link"
+        },
+        "inboundEmail": {
+            "type": "link",
+            "readOnly": true
+        },
+        "assignedUser": {
+            "type": "link",
+            "required": false,
+            "view": "views/fields/assigned-user"
+        },
+        "teams": {
+            "type": "linkMultiple",
+            "view": "views/fields/teams"
+        },
+        "createdAt": {
+            "type": "datetime",
+            "readOnly": true
+        },
+        "modifiedAt": {
+            "type": "datetime",
+            "readOnly": true
+        },
+        "createdBy": {
+            "type": "link",
+            "readOnly": true
+        },
+        "modifiedBy": {
+            "type": "link",
+            "readOnly": true
+        }
+    },
+    "links": {
+        "assignedUser": {
+            "type": "belongsTo",
+            "entity": "User"
+        },
+        "teams": {
+            "type": "hasMany",
+            "entity": "Team",
+            "relationName": "EntityTeam",
+            "layoutRelationshipsDisabled": true
+        },
+        "createdBy": {
+            "type": "belongsTo",
+            "entity": "User"
+        },
+        "modifiedBy": {
+            "type": "belongsTo",
+            "entity": "User"
+        },
+        "account": {
+            "type": "belongsTo",
+            "entity": "Account",
+            "foreign": "tickets"
+        },
+        "contact": {
+            "type": "belongsTo",
+            "entity": "Contact",
+            "foreign": "tickets"
+        },
+        "lead": {
+            "type": "belongsTo",
+            "entity": "Lead",
+            "foreign": "tickets"
+        },
+        "inboundEmail": {
+            "type": "belongsTo",
+            "entity": "InboundEmail"
+        },
+        "meetings": {
+            "type": "hasMany",
+            "entity": "Meeting",
+            "foreign": "parent",
+            "layoutRelationshipsDisabled": true
+        },
+        "calls": {
+            "type": "hasMany",
+            "entity": "Call",
+            "foreign": "parent",
+            "layoutRelationshipsDisabled": true
+        },
+        "tasks": {
+            "type": "hasChildren",
+            "entity": "Task",
+            "foreign": "parent",
+            "layoutRelationshipsDisabled": true
+        },
+        "emails": {
+            "type": "hasChildren",
+            "entity": "Email",
+            "foreign": "parent",
+            "layoutRelationshipsDisabled": true
+        },
+        "documents": {
+            "type": "hasMany",
+            "entity": "Document",
+            "foreign": "tickets",
+            "audited": true
+        }
+    },
+    "collection": {
+        "orderBy": "createdAt",
+        "order": "desc",
+        "textFilterFields": ["name", "number"]
+    },
+    "indexes": {
+        "name": {
+            "columns": ["name", "deleted"]
+        },
+        "status": {
+            "columns": ["status", "deleted"]
+        },
+        "assignedUser": {
+            "columns": ["assignedUserId", "deleted"]
+        },
+        "createdAt": {
+            "columns": ["createdAt", "deleted"]
+        },
+        "number": {
+            "columns": ["number", "deleted"]
+        }
+    }
+}

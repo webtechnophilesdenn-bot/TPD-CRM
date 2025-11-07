@@ -1,0 +1,54 @@
+{
+    "controller": "controllers/record",
+    "iconClass": "fas fa-money-bill-wave",
+    "color": "#27ae60",
+    "kanbanViewMode": true,
+    "filterList": [
+        "all",
+        {
+            "name": "pending",
+            "label": "Pending"
+        },
+        {
+            "name": "completed",
+            "label": "Completed"
+        },
+        {
+            "name": "failed",
+            "label": "Failed"
+        },
+        {
+            "name": "recent",
+            "label": "Recent"
+        }
+    ],
+    "boolFilterList": [
+        "onlyMy"
+    ],
+    "selectDefaultFilters": {
+        "filter": "completed"
+    },
+    "sidePanels": {
+        "detail": [
+            {
+                "name": "activities",
+                "label": "Activities",
+                "view": "crm:views/record/panels/activities",
+                "aclScope": "Activities"
+            },
+            {
+                "name": "history",
+                "label": "History",
+                "view": "crm:views/record/panels/history",
+                "aclScope": "Activities"
+            }
+        ]
+    },
+    "relationshipPanels": {
+        "documents": {
+            "create": true,
+            "select": true,
+            "view": "views/record/panels/relationship"
+        }
+    }
+}

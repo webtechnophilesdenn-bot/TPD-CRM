@@ -1,0 +1,76 @@
+{
+    "fields": {
+        "name": {
+            "type": "varchar",
+            "required": true,
+            "maxLength": 255
+        },
+        "number": {
+            "type": "autoincrement",
+            "unique": true,
+            "prefix": "EXP-",
+            "padLength": 5
+        },
+        "status": {
+            "type": "enum",
+            "options": ["Draft", "Submitted", "Approved", "Rejected", "Paid", "Cancelled"],
+            "default": "Draft",
+            "style": {
+                "Draft": "default",
+                "Submitted": "info",
+                "Approved": "success",
+                "Rejected": "danger",
+                "Paid": "success",
+                "Cancelled": "default"
+            },
+            "required": true
+        },
+        "expenseDate": {
+            "type": "date",
+            "required": true
+        },
+        "amount": {
+            "type": "currency",
+            "required": true
+        },
+        "category": {
+            "type": "enum",
+            "options": ["Travel", "Meals", "Office Supplies", "Marketing", "Other"]
+        },
+        "isReimbursable": {
+            "type": "bool",
+            "default": false
+        },
+        "description": {
+            "type": "text"
+        },
+        "account": {
+            "type": "link"
+        },
+        "assignedUser": {
+            "type": "link"
+        },
+        "teams": {
+            "type": "linkMultiple"
+        }
+    },
+    "links": {
+        "account": {
+            "type": "belongsTo",
+            "entity": "Account"
+        },
+        "assignedUser": {
+            "type": "belongsTo",
+            "entity": "User"
+        },
+        "teams": {
+            "type": "hasMany",
+            "entity": "Team",
+            "relationName": "EntityTeam"
+        }
+    },
+    "collection": {
+        "orderBy": "expenseDate",
+        "order": "desc"
+    }
+}

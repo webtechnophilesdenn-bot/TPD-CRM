@@ -11886,6 +11886,508 @@ return [
       'order' => 'ASC'
     ]
   ],
+  'Ticket' => [
+    'attributes' => [
+      'id' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'id'
+      ],
+      'name' => [
+        'type' => 'varchar',
+        'len' => 255,
+        'index' => true,
+        'fieldType' => 'varchar'
+      ],
+      'deleted' => [
+        'type' => 'bool',
+        'default' => false
+      ],
+      'number' => [
+        'type' => 'varchar',
+        'len' => 36,
+        'unique' => true,
+        'index' => true,
+        'fieldType' => 'varchar'
+      ],
+      'status' => [
+        'type' => 'varchar',
+        'index' => true,
+        'default' => 'New',
+        'fieldType' => 'varchar',
+        'len' => 255
+      ],
+      'priority' => [
+        'type' => 'varchar',
+        'index' => true,
+        'default' => 'Normal',
+        'fieldType' => 'varchar',
+        'len' => 255
+      ],
+      'description' => [
+        'type' => 'text',
+        'fieldType' => 'text'
+      ],
+      'createdAt' => [
+        'type' => 'datetime',
+        'notNull' => false,
+        'fieldType' => 'datetime'
+      ],
+      'modifiedAt' => [
+        'type' => 'datetime',
+        'notNull' => false,
+        'fieldType' => 'datetime'
+      ],
+      'type' => [
+        'type' => 'varchar',
+        'fieldType' => 'varchar',
+        'len' => 255
+      ],
+      'category' => [
+        'type' => 'varchar',
+        'fieldType' => 'varchar',
+        'len' => 255
+      ],
+      'resolution' => [
+        'type' => 'text',
+        'fieldType' => 'text'
+      ],
+      'streamUpdatedAt' => [
+        'type' => 'datetime',
+        'notNull' => false,
+        'fieldType' => 'datetime'
+      ],
+      'assignedUserId' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'foreignId',
+        'index' => true,
+        'attributeRole' => 'id',
+        'fieldType' => 'link',
+        'notNull' => false
+      ],
+      'assignedUserName' => [
+        'type' => 'foreign',
+        'notStorable' => true,
+        'attributeRole' => 'name',
+        'fieldType' => 'link',
+        'relation' => 'assignedUser',
+        'foreign' => 'name',
+        'foreignType' => 'varchar'
+      ],
+      'teamsIds' => [
+        'type' => 'jsonArray',
+        'notStorable' => true,
+        'isLinkMultipleIdList' => true,
+        'relation' => 'teams',
+        'isUnordered' => true,
+        'attributeRole' => 'idList',
+        'fieldType' => 'linkMultiple'
+      ],
+      'teamsNames' => [
+        'type' => 'jsonObject',
+        'notStorable' => true,
+        'isLinkMultipleNameMap' => true,
+        'attributeRole' => 'nameMap',
+        'fieldType' => 'linkMultiple'
+      ],
+      'contactId' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'foreignId',
+        'index' => true,
+        'attributeRole' => 'id',
+        'fieldType' => 'link',
+        'notNull' => false
+      ],
+      'contactName' => [
+        'type' => 'foreign',
+        'notStorable' => true,
+        'attributeRole' => 'name',
+        'fieldType' => 'link',
+        'relation' => 'contact',
+        'foreign' => 'name',
+        'foreignType' => 'varchar'
+      ],
+      'createdById' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'foreignId',
+        'index' => true,
+        'attributeRole' => 'id',
+        'fieldType' => 'link',
+        'notNull' => false
+      ],
+      'createdByName' => [
+        'type' => 'foreign',
+        'notStorable' => true,
+        'attributeRole' => 'name',
+        'fieldType' => 'link',
+        'relation' => 'createdBy',
+        'foreign' => 'name',
+        'foreignType' => 'varchar'
+      ],
+      'modifiedById' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'foreignId',
+        'index' => true,
+        'attributeRole' => 'id',
+        'fieldType' => 'link',
+        'notNull' => false
+      ],
+      'modifiedByName' => [
+        'type' => 'foreign',
+        'notStorable' => true,
+        'attributeRole' => 'name',
+        'fieldType' => 'link',
+        'relation' => 'modifiedBy',
+        'foreign' => 'name',
+        'foreignType' => 'varchar'
+      ],
+      'accountId' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'foreignId',
+        'index' => true,
+        'attributeRole' => 'id',
+        'fieldType' => 'link',
+        'notNull' => false
+      ],
+      'accountName' => [
+        'type' => 'foreign',
+        'notStorable' => true,
+        'attributeRole' => 'name',
+        'fieldType' => 'link',
+        'relation' => 'account',
+        'foreign' => 'name',
+        'foreignType' => 'varchar'
+      ],
+      'leadId' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'foreignId',
+        'index' => true,
+        'attributeRole' => 'id',
+        'fieldType' => 'link',
+        'notNull' => false
+      ],
+      'leadName' => [
+        'type' => 'foreign',
+        'notStorable' => true,
+        'attributeRole' => 'name',
+        'fieldType' => 'link',
+        'relation' => 'lead',
+        'foreign' => 'name',
+        'foreignType' => 'varchar'
+      ],
+      'inboundEmailId' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'foreignId',
+        'index' => true,
+        'attributeRole' => 'id',
+        'fieldType' => 'link',
+        'notNull' => false
+      ],
+      'inboundEmailName' => [
+        'type' => 'foreign',
+        'notStorable' => true,
+        'attributeRole' => 'name',
+        'fieldType' => 'link',
+        'relation' => 'inboundEmail',
+        'foreign' => 'name',
+        'foreignType' => 'varchar'
+      ],
+      'isFollowed' => [
+        'type' => 'bool',
+        'notStorable' => true,
+        'notExportable' => true,
+        'default' => false
+      ],
+      'followersIds' => [
+        'type' => 'jsonArray',
+        'notStorable' => true,
+        'notExportable' => true
+      ],
+      'followersNames' => [
+        'type' => 'jsonObject',
+        'notStorable' => true,
+        'notExportable' => true
+      ],
+      'documentsIds' => [
+        'type' => 'jsonArray',
+        'notStorable' => true,
+        'isLinkStub' => true
+      ],
+      'documentsNames' => [
+        'type' => 'jsonObject',
+        'notStorable' => true,
+        'isLinkStub' => true
+      ],
+      'emailsIds' => [
+        'type' => 'jsonArray',
+        'notStorable' => true,
+        'isLinkStub' => true
+      ],
+      'emailsNames' => [
+        'type' => 'jsonObject',
+        'notStorable' => true,
+        'isLinkStub' => true
+      ],
+      'tasksIds' => [
+        'type' => 'jsonArray',
+        'notStorable' => true,
+        'isLinkStub' => true
+      ],
+      'tasksNames' => [
+        'type' => 'jsonObject',
+        'notStorable' => true,
+        'isLinkStub' => true
+      ],
+      'callsIds' => [
+        'type' => 'jsonArray',
+        'notStorable' => true,
+        'isLinkStub' => true
+      ],
+      'callsNames' => [
+        'type' => 'jsonObject',
+        'notStorable' => true,
+        'isLinkStub' => true
+      ],
+      'meetingsIds' => [
+        'type' => 'jsonArray',
+        'notStorable' => true,
+        'isLinkStub' => true
+      ],
+      'meetingsNames' => [
+        'type' => 'jsonObject',
+        'notStorable' => true,
+        'isLinkStub' => true
+      ]
+    ],
+    'relations' => [
+      'documents' => [
+        'type' => 'hasMany',
+        'entity' => 'Document',
+        'foreignKey' => 'ticketsId',
+        'foreign' => 'tickets'
+      ],
+      'emails' => [
+        'type' => 'hasChildren',
+        'entity' => 'Email',
+        'foreignKey' => 'parentId',
+        'foreignType' => 'parentType',
+        'foreign' => 'parent'
+      ],
+      'tasks' => [
+        'type' => 'hasChildren',
+        'entity' => 'Task',
+        'foreignKey' => 'parentId',
+        'foreignType' => 'parentType',
+        'foreign' => 'parent'
+      ],
+      'calls' => [
+        'type' => 'hasMany',
+        'entity' => 'Call',
+        'foreignKey' => 'parentId',
+        'foreign' => 'parent'
+      ],
+      'meetings' => [
+        'type' => 'hasMany',
+        'entity' => 'Meeting',
+        'foreignKey' => 'parentId',
+        'foreign' => 'parent'
+      ],
+      'inboundEmail' => [
+        'type' => 'belongsTo',
+        'entity' => 'InboundEmail',
+        'key' => 'inboundEmailId',
+        'foreignKey' => 'id',
+        'foreign' => NULL
+      ],
+      'lead' => [
+        'type' => 'belongsTo',
+        'entity' => 'Lead',
+        'key' => 'leadId',
+        'foreignKey' => 'id',
+        'foreign' => 'tickets'
+      ],
+      'account' => [
+        'type' => 'belongsTo',
+        'entity' => 'Account',
+        'key' => 'accountId',
+        'foreignKey' => 'id',
+        'foreign' => 'tickets'
+      ],
+      'modifiedBy' => [
+        'type' => 'belongsTo',
+        'entity' => 'User',
+        'key' => 'modifiedById',
+        'foreignKey' => 'id',
+        'foreign' => NULL
+      ],
+      'createdBy' => [
+        'type' => 'belongsTo',
+        'entity' => 'User',
+        'key' => 'createdById',
+        'foreignKey' => 'id',
+        'foreign' => NULL
+      ],
+      'contact' => [
+        'type' => 'belongsTo',
+        'entity' => 'Contact',
+        'key' => 'contactId',
+        'foreignKey' => 'id',
+        'foreign' => 'tickets'
+      ],
+      'teams' => [
+        'type' => 'manyMany',
+        'entity' => 'Team',
+        'relationName' => 'entityTeam',
+        'midKeys' => [
+          0 => 'entityId',
+          1 => 'teamId'
+        ],
+        'conditions' => [
+          'entityType' => 'Ticket'
+        ],
+        'additionalColumns' => [
+          'entityType' => [
+            'type' => 'varchar',
+            'len' => 100
+          ]
+        ],
+        'indexes' => [
+          'entityId' => [
+            'columns' => [
+              0 => 'entityId'
+            ],
+            'key' => 'IDX_ENTITY_ID'
+          ],
+          'teamId' => [
+            'columns' => [
+              0 => 'teamId'
+            ],
+            'key' => 'IDX_TEAM_ID'
+          ],
+          'entityId_teamId_entityType' => [
+            'type' => 'unique',
+            'columns' => [
+              0 => 'entityId',
+              1 => 'teamId',
+              2 => 'entityType'
+            ],
+            'key' => 'UNIQ_ENTITY_ID_TEAM_ID_ENTITY_TYPE'
+          ]
+        ]
+      ],
+      'assignedUser' => [
+        'type' => 'belongsTo',
+        'entity' => 'User',
+        'key' => 'assignedUserId',
+        'foreignKey' => 'id',
+        'foreign' => NULL
+      ]
+    ],
+    'indexes' => [
+      'name' => [
+        'columns' => [
+          0 => 'name',
+          1 => 'deleted'
+        ],
+        'key' => 'IDX_NAME'
+      ],
+      'status' => [
+        'columns' => [
+          0 => 'status',
+          1 => 'deleted'
+        ],
+        'key' => 'IDX_STATUS'
+      ],
+      'assignedUser' => [
+        'columns' => [
+          0 => 'assignedUserId',
+          1 => 'deleted'
+        ],
+        'key' => 'IDX_ASSIGNED_USER'
+      ],
+      'createdAt' => [
+        'columns' => [
+          0 => 'createdAt',
+          1 => 'deleted'
+        ],
+        'key' => 'IDX_CREATED_AT'
+      ],
+      'number' => [
+        'columns' => [
+          0 => 'number',
+          1 => 'deleted'
+        ],
+        'key' => 'IDX_NUMBER'
+      ],
+      'priority' => [
+        'type' => 'index',
+        'columns' => [
+          0 => 'priority'
+        ],
+        'key' => 'IDX_PRIORITY'
+      ],
+      'assignedUserId' => [
+        'type' => 'index',
+        'columns' => [
+          0 => 'assignedUserId'
+        ],
+        'key' => 'IDX_ASSIGNED_USER_ID'
+      ],
+      'contactId' => [
+        'type' => 'index',
+        'columns' => [
+          0 => 'contactId'
+        ],
+        'key' => 'IDX_CONTACT_ID'
+      ],
+      'createdById' => [
+        'type' => 'index',
+        'columns' => [
+          0 => 'createdById'
+        ],
+        'key' => 'IDX_CREATED_BY_ID'
+      ],
+      'modifiedById' => [
+        'type' => 'index',
+        'columns' => [
+          0 => 'modifiedById'
+        ],
+        'key' => 'IDX_MODIFIED_BY_ID'
+      ],
+      'accountId' => [
+        'type' => 'index',
+        'columns' => [
+          0 => 'accountId'
+        ],
+        'key' => 'IDX_ACCOUNT_ID'
+      ],
+      'leadId' => [
+        'type' => 'index',
+        'columns' => [
+          0 => 'leadId'
+        ],
+        'key' => 'IDX_LEAD_ID'
+      ],
+      'inboundEmailId' => [
+        'type' => 'index',
+        'columns' => [
+          0 => 'inboundEmailId'
+        ],
+        'key' => 'IDX_INBOUND_EMAIL_ID'
+      ]
+    ],
+    'collection' => [
+      'orderBy' => 'createdAt',
+      'order' => 'DESC'
+    ]
+  ],
   'TwoFactorCode' => [
     'attributes' => [
       'id' => [
@@ -17080,6 +17582,16 @@ return [
         'dbType' => 'bigint',
         'notExportable' => true
       ],
+      'ticketsIds' => [
+        'type' => 'jsonArray',
+        'notStorable' => true,
+        'isLinkStub' => true
+      ],
+      'ticketsNames' => [
+        'type' => 'jsonObject',
+        'notStorable' => true,
+        'isLinkStub' => true
+      ],
       'portalUsersIds' => [
         'type' => 'jsonArray',
         'notStorable' => true,
@@ -17321,6 +17833,12 @@ return [
             'key' => 'UNIQ_ENTITY_ID_PHONE_NUMBER_ID_ENTITY_TYPE'
           ]
         ]
+      ],
+      'tickets' => [
+        'type' => 'hasMany',
+        'entity' => 'Ticket',
+        'foreignKey' => 'accountId',
+        'foreign' => 'account'
       ],
       'originalLead' => [
         'type' => 'hasOne',
@@ -22338,6 +22856,16 @@ return [
         'notStorable' => true,
         'notExportable' => true
       ],
+      'ticketsIds' => [
+        'type' => 'jsonArray',
+        'notStorable' => true,
+        'isLinkStub' => true
+      ],
+      'ticketsNames' => [
+        'type' => 'jsonObject',
+        'notStorable' => true,
+        'isLinkStub' => true
+      ],
       'tasksPrimaryIds' => [
         'type' => 'jsonArray',
         'notStorable' => true,
@@ -22539,6 +23067,12 @@ return [
             'key' => 'UNIQ_ENTITY_ID_PHONE_NUMBER_ID_ENTITY_TYPE'
           ]
         ]
+      ],
+      'tickets' => [
+        'type' => 'hasMany',
+        'entity' => 'Ticket',
+        'foreignKey' => 'contactId',
+        'foreign' => 'contact'
       ],
       'tasksPrimary' => [
         'type' => 'hasMany',
@@ -26210,6 +26744,16 @@ return [
         'notStorable' => true,
         'notExportable' => true
       ],
+      'ticketsIds' => [
+        'type' => 'jsonArray',
+        'notStorable' => true,
+        'isLinkStub' => true
+      ],
+      'ticketsNames' => [
+        'type' => 'jsonObject',
+        'notStorable' => true,
+        'isLinkStub' => true
+      ],
       'documentsIds' => [
         'type' => 'jsonArray',
         'notStorable' => true,
@@ -26371,6 +26915,12 @@ return [
             'key' => 'UNIQ_ENTITY_ID_PHONE_NUMBER_ID_ENTITY_TYPE'
           ]
         ]
+      ],
+      'tickets' => [
+        'type' => 'hasMany',
+        'entity' => 'Ticket',
+        'foreignKey' => 'leadId',
+        'foreign' => 'lead'
       ],
       'documents' => [
         'type' => 'manyMany',
@@ -32014,6 +32564,3041 @@ return [
           0 => 'emailId'
         ],
         'key' => 'IDX_EMAIL_ID'
+      ]
+    ],
+    'collection' => [
+      'orderBy' => 'createdAt',
+      'order' => 'DESC'
+    ]
+  ],
+  'Expense' => [
+    'attributes' => [
+      'id' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'id'
+      ],
+      'name' => [
+        'type' => 'varchar',
+        'len' => 255,
+        'fieldType' => 'varchar'
+      ],
+      'deleted' => [
+        'type' => 'bool',
+        'default' => false
+      ],
+      'number' => [
+        'type' => 'int',
+        'autoincrement' => true,
+        'unique' => true,
+        'fieldType' => 'int',
+        'len' => 11
+      ],
+      'status' => [
+        'type' => 'varchar',
+        'default' => 'Draft',
+        'fieldType' => 'varchar',
+        'len' => 255
+      ],
+      'expenseDate' => [
+        'type' => 'date',
+        'fieldType' => 'date'
+      ],
+      'amount' => [
+        'type' => 'float',
+        'fieldType' => 'currency',
+        'attributeRole' => 'value',
+        'order' => [
+          'order' => [
+            0 => [
+              0 => 'MUL:(amount, amountCurrencyRate.rate)',
+              1 => '{direction}'
+            ]
+          ],
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'amountCurrencyRate',
+              2 => [
+                'amountCurrencyRate.id:' => 'amountCurrency'
+              ]
+            ]
+          ],
+          'additionalSelect' => [
+            0 => 'amountCurrencyRate.rate'
+          ]
+        ]
+      ],
+      'category' => [
+        'type' => 'varchar',
+        'fieldType' => 'varchar',
+        'len' => 255
+      ],
+      'isReimbursable' => [
+        'type' => 'bool',
+        'notNull' => true,
+        'default' => false,
+        'fieldType' => 'bool'
+      ],
+      'description' => [
+        'type' => 'text',
+        'fieldType' => 'text'
+      ],
+      'amountCurrency' => [
+        'type' => 'varchar',
+        'len' => 3,
+        'fieldType' => 'currency',
+        'attributeRole' => 'currency'
+      ],
+      'streamUpdatedAt' => [
+        'type' => 'datetime',
+        'notNull' => false,
+        'fieldType' => 'datetime'
+      ],
+      'amountConverted' => [
+        'type' => 'float',
+        'select' => [
+          'select' => 'MUL:(amount, amountCurrencyRate.rate)',
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'amountCurrencyRate',
+              2 => [
+                'amountCurrencyRate.id:' => 'amountCurrency'
+              ]
+            ]
+          ]
+        ],
+        'selectForeign' => [
+          'select' => 'MUL:({alias}.amount, amountCurrencyRateExpense{alias}Foreign.rate)',
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'amountCurrencyRateExpense{alias}Foreign',
+              2 => [
+                'amountCurrencyRateExpense{alias}Foreign.id:' => '{alias}.amountCurrency'
+              ]
+            ]
+          ]
+        ],
+        'where' => [
+          '=' => [
+            'whereClause' => [
+              'MUL:(amount, amountCurrencyRate.rate)=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'amountCurrencyRate',
+                2 => [
+                  'amountCurrencyRate.id:' => 'amountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '>' => [
+            'whereClause' => [
+              'MUL:(amount, amountCurrencyRate.rate)>' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'amountCurrencyRate',
+                2 => [
+                  'amountCurrencyRate.id:' => 'amountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '<' => [
+            'whereClause' => [
+              'MUL:(amount, amountCurrencyRate.rate)<' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'amountCurrencyRate',
+                2 => [
+                  'amountCurrencyRate.id:' => 'amountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '>=' => [
+            'whereClause' => [
+              'MUL:(amount, amountCurrencyRate.rate)>=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'amountCurrencyRate',
+                2 => [
+                  'amountCurrencyRate.id:' => 'amountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '<=' => [
+            'whereClause' => [
+              'MUL:(amount, amountCurrencyRate.rate)<=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'amountCurrencyRate',
+                2 => [
+                  'amountCurrencyRate.id:' => 'amountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '<>' => [
+            'whereClause' => [
+              'MUL:(amount, amountCurrencyRate.rate)!=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'amountCurrencyRate',
+                2 => [
+                  'amountCurrencyRate.id:' => 'amountCurrency'
+                ]
+              ]
+            ]
+          ],
+          'IS NULL' => [
+            'whereClause' => [
+              'amount=' => NULL
+            ]
+          ],
+          'IS NOT NULL' => [
+            'whereClause' => [
+              'amount!=' => NULL
+            ]
+          ]
+        ],
+        'notStorable' => true,
+        'order' => [
+          'order' => [
+            0 => [
+              0 => 'MUL:(amount, amountCurrencyRate.rate)',
+              1 => '{direction}'
+            ]
+          ],
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'amountCurrencyRate',
+              2 => [
+                'amountCurrencyRate.id:' => 'amountCurrency'
+              ]
+            ]
+          ],
+          'additionalSelect' => [
+            0 => 'amountCurrencyRate.rate'
+          ]
+        ],
+        'attributeRole' => 'valueConverted',
+        'fieldType' => 'currency'
+      ],
+      'accountId' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'foreignId',
+        'index' => true,
+        'attributeRole' => 'id',
+        'fieldType' => 'link',
+        'notNull' => false
+      ],
+      'accountName' => [
+        'type' => 'foreign',
+        'notStorable' => true,
+        'attributeRole' => 'name',
+        'fieldType' => 'link',
+        'relation' => 'account',
+        'foreign' => 'name',
+        'foreignType' => 'varchar'
+      ],
+      'assignedUserId' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'foreignId',
+        'index' => true,
+        'attributeRole' => 'id',
+        'fieldType' => 'link',
+        'notNull' => false
+      ],
+      'assignedUserName' => [
+        'type' => 'foreign',
+        'notStorable' => true,
+        'attributeRole' => 'name',
+        'fieldType' => 'link',
+        'relation' => 'assignedUser',
+        'foreign' => 'name',
+        'foreignType' => 'varchar'
+      ],
+      'teamsIds' => [
+        'type' => 'jsonArray',
+        'notStorable' => true,
+        'isLinkMultipleIdList' => true,
+        'relation' => 'teams',
+        'isUnordered' => true,
+        'attributeRole' => 'idList',
+        'fieldType' => 'linkMultiple'
+      ],
+      'teamsNames' => [
+        'type' => 'jsonObject',
+        'notStorable' => true,
+        'isLinkMultipleNameMap' => true,
+        'attributeRole' => 'nameMap',
+        'fieldType' => 'linkMultiple'
+      ],
+      'isFollowed' => [
+        'type' => 'bool',
+        'notStorable' => true,
+        'notExportable' => true,
+        'default' => false
+      ],
+      'followersIds' => [
+        'type' => 'jsonArray',
+        'notStorable' => true,
+        'notExportable' => true
+      ],
+      'followersNames' => [
+        'type' => 'jsonObject',
+        'notStorable' => true,
+        'notExportable' => true
+      ]
+    ],
+    'relations' => [
+      'teams' => [
+        'type' => 'manyMany',
+        'entity' => 'Team',
+        'relationName' => 'entityTeam',
+        'midKeys' => [
+          0 => 'entityId',
+          1 => 'teamId'
+        ],
+        'conditions' => [
+          'entityType' => 'Expense'
+        ],
+        'additionalColumns' => [
+          'entityType' => [
+            'type' => 'varchar',
+            'len' => 100
+          ]
+        ],
+        'indexes' => [
+          'entityId' => [
+            'columns' => [
+              0 => 'entityId'
+            ],
+            'key' => 'IDX_ENTITY_ID'
+          ],
+          'teamId' => [
+            'columns' => [
+              0 => 'teamId'
+            ],
+            'key' => 'IDX_TEAM_ID'
+          ],
+          'entityId_teamId_entityType' => [
+            'type' => 'unique',
+            'columns' => [
+              0 => 'entityId',
+              1 => 'teamId',
+              2 => 'entityType'
+            ],
+            'key' => 'UNIQ_ENTITY_ID_TEAM_ID_ENTITY_TYPE'
+          ]
+        ]
+      ],
+      'assignedUser' => [
+        'type' => 'belongsTo',
+        'entity' => 'User',
+        'key' => 'assignedUserId',
+        'foreignKey' => 'id',
+        'foreign' => NULL
+      ],
+      'account' => [
+        'type' => 'belongsTo',
+        'entity' => 'Account',
+        'key' => 'accountId',
+        'foreignKey' => 'id',
+        'foreign' => NULL
+      ]
+    ],
+    'indexes' => [
+      'number' => [
+        'type' => 'unique',
+        'columns' => [
+          0 => 'number'
+        ],
+        'key' => 'UNIQ_NUMBER'
+      ],
+      'accountId' => [
+        'type' => 'index',
+        'columns' => [
+          0 => 'accountId'
+        ],
+        'key' => 'IDX_ACCOUNT_ID'
+      ],
+      'assignedUserId' => [
+        'type' => 'index',
+        'columns' => [
+          0 => 'assignedUserId'
+        ],
+        'key' => 'IDX_ASSIGNED_USER_ID'
+      ]
+    ],
+    'collection' => [
+      'orderBy' => 'expenseDate',
+      'order' => 'DESC'
+    ]
+  ],
+  'Invoice' => [
+    'attributes' => [
+      'id' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'id'
+      ],
+      'name' => [
+        'type' => 'varchar',
+        'len' => 255,
+        'index' => true,
+        'fieldType' => 'varchar'
+      ],
+      'deleted' => [
+        'type' => 'bool',
+        'default' => false
+      ],
+      'number' => [
+        'type' => 'varchar',
+        'len' => 36,
+        'unique' => true,
+        'index' => true,
+        'fieldType' => 'varchar'
+      ],
+      'status' => [
+        'type' => 'varchar',
+        'default' => 'Draft',
+        'fieldType' => 'varchar',
+        'len' => 255
+      ],
+      'invoiceDate' => [
+        'type' => 'date',
+        'notNull' => false,
+        'fieldType' => 'date'
+      ],
+      'dueDate' => [
+        'type' => 'date',
+        'notNull' => false,
+        'fieldType' => 'date'
+      ],
+      'amount' => [
+        'type' => 'float',
+        'fieldType' => 'currency',
+        'attributeRole' => 'value',
+        'order' => [
+          'order' => [
+            0 => [
+              0 => 'MUL:(amount, amountCurrencyRate.rate)',
+              1 => '{direction}'
+            ]
+          ],
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'amountCurrencyRate',
+              2 => [
+                'amountCurrencyRate.id:' => 'amountCurrency'
+              ]
+            ]
+          ],
+          'additionalSelect' => [
+            0 => 'amountCurrencyRate.rate'
+          ]
+        ]
+      ],
+      'taxAmount' => [
+        'type' => 'float',
+        'default' => 0,
+        'fieldType' => 'currency',
+        'attributeRole' => 'value',
+        'order' => [
+          'order' => [
+            0 => [
+              0 => 'MUL:(taxAmount, taxAmountCurrencyRate.rate)',
+              1 => '{direction}'
+            ]
+          ],
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'taxAmountCurrencyRate',
+              2 => [
+                'taxAmountCurrencyRate.id:' => 'taxAmountCurrency'
+              ]
+            ]
+          ],
+          'additionalSelect' => [
+            0 => 'taxAmountCurrencyRate.rate'
+          ]
+        ]
+      ],
+      'discountAmount' => [
+        'type' => 'float',
+        'default' => 0,
+        'fieldType' => 'currency',
+        'attributeRole' => 'value',
+        'order' => [
+          'order' => [
+            0 => [
+              0 => 'MUL:(discountAmount, discountAmountCurrencyRate.rate)',
+              1 => '{direction}'
+            ]
+          ],
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'discountAmountCurrencyRate',
+              2 => [
+                'discountAmountCurrencyRate.id:' => 'discountAmountCurrency'
+              ]
+            ]
+          ],
+          'additionalSelect' => [
+            0 => 'discountAmountCurrencyRate.rate'
+          ]
+        ]
+      ],
+      'grandTotal' => [
+        'type' => 'float',
+        'notStorable' => true,
+        'fieldType' => 'currency',
+        'attributeRole' => 'value'
+      ],
+      'paidAmount' => [
+        'type' => 'float',
+        'default' => 0,
+        'fieldType' => 'currency',
+        'attributeRole' => 'value',
+        'order' => [
+          'order' => [
+            0 => [
+              0 => 'MUL:(paidAmount, paidAmountCurrencyRate.rate)',
+              1 => '{direction}'
+            ]
+          ],
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'paidAmountCurrencyRate',
+              2 => [
+                'paidAmountCurrencyRate.id:' => 'paidAmountCurrency'
+              ]
+            ]
+          ],
+          'additionalSelect' => [
+            0 => 'paidAmountCurrencyRate.rate'
+          ]
+        ]
+      ],
+      'balanceAmount' => [
+        'type' => 'float',
+        'notStorable' => true,
+        'fieldType' => 'currency',
+        'attributeRole' => 'value'
+      ],
+      'description' => [
+        'type' => 'text',
+        'fieldType' => 'text'
+      ],
+      'termsAndConditions' => [
+        'type' => 'text',
+        'fieldType' => 'text'
+      ],
+      'createdAt' => [
+        'type' => 'datetime',
+        'notNull' => false,
+        'fieldType' => 'datetime'
+      ],
+      'modifiedAt' => [
+        'type' => 'datetime',
+        'notNull' => false,
+        'fieldType' => 'datetime'
+      ],
+      'amountCurrency' => [
+        'type' => 'varchar',
+        'len' => 3,
+        'fieldType' => 'currency',
+        'attributeRole' => 'currency'
+      ],
+      'taxAmountCurrency' => [
+        'type' => 'varchar',
+        'len' => 3,
+        'fieldType' => 'currency',
+        'attributeRole' => 'currency'
+      ],
+      'discountAmountCurrency' => [
+        'type' => 'varchar',
+        'len' => 3,
+        'fieldType' => 'currency',
+        'attributeRole' => 'currency'
+      ],
+      'grandTotalCurrency' => [
+        'type' => 'varchar',
+        'len' => 3,
+        'notStorable' => true,
+        'fieldType' => 'currency',
+        'attributeRole' => 'currency'
+      ],
+      'paidAmountCurrency' => [
+        'type' => 'varchar',
+        'len' => 3,
+        'fieldType' => 'currency',
+        'attributeRole' => 'currency'
+      ],
+      'balanceAmountCurrency' => [
+        'type' => 'varchar',
+        'len' => 3,
+        'notStorable' => true,
+        'fieldType' => 'currency',
+        'attributeRole' => 'currency'
+      ],
+      'billingAddressStreet' => [
+        'type' => 'text',
+        'dbType' => 'varchar',
+        'len' => 255,
+        'fieldType' => 'text'
+      ],
+      'billingAddressCity' => [
+        'type' => 'varchar',
+        'len' => 100,
+        'fieldType' => 'varchar'
+      ],
+      'billingAddressState' => [
+        'type' => 'varchar',
+        'len' => 100,
+        'fieldType' => 'varchar'
+      ],
+      'billingAddressCountry' => [
+        'type' => 'varchar',
+        'len' => 100,
+        'fieldType' => 'varchar'
+      ],
+      'billingAddressPostalCode' => [
+        'type' => 'varchar',
+        'len' => 40,
+        'fieldType' => 'varchar'
+      ],
+      'billingAddressMap' => [
+        'type' => 'varchar',
+        'notExportable' => true,
+        'notStorable' => true,
+        'fieldType' => 'map'
+      ],
+      'shippingAddressStreet' => [
+        'type' => 'text',
+        'dbType' => 'varchar',
+        'len' => 255,
+        'fieldType' => 'text'
+      ],
+      'shippingAddressCity' => [
+        'type' => 'varchar',
+        'len' => 100,
+        'fieldType' => 'varchar'
+      ],
+      'shippingAddressState' => [
+        'type' => 'varchar',
+        'len' => 100,
+        'fieldType' => 'varchar'
+      ],
+      'shippingAddressCountry' => [
+        'type' => 'varchar',
+        'len' => 100,
+        'fieldType' => 'varchar'
+      ],
+      'shippingAddressPostalCode' => [
+        'type' => 'varchar',
+        'len' => 40,
+        'fieldType' => 'varchar'
+      ],
+      'shippingAddressMap' => [
+        'type' => 'varchar',
+        'notExportable' => true,
+        'notStorable' => true,
+        'fieldType' => 'map'
+      ],
+      'streamUpdatedAt' => [
+        'type' => 'datetime',
+        'notNull' => false,
+        'fieldType' => 'datetime'
+      ],
+      'amountConverted' => [
+        'type' => 'float',
+        'select' => [
+          'select' => 'MUL:(amount, amountCurrencyRate.rate)',
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'amountCurrencyRate',
+              2 => [
+                'amountCurrencyRate.id:' => 'amountCurrency'
+              ]
+            ]
+          ]
+        ],
+        'selectForeign' => [
+          'select' => 'MUL:({alias}.amount, amountCurrencyRateInvoice{alias}Foreign.rate)',
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'amountCurrencyRateInvoice{alias}Foreign',
+              2 => [
+                'amountCurrencyRateInvoice{alias}Foreign.id:' => '{alias}.amountCurrency'
+              ]
+            ]
+          ]
+        ],
+        'where' => [
+          '=' => [
+            'whereClause' => [
+              'MUL:(amount, amountCurrencyRate.rate)=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'amountCurrencyRate',
+                2 => [
+                  'amountCurrencyRate.id:' => 'amountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '>' => [
+            'whereClause' => [
+              'MUL:(amount, amountCurrencyRate.rate)>' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'amountCurrencyRate',
+                2 => [
+                  'amountCurrencyRate.id:' => 'amountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '<' => [
+            'whereClause' => [
+              'MUL:(amount, amountCurrencyRate.rate)<' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'amountCurrencyRate',
+                2 => [
+                  'amountCurrencyRate.id:' => 'amountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '>=' => [
+            'whereClause' => [
+              'MUL:(amount, amountCurrencyRate.rate)>=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'amountCurrencyRate',
+                2 => [
+                  'amountCurrencyRate.id:' => 'amountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '<=' => [
+            'whereClause' => [
+              'MUL:(amount, amountCurrencyRate.rate)<=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'amountCurrencyRate',
+                2 => [
+                  'amountCurrencyRate.id:' => 'amountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '<>' => [
+            'whereClause' => [
+              'MUL:(amount, amountCurrencyRate.rate)!=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'amountCurrencyRate',
+                2 => [
+                  'amountCurrencyRate.id:' => 'amountCurrency'
+                ]
+              ]
+            ]
+          ],
+          'IS NULL' => [
+            'whereClause' => [
+              'amount=' => NULL
+            ]
+          ],
+          'IS NOT NULL' => [
+            'whereClause' => [
+              'amount!=' => NULL
+            ]
+          ]
+        ],
+        'notStorable' => true,
+        'order' => [
+          'order' => [
+            0 => [
+              0 => 'MUL:(amount, amountCurrencyRate.rate)',
+              1 => '{direction}'
+            ]
+          ],
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'amountCurrencyRate',
+              2 => [
+                'amountCurrencyRate.id:' => 'amountCurrency'
+              ]
+            ]
+          ],
+          'additionalSelect' => [
+            0 => 'amountCurrencyRate.rate'
+          ]
+        ],
+        'attributeRole' => 'valueConverted',
+        'fieldType' => 'currency'
+      ],
+      'taxAmountConverted' => [
+        'type' => 'float',
+        'select' => [
+          'select' => 'MUL:(taxAmount, taxAmountCurrencyRate.rate)',
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'taxAmountCurrencyRate',
+              2 => [
+                'taxAmountCurrencyRate.id:' => 'taxAmountCurrency'
+              ]
+            ]
+          ]
+        ],
+        'selectForeign' => [
+          'select' => 'MUL:({alias}.taxAmount, taxAmountCurrencyRateInvoice{alias}Foreign.rate)',
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'taxAmountCurrencyRateInvoice{alias}Foreign',
+              2 => [
+                'taxAmountCurrencyRateInvoice{alias}Foreign.id:' => '{alias}.taxAmountCurrency'
+              ]
+            ]
+          ]
+        ],
+        'where' => [
+          '=' => [
+            'whereClause' => [
+              'MUL:(taxAmount, taxAmountCurrencyRate.rate)=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'taxAmountCurrencyRate',
+                2 => [
+                  'taxAmountCurrencyRate.id:' => 'taxAmountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '>' => [
+            'whereClause' => [
+              'MUL:(taxAmount, taxAmountCurrencyRate.rate)>' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'taxAmountCurrencyRate',
+                2 => [
+                  'taxAmountCurrencyRate.id:' => 'taxAmountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '<' => [
+            'whereClause' => [
+              'MUL:(taxAmount, taxAmountCurrencyRate.rate)<' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'taxAmountCurrencyRate',
+                2 => [
+                  'taxAmountCurrencyRate.id:' => 'taxAmountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '>=' => [
+            'whereClause' => [
+              'MUL:(taxAmount, taxAmountCurrencyRate.rate)>=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'taxAmountCurrencyRate',
+                2 => [
+                  'taxAmountCurrencyRate.id:' => 'taxAmountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '<=' => [
+            'whereClause' => [
+              'MUL:(taxAmount, taxAmountCurrencyRate.rate)<=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'taxAmountCurrencyRate',
+                2 => [
+                  'taxAmountCurrencyRate.id:' => 'taxAmountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '<>' => [
+            'whereClause' => [
+              'MUL:(taxAmount, taxAmountCurrencyRate.rate)!=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'taxAmountCurrencyRate',
+                2 => [
+                  'taxAmountCurrencyRate.id:' => 'taxAmountCurrency'
+                ]
+              ]
+            ]
+          ],
+          'IS NULL' => [
+            'whereClause' => [
+              'taxAmount=' => NULL
+            ]
+          ],
+          'IS NOT NULL' => [
+            'whereClause' => [
+              'taxAmount!=' => NULL
+            ]
+          ]
+        ],
+        'notStorable' => true,
+        'order' => [
+          'order' => [
+            0 => [
+              0 => 'MUL:(taxAmount, taxAmountCurrencyRate.rate)',
+              1 => '{direction}'
+            ]
+          ],
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'taxAmountCurrencyRate',
+              2 => [
+                'taxAmountCurrencyRate.id:' => 'taxAmountCurrency'
+              ]
+            ]
+          ],
+          'additionalSelect' => [
+            0 => 'taxAmountCurrencyRate.rate'
+          ]
+        ],
+        'attributeRole' => 'valueConverted',
+        'fieldType' => 'currency'
+      ],
+      'discountAmountConverted' => [
+        'type' => 'float',
+        'select' => [
+          'select' => 'MUL:(discountAmount, discountAmountCurrencyRate.rate)',
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'discountAmountCurrencyRate',
+              2 => [
+                'discountAmountCurrencyRate.id:' => 'discountAmountCurrency'
+              ]
+            ]
+          ]
+        ],
+        'selectForeign' => [
+          'select' => 'MUL:({alias}.discountAmount, discountAmountCurrencyRateInvoice{alias}Foreign.rate)',
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'discountAmountCurrencyRateInvoice{alias}Foreign',
+              2 => [
+                'discountAmountCurrencyRateInvoice{alias}Foreign.id:' => '{alias}.discountAmountCurrency'
+              ]
+            ]
+          ]
+        ],
+        'where' => [
+          '=' => [
+            'whereClause' => [
+              'MUL:(discountAmount, discountAmountCurrencyRate.rate)=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'discountAmountCurrencyRate',
+                2 => [
+                  'discountAmountCurrencyRate.id:' => 'discountAmountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '>' => [
+            'whereClause' => [
+              'MUL:(discountAmount, discountAmountCurrencyRate.rate)>' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'discountAmountCurrencyRate',
+                2 => [
+                  'discountAmountCurrencyRate.id:' => 'discountAmountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '<' => [
+            'whereClause' => [
+              'MUL:(discountAmount, discountAmountCurrencyRate.rate)<' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'discountAmountCurrencyRate',
+                2 => [
+                  'discountAmountCurrencyRate.id:' => 'discountAmountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '>=' => [
+            'whereClause' => [
+              'MUL:(discountAmount, discountAmountCurrencyRate.rate)>=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'discountAmountCurrencyRate',
+                2 => [
+                  'discountAmountCurrencyRate.id:' => 'discountAmountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '<=' => [
+            'whereClause' => [
+              'MUL:(discountAmount, discountAmountCurrencyRate.rate)<=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'discountAmountCurrencyRate',
+                2 => [
+                  'discountAmountCurrencyRate.id:' => 'discountAmountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '<>' => [
+            'whereClause' => [
+              'MUL:(discountAmount, discountAmountCurrencyRate.rate)!=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'discountAmountCurrencyRate',
+                2 => [
+                  'discountAmountCurrencyRate.id:' => 'discountAmountCurrency'
+                ]
+              ]
+            ]
+          ],
+          'IS NULL' => [
+            'whereClause' => [
+              'discountAmount=' => NULL
+            ]
+          ],
+          'IS NOT NULL' => [
+            'whereClause' => [
+              'discountAmount!=' => NULL
+            ]
+          ]
+        ],
+        'notStorable' => true,
+        'order' => [
+          'order' => [
+            0 => [
+              0 => 'MUL:(discountAmount, discountAmountCurrencyRate.rate)',
+              1 => '{direction}'
+            ]
+          ],
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'discountAmountCurrencyRate',
+              2 => [
+                'discountAmountCurrencyRate.id:' => 'discountAmountCurrency'
+              ]
+            ]
+          ],
+          'additionalSelect' => [
+            0 => 'discountAmountCurrencyRate.rate'
+          ]
+        ],
+        'attributeRole' => 'valueConverted',
+        'fieldType' => 'currency'
+      ],
+      'paidAmountConverted' => [
+        'type' => 'float',
+        'select' => [
+          'select' => 'MUL:(paidAmount, paidAmountCurrencyRate.rate)',
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'paidAmountCurrencyRate',
+              2 => [
+                'paidAmountCurrencyRate.id:' => 'paidAmountCurrency'
+              ]
+            ]
+          ]
+        ],
+        'selectForeign' => [
+          'select' => 'MUL:({alias}.paidAmount, paidAmountCurrencyRateInvoice{alias}Foreign.rate)',
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'paidAmountCurrencyRateInvoice{alias}Foreign',
+              2 => [
+                'paidAmountCurrencyRateInvoice{alias}Foreign.id:' => '{alias}.paidAmountCurrency'
+              ]
+            ]
+          ]
+        ],
+        'where' => [
+          '=' => [
+            'whereClause' => [
+              'MUL:(paidAmount, paidAmountCurrencyRate.rate)=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'paidAmountCurrencyRate',
+                2 => [
+                  'paidAmountCurrencyRate.id:' => 'paidAmountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '>' => [
+            'whereClause' => [
+              'MUL:(paidAmount, paidAmountCurrencyRate.rate)>' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'paidAmountCurrencyRate',
+                2 => [
+                  'paidAmountCurrencyRate.id:' => 'paidAmountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '<' => [
+            'whereClause' => [
+              'MUL:(paidAmount, paidAmountCurrencyRate.rate)<' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'paidAmountCurrencyRate',
+                2 => [
+                  'paidAmountCurrencyRate.id:' => 'paidAmountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '>=' => [
+            'whereClause' => [
+              'MUL:(paidAmount, paidAmountCurrencyRate.rate)>=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'paidAmountCurrencyRate',
+                2 => [
+                  'paidAmountCurrencyRate.id:' => 'paidAmountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '<=' => [
+            'whereClause' => [
+              'MUL:(paidAmount, paidAmountCurrencyRate.rate)<=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'paidAmountCurrencyRate',
+                2 => [
+                  'paidAmountCurrencyRate.id:' => 'paidAmountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '<>' => [
+            'whereClause' => [
+              'MUL:(paidAmount, paidAmountCurrencyRate.rate)!=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'paidAmountCurrencyRate',
+                2 => [
+                  'paidAmountCurrencyRate.id:' => 'paidAmountCurrency'
+                ]
+              ]
+            ]
+          ],
+          'IS NULL' => [
+            'whereClause' => [
+              'paidAmount=' => NULL
+            ]
+          ],
+          'IS NOT NULL' => [
+            'whereClause' => [
+              'paidAmount!=' => NULL
+            ]
+          ]
+        ],
+        'notStorable' => true,
+        'order' => [
+          'order' => [
+            0 => [
+              0 => 'MUL:(paidAmount, paidAmountCurrencyRate.rate)',
+              1 => '{direction}'
+            ]
+          ],
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'paidAmountCurrencyRate',
+              2 => [
+                'paidAmountCurrencyRate.id:' => 'paidAmountCurrency'
+              ]
+            ]
+          ],
+          'additionalSelect' => [
+            0 => 'paidAmountCurrencyRate.rate'
+          ]
+        ],
+        'attributeRole' => 'valueConverted',
+        'fieldType' => 'currency'
+      ],
+      'accountId' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'foreignId',
+        'index' => true,
+        'attributeRole' => 'id',
+        'fieldType' => 'link',
+        'notNull' => false
+      ],
+      'accountName' => [
+        'type' => 'foreign',
+        'notStorable' => true,
+        'attributeRole' => 'name',
+        'fieldType' => 'link',
+        'relation' => 'account',
+        'foreign' => 'name',
+        'foreignType' => 'varchar'
+      ],
+      'contactId' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'foreignId',
+        'index' => true,
+        'attributeRole' => 'id',
+        'fieldType' => 'link',
+        'notNull' => false
+      ],
+      'contactName' => [
+        'type' => 'foreign',
+        'notStorable' => true,
+        'attributeRole' => 'name',
+        'fieldType' => 'link',
+        'relation' => 'contact',
+        'foreign' => 'name',
+        'foreignType' => 'varchar'
+      ],
+      'opportunityId' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'foreignId',
+        'index' => true,
+        'attributeRole' => 'id',
+        'fieldType' => 'link',
+        'notNull' => false
+      ],
+      'opportunityName' => [
+        'type' => 'foreign',
+        'notStorable' => true,
+        'attributeRole' => 'name',
+        'fieldType' => 'link',
+        'relation' => 'opportunity',
+        'foreign' => 'name',
+        'foreignType' => 'varchar'
+      ],
+      'quoteId' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'foreignId',
+        'index' => true,
+        'attributeRole' => 'id',
+        'fieldType' => 'link',
+        'notNull' => false
+      ],
+      'quoteName' => [
+        'type' => 'foreign',
+        'notStorable' => true,
+        'attributeRole' => 'name',
+        'fieldType' => 'link',
+        'relation' => 'quote',
+        'foreign' => 'name',
+        'foreignType' => 'varchar'
+      ],
+      'assignedUserId' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'foreignId',
+        'index' => true,
+        'attributeRole' => 'id',
+        'fieldType' => 'link',
+        'notNull' => false
+      ],
+      'assignedUserName' => [
+        'type' => 'foreign',
+        'notStorable' => true,
+        'attributeRole' => 'name',
+        'fieldType' => 'link',
+        'relation' => 'assignedUser',
+        'foreign' => 'name',
+        'foreignType' => 'varchar'
+      ],
+      'teamsIds' => [
+        'type' => 'jsonArray',
+        'notStorable' => true,
+        'isLinkMultipleIdList' => true,
+        'relation' => 'teams',
+        'isUnordered' => true,
+        'attributeRole' => 'idList',
+        'fieldType' => 'linkMultiple'
+      ],
+      'teamsNames' => [
+        'type' => 'jsonObject',
+        'notStorable' => true,
+        'isLinkMultipleNameMap' => true,
+        'attributeRole' => 'nameMap',
+        'fieldType' => 'linkMultiple'
+      ],
+      'createdById' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'foreignId',
+        'index' => true,
+        'attributeRole' => 'id',
+        'fieldType' => 'link',
+        'notNull' => false
+      ],
+      'createdByName' => [
+        'type' => 'foreign',
+        'notStorable' => true,
+        'attributeRole' => 'name',
+        'fieldType' => 'link',
+        'relation' => 'createdBy',
+        'foreign' => 'name',
+        'foreignType' => 'varchar'
+      ],
+      'modifiedById' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'foreignId',
+        'index' => true,
+        'attributeRole' => 'id',
+        'fieldType' => 'link',
+        'notNull' => false
+      ],
+      'modifiedByName' => [
+        'type' => 'foreign',
+        'notStorable' => true,
+        'attributeRole' => 'name',
+        'fieldType' => 'link',
+        'relation' => 'modifiedBy',
+        'foreign' => 'name',
+        'foreignType' => 'varchar'
+      ],
+      'isFollowed' => [
+        'type' => 'bool',
+        'notStorable' => true,
+        'notExportable' => true,
+        'default' => false
+      ],
+      'followersIds' => [
+        'type' => 'jsonArray',
+        'notStorable' => true,
+        'notExportable' => true
+      ],
+      'followersNames' => [
+        'type' => 'jsonObject',
+        'notStorable' => true,
+        'notExportable' => true
+      ],
+      'documentsIds' => [
+        'type' => 'jsonArray',
+        'notStorable' => true,
+        'isLinkStub' => true
+      ],
+      'documentsNames' => [
+        'type' => 'jsonObject',
+        'notStorable' => true,
+        'isLinkStub' => true
+      ],
+      'paymentsIds' => [
+        'type' => 'jsonArray',
+        'notStorable' => true,
+        'isLinkStub' => true
+      ],
+      'paymentsNames' => [
+        'type' => 'jsonObject',
+        'notStorable' => true,
+        'isLinkStub' => true
+      ]
+    ],
+    'relations' => [
+      'documents' => [
+        'type' => 'hasMany',
+        'entity' => 'Document',
+        'foreignKey' => 'invoicesId',
+        'foreign' => 'invoices'
+      ],
+      'payments' => [
+        'type' => 'hasMany',
+        'entity' => 'Payment',
+        'foreignKey' => 'invoiceId',
+        'foreign' => 'invoice'
+      ],
+      'quote' => [
+        'type' => 'belongsTo',
+        'entity' => 'Quote',
+        'key' => 'quoteId',
+        'foreignKey' => 'id',
+        'foreign' => 'invoices'
+      ],
+      'opportunity' => [
+        'type' => 'belongsTo',
+        'entity' => 'Opportunity',
+        'key' => 'opportunityId',
+        'foreignKey' => 'id',
+        'foreign' => 'invoices'
+      ],
+      'contact' => [
+        'type' => 'belongsTo',
+        'entity' => 'Contact',
+        'key' => 'contactId',
+        'foreignKey' => 'id',
+        'foreign' => 'invoices'
+      ],
+      'account' => [
+        'type' => 'belongsTo',
+        'entity' => 'Account',
+        'key' => 'accountId',
+        'foreignKey' => 'id',
+        'foreign' => 'invoices'
+      ],
+      'modifiedBy' => [
+        'type' => 'belongsTo',
+        'entity' => 'User',
+        'key' => 'modifiedById',
+        'foreignKey' => 'id',
+        'foreign' => NULL
+      ],
+      'createdBy' => [
+        'type' => 'belongsTo',
+        'entity' => 'User',
+        'key' => 'createdById',
+        'foreignKey' => 'id',
+        'foreign' => NULL
+      ],
+      'teams' => [
+        'type' => 'manyMany',
+        'entity' => 'Team',
+        'relationName' => 'entityTeam',
+        'midKeys' => [
+          0 => 'entityId',
+          1 => 'teamId'
+        ],
+        'conditions' => [
+          'entityType' => 'Invoice'
+        ],
+        'additionalColumns' => [
+          'entityType' => [
+            'type' => 'varchar',
+            'len' => 100
+          ]
+        ],
+        'indexes' => [
+          'entityId' => [
+            'columns' => [
+              0 => 'entityId'
+            ],
+            'key' => 'IDX_ENTITY_ID'
+          ],
+          'teamId' => [
+            'columns' => [
+              0 => 'teamId'
+            ],
+            'key' => 'IDX_TEAM_ID'
+          ],
+          'entityId_teamId_entityType' => [
+            'type' => 'unique',
+            'columns' => [
+              0 => 'entityId',
+              1 => 'teamId',
+              2 => 'entityType'
+            ],
+            'key' => 'UNIQ_ENTITY_ID_TEAM_ID_ENTITY_TYPE'
+          ]
+        ]
+      ],
+      'assignedUser' => [
+        'type' => 'belongsTo',
+        'entity' => 'User',
+        'key' => 'assignedUserId',
+        'foreignKey' => 'id',
+        'foreign' => NULL
+      ]
+    ],
+    'indexes' => [
+      'name' => [
+        'columns' => [
+          0 => 'name',
+          1 => 'deleted'
+        ],
+        'key' => 'IDX_NAME'
+      ],
+      'status' => [
+        'columns' => [
+          0 => 'status',
+          1 => 'deleted'
+        ],
+        'key' => 'IDX_STATUS'
+      ],
+      'assignedUser' => [
+        'columns' => [
+          0 => 'assignedUserId',
+          1 => 'deleted'
+        ],
+        'key' => 'IDX_ASSIGNED_USER'
+      ],
+      'createdAt' => [
+        'columns' => [
+          0 => 'createdAt',
+          1 => 'deleted'
+        ],
+        'key' => 'IDX_CREATED_AT'
+      ],
+      'number' => [
+        'columns' => [
+          0 => 'number',
+          1 => 'deleted'
+        ],
+        'key' => 'IDX_NUMBER'
+      ],
+      'invoiceDate' => [
+        'columns' => [
+          0 => 'invoiceDate',
+          1 => 'deleted'
+        ],
+        'key' => 'IDX_INVOICE_DATE'
+      ],
+      'dueDate' => [
+        'columns' => [
+          0 => 'dueDate',
+          1 => 'deleted'
+        ],
+        'key' => 'IDX_DUE_DATE'
+      ],
+      'accountId' => [
+        'type' => 'index',
+        'columns' => [
+          0 => 'accountId'
+        ],
+        'key' => 'IDX_ACCOUNT_ID'
+      ],
+      'contactId' => [
+        'type' => 'index',
+        'columns' => [
+          0 => 'contactId'
+        ],
+        'key' => 'IDX_CONTACT_ID'
+      ],
+      'opportunityId' => [
+        'type' => 'index',
+        'columns' => [
+          0 => 'opportunityId'
+        ],
+        'key' => 'IDX_OPPORTUNITY_ID'
+      ],
+      'quoteId' => [
+        'type' => 'index',
+        'columns' => [
+          0 => 'quoteId'
+        ],
+        'key' => 'IDX_QUOTE_ID'
+      ],
+      'assignedUserId' => [
+        'type' => 'index',
+        'columns' => [
+          0 => 'assignedUserId'
+        ],
+        'key' => 'IDX_ASSIGNED_USER_ID'
+      ],
+      'createdById' => [
+        'type' => 'index',
+        'columns' => [
+          0 => 'createdById'
+        ],
+        'key' => 'IDX_CREATED_BY_ID'
+      ],
+      'modifiedById' => [
+        'type' => 'index',
+        'columns' => [
+          0 => 'modifiedById'
+        ],
+        'key' => 'IDX_MODIFIED_BY_ID'
+      ]
+    ],
+    'collection' => [
+      'orderBy' => 'createdAt',
+      'order' => 'DESC'
+    ]
+  ],
+  'Payment' => [
+    'attributes' => [
+      'id' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'id'
+      ],
+      'name' => [
+        'type' => 'varchar',
+        'len' => 255,
+        'fieldType' => 'varchar'
+      ],
+      'deleted' => [
+        'type' => 'bool',
+        'default' => false
+      ],
+      'number' => [
+        'type' => 'int',
+        'autoincrement' => true,
+        'unique' => true,
+        'fieldType' => 'int',
+        'len' => 11
+      ],
+      'status' => [
+        'type' => 'varchar',
+        'default' => 'Pending',
+        'fieldType' => 'varchar',
+        'len' => 255
+      ],
+      'paymentDate' => [
+        'type' => 'date',
+        'fieldType' => 'date'
+      ],
+      'amount' => [
+        'type' => 'float',
+        'fieldType' => 'currency',
+        'attributeRole' => 'value',
+        'order' => [
+          'order' => [
+            0 => [
+              0 => 'MUL:(amount, amountCurrencyRate.rate)',
+              1 => '{direction}'
+            ]
+          ],
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'amountCurrencyRate',
+              2 => [
+                'amountCurrencyRate.id:' => 'amountCurrency'
+              ]
+            ]
+          ],
+          'additionalSelect' => [
+            0 => 'amountCurrencyRate.rate'
+          ]
+        ]
+      ],
+      'paymentMethod' => [
+        'type' => 'varchar',
+        'fieldType' => 'varchar',
+        'len' => 255
+      ],
+      'reference' => [
+        'type' => 'varchar',
+        'len' => 100,
+        'fieldType' => 'varchar'
+      ],
+      'description' => [
+        'type' => 'text',
+        'fieldType' => 'text'
+      ],
+      'amountCurrency' => [
+        'type' => 'varchar',
+        'len' => 3,
+        'fieldType' => 'currency',
+        'attributeRole' => 'currency'
+      ],
+      'streamUpdatedAt' => [
+        'type' => 'datetime',
+        'notNull' => false,
+        'fieldType' => 'datetime'
+      ],
+      'amountConverted' => [
+        'type' => 'float',
+        'select' => [
+          'select' => 'MUL:(amount, amountCurrencyRate.rate)',
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'amountCurrencyRate',
+              2 => [
+                'amountCurrencyRate.id:' => 'amountCurrency'
+              ]
+            ]
+          ]
+        ],
+        'selectForeign' => [
+          'select' => 'MUL:({alias}.amount, amountCurrencyRatePayment{alias}Foreign.rate)',
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'amountCurrencyRatePayment{alias}Foreign',
+              2 => [
+                'amountCurrencyRatePayment{alias}Foreign.id:' => '{alias}.amountCurrency'
+              ]
+            ]
+          ]
+        ],
+        'where' => [
+          '=' => [
+            'whereClause' => [
+              'MUL:(amount, amountCurrencyRate.rate)=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'amountCurrencyRate',
+                2 => [
+                  'amountCurrencyRate.id:' => 'amountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '>' => [
+            'whereClause' => [
+              'MUL:(amount, amountCurrencyRate.rate)>' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'amountCurrencyRate',
+                2 => [
+                  'amountCurrencyRate.id:' => 'amountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '<' => [
+            'whereClause' => [
+              'MUL:(amount, amountCurrencyRate.rate)<' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'amountCurrencyRate',
+                2 => [
+                  'amountCurrencyRate.id:' => 'amountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '>=' => [
+            'whereClause' => [
+              'MUL:(amount, amountCurrencyRate.rate)>=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'amountCurrencyRate',
+                2 => [
+                  'amountCurrencyRate.id:' => 'amountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '<=' => [
+            'whereClause' => [
+              'MUL:(amount, amountCurrencyRate.rate)<=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'amountCurrencyRate',
+                2 => [
+                  'amountCurrencyRate.id:' => 'amountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '<>' => [
+            'whereClause' => [
+              'MUL:(amount, amountCurrencyRate.rate)!=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'amountCurrencyRate',
+                2 => [
+                  'amountCurrencyRate.id:' => 'amountCurrency'
+                ]
+              ]
+            ]
+          ],
+          'IS NULL' => [
+            'whereClause' => [
+              'amount=' => NULL
+            ]
+          ],
+          'IS NOT NULL' => [
+            'whereClause' => [
+              'amount!=' => NULL
+            ]
+          ]
+        ],
+        'notStorable' => true,
+        'order' => [
+          'order' => [
+            0 => [
+              0 => 'MUL:(amount, amountCurrencyRate.rate)',
+              1 => '{direction}'
+            ]
+          ],
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'amountCurrencyRate',
+              2 => [
+                'amountCurrencyRate.id:' => 'amountCurrency'
+              ]
+            ]
+          ],
+          'additionalSelect' => [
+            0 => 'amountCurrencyRate.rate'
+          ]
+        ],
+        'attributeRole' => 'valueConverted',
+        'fieldType' => 'currency'
+      ],
+      'accountId' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'foreignId',
+        'index' => true,
+        'attributeRole' => 'id',
+        'fieldType' => 'link',
+        'notNull' => false
+      ],
+      'accountName' => [
+        'type' => 'foreign',
+        'notStorable' => true,
+        'attributeRole' => 'name',
+        'fieldType' => 'link',
+        'relation' => 'account',
+        'foreign' => 'name',
+        'foreignType' => 'varchar'
+      ],
+      'invoiceId' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'foreignId',
+        'index' => true,
+        'attributeRole' => 'id',
+        'fieldType' => 'link',
+        'notNull' => false
+      ],
+      'invoiceName' => [
+        'type' => 'foreign',
+        'notStorable' => true,
+        'attributeRole' => 'name',
+        'fieldType' => 'link',
+        'relation' => 'invoice',
+        'foreign' => 'name',
+        'foreignType' => 'varchar'
+      ],
+      'assignedUserId' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'foreignId',
+        'index' => true,
+        'attributeRole' => 'id',
+        'fieldType' => 'link',
+        'notNull' => false
+      ],
+      'assignedUserName' => [
+        'type' => 'foreign',
+        'notStorable' => true,
+        'attributeRole' => 'name',
+        'fieldType' => 'link',
+        'relation' => 'assignedUser',
+        'foreign' => 'name',
+        'foreignType' => 'varchar'
+      ],
+      'teamsIds' => [
+        'type' => 'jsonArray',
+        'notStorable' => true,
+        'isLinkMultipleIdList' => true,
+        'relation' => 'teams',
+        'isUnordered' => true,
+        'attributeRole' => 'idList',
+        'fieldType' => 'linkMultiple'
+      ],
+      'teamsNames' => [
+        'type' => 'jsonObject',
+        'notStorable' => true,
+        'isLinkMultipleNameMap' => true,
+        'attributeRole' => 'nameMap',
+        'fieldType' => 'linkMultiple'
+      ],
+      'isFollowed' => [
+        'type' => 'bool',
+        'notStorable' => true,
+        'notExportable' => true,
+        'default' => false
+      ],
+      'followersIds' => [
+        'type' => 'jsonArray',
+        'notStorable' => true,
+        'notExportable' => true
+      ],
+      'followersNames' => [
+        'type' => 'jsonObject',
+        'notStorable' => true,
+        'notExportable' => true
+      ]
+    ],
+    'relations' => [
+      'teams' => [
+        'type' => 'manyMany',
+        'entity' => 'Team',
+        'relationName' => 'entityTeam',
+        'midKeys' => [
+          0 => 'entityId',
+          1 => 'teamId'
+        ],
+        'conditions' => [
+          'entityType' => 'Payment'
+        ],
+        'additionalColumns' => [
+          'entityType' => [
+            'type' => 'varchar',
+            'len' => 100
+          ]
+        ],
+        'indexes' => [
+          'entityId' => [
+            'columns' => [
+              0 => 'entityId'
+            ],
+            'key' => 'IDX_ENTITY_ID'
+          ],
+          'teamId' => [
+            'columns' => [
+              0 => 'teamId'
+            ],
+            'key' => 'IDX_TEAM_ID'
+          ],
+          'entityId_teamId_entityType' => [
+            'type' => 'unique',
+            'columns' => [
+              0 => 'entityId',
+              1 => 'teamId',
+              2 => 'entityType'
+            ],
+            'key' => 'UNIQ_ENTITY_ID_TEAM_ID_ENTITY_TYPE'
+          ]
+        ]
+      ],
+      'assignedUser' => [
+        'type' => 'belongsTo',
+        'entity' => 'User',
+        'key' => 'assignedUserId',
+        'foreignKey' => 'id',
+        'foreign' => NULL
+      ],
+      'invoice' => [
+        'type' => 'belongsTo',
+        'entity' => 'Invoice',
+        'key' => 'invoiceId',
+        'foreignKey' => 'id',
+        'foreign' => 'payments'
+      ],
+      'account' => [
+        'type' => 'belongsTo',
+        'entity' => 'Account',
+        'key' => 'accountId',
+        'foreignKey' => 'id',
+        'foreign' => NULL
+      ]
+    ],
+    'indexes' => [
+      'number' => [
+        'type' => 'unique',
+        'columns' => [
+          0 => 'number'
+        ],
+        'key' => 'UNIQ_NUMBER'
+      ],
+      'accountId' => [
+        'type' => 'index',
+        'columns' => [
+          0 => 'accountId'
+        ],
+        'key' => 'IDX_ACCOUNT_ID'
+      ],
+      'invoiceId' => [
+        'type' => 'index',
+        'columns' => [
+          0 => 'invoiceId'
+        ],
+        'key' => 'IDX_INVOICE_ID'
+      ],
+      'assignedUserId' => [
+        'type' => 'index',
+        'columns' => [
+          0 => 'assignedUserId'
+        ],
+        'key' => 'IDX_ASSIGNED_USER_ID'
+      ]
+    ],
+    'collection' => [
+      'orderBy' => 'paymentDate',
+      'order' => 'DESC'
+    ]
+  ],
+  'Quote' => [
+    'attributes' => [
+      'id' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'id'
+      ],
+      'name' => [
+        'type' => 'varchar',
+        'len' => 255,
+        'fieldType' => 'varchar'
+      ],
+      'deleted' => [
+        'type' => 'bool',
+        'default' => false
+      ],
+      'number' => [
+        'type' => 'int',
+        'autoincrement' => true,
+        'unique' => true,
+        'index' => true,
+        'fieldType' => 'int',
+        'len' => 11
+      ],
+      'status' => [
+        'type' => 'varchar',
+        'default' => 'Draft',
+        'fieldType' => 'varchar',
+        'len' => 255
+      ],
+      'quoteDate' => [
+        'type' => 'date',
+        'fieldType' => 'date'
+      ],
+      'expirationDate' => [
+        'type' => 'date',
+        'notNull' => false,
+        'fieldType' => 'date'
+      ],
+      'amount' => [
+        'type' => 'float',
+        'fieldType' => 'currency',
+        'attributeRole' => 'value',
+        'order' => [
+          'order' => [
+            0 => [
+              0 => 'MUL:(amount, amountCurrencyRate.rate)',
+              1 => '{direction}'
+            ]
+          ],
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'amountCurrencyRate',
+              2 => [
+                'amountCurrencyRate.id:' => 'amountCurrency'
+              ]
+            ]
+          ],
+          'additionalSelect' => [
+            0 => 'amountCurrencyRate.rate'
+          ]
+        ]
+      ],
+      'taxAmount' => [
+        'type' => 'float',
+        'fieldType' => 'currency',
+        'attributeRole' => 'value',
+        'order' => [
+          'order' => [
+            0 => [
+              0 => 'MUL:(taxAmount, taxAmountCurrencyRate.rate)',
+              1 => '{direction}'
+            ]
+          ],
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'taxAmountCurrencyRate',
+              2 => [
+                'taxAmountCurrencyRate.id:' => 'taxAmountCurrency'
+              ]
+            ]
+          ],
+          'additionalSelect' => [
+            0 => 'taxAmountCurrencyRate.rate'
+          ]
+        ]
+      ],
+      'discountAmount' => [
+        'type' => 'float',
+        'fieldType' => 'currency',
+        'attributeRole' => 'value',
+        'order' => [
+          'order' => [
+            0 => [
+              0 => 'MUL:(discountAmount, discountAmountCurrencyRate.rate)',
+              1 => '{direction}'
+            ]
+          ],
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'discountAmountCurrencyRate',
+              2 => [
+                'discountAmountCurrencyRate.id:' => 'discountAmountCurrency'
+              ]
+            ]
+          ],
+          'additionalSelect' => [
+            0 => 'discountAmountCurrencyRate.rate'
+          ]
+        ]
+      ],
+      'grandTotal' => [
+        'type' => 'float',
+        'fieldType' => 'currency',
+        'attributeRole' => 'value',
+        'order' => [
+          'order' => [
+            0 => [
+              0 => 'MUL:(grandTotal, grandTotalCurrencyRate.rate)',
+              1 => '{direction}'
+            ]
+          ],
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'grandTotalCurrencyRate',
+              2 => [
+                'grandTotalCurrencyRate.id:' => 'grandTotalCurrency'
+              ]
+            ]
+          ],
+          'additionalSelect' => [
+            0 => 'grandTotalCurrencyRate.rate'
+          ]
+        ]
+      ],
+      'description' => [
+        'type' => 'text',
+        'fieldType' => 'text'
+      ],
+      'createdAt' => [
+        'type' => 'datetime',
+        'notNull' => false,
+        'fieldType' => 'datetime'
+      ],
+      'modifiedAt' => [
+        'type' => 'datetime',
+        'notNull' => false,
+        'fieldType' => 'datetime'
+      ],
+      'amountCurrency' => [
+        'type' => 'varchar',
+        'len' => 3,
+        'fieldType' => 'currency',
+        'attributeRole' => 'currency'
+      ],
+      'taxAmountCurrency' => [
+        'type' => 'varchar',
+        'len' => 3,
+        'fieldType' => 'currency',
+        'attributeRole' => 'currency'
+      ],
+      'discountAmountCurrency' => [
+        'type' => 'varchar',
+        'len' => 3,
+        'fieldType' => 'currency',
+        'attributeRole' => 'currency'
+      ],
+      'grandTotalCurrency' => [
+        'type' => 'varchar',
+        'len' => 3,
+        'fieldType' => 'currency',
+        'attributeRole' => 'currency'
+      ],
+      'streamUpdatedAt' => [
+        'type' => 'datetime',
+        'notNull' => false,
+        'fieldType' => 'datetime'
+      ],
+      'amountConverted' => [
+        'type' => 'float',
+        'select' => [
+          'select' => 'MUL:(amount, amountCurrencyRate.rate)',
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'amountCurrencyRate',
+              2 => [
+                'amountCurrencyRate.id:' => 'amountCurrency'
+              ]
+            ]
+          ]
+        ],
+        'selectForeign' => [
+          'select' => 'MUL:({alias}.amount, amountCurrencyRateQuote{alias}Foreign.rate)',
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'amountCurrencyRateQuote{alias}Foreign',
+              2 => [
+                'amountCurrencyRateQuote{alias}Foreign.id:' => '{alias}.amountCurrency'
+              ]
+            ]
+          ]
+        ],
+        'where' => [
+          '=' => [
+            'whereClause' => [
+              'MUL:(amount, amountCurrencyRate.rate)=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'amountCurrencyRate',
+                2 => [
+                  'amountCurrencyRate.id:' => 'amountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '>' => [
+            'whereClause' => [
+              'MUL:(amount, amountCurrencyRate.rate)>' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'amountCurrencyRate',
+                2 => [
+                  'amountCurrencyRate.id:' => 'amountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '<' => [
+            'whereClause' => [
+              'MUL:(amount, amountCurrencyRate.rate)<' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'amountCurrencyRate',
+                2 => [
+                  'amountCurrencyRate.id:' => 'amountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '>=' => [
+            'whereClause' => [
+              'MUL:(amount, amountCurrencyRate.rate)>=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'amountCurrencyRate',
+                2 => [
+                  'amountCurrencyRate.id:' => 'amountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '<=' => [
+            'whereClause' => [
+              'MUL:(amount, amountCurrencyRate.rate)<=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'amountCurrencyRate',
+                2 => [
+                  'amountCurrencyRate.id:' => 'amountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '<>' => [
+            'whereClause' => [
+              'MUL:(amount, amountCurrencyRate.rate)!=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'amountCurrencyRate',
+                2 => [
+                  'amountCurrencyRate.id:' => 'amountCurrency'
+                ]
+              ]
+            ]
+          ],
+          'IS NULL' => [
+            'whereClause' => [
+              'amount=' => NULL
+            ]
+          ],
+          'IS NOT NULL' => [
+            'whereClause' => [
+              'amount!=' => NULL
+            ]
+          ]
+        ],
+        'notStorable' => true,
+        'order' => [
+          'order' => [
+            0 => [
+              0 => 'MUL:(amount, amountCurrencyRate.rate)',
+              1 => '{direction}'
+            ]
+          ],
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'amountCurrencyRate',
+              2 => [
+                'amountCurrencyRate.id:' => 'amountCurrency'
+              ]
+            ]
+          ],
+          'additionalSelect' => [
+            0 => 'amountCurrencyRate.rate'
+          ]
+        ],
+        'attributeRole' => 'valueConverted',
+        'fieldType' => 'currency'
+      ],
+      'taxAmountConverted' => [
+        'type' => 'float',
+        'select' => [
+          'select' => 'MUL:(taxAmount, taxAmountCurrencyRate.rate)',
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'taxAmountCurrencyRate',
+              2 => [
+                'taxAmountCurrencyRate.id:' => 'taxAmountCurrency'
+              ]
+            ]
+          ]
+        ],
+        'selectForeign' => [
+          'select' => 'MUL:({alias}.taxAmount, taxAmountCurrencyRateQuote{alias}Foreign.rate)',
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'taxAmountCurrencyRateQuote{alias}Foreign',
+              2 => [
+                'taxAmountCurrencyRateQuote{alias}Foreign.id:' => '{alias}.taxAmountCurrency'
+              ]
+            ]
+          ]
+        ],
+        'where' => [
+          '=' => [
+            'whereClause' => [
+              'MUL:(taxAmount, taxAmountCurrencyRate.rate)=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'taxAmountCurrencyRate',
+                2 => [
+                  'taxAmountCurrencyRate.id:' => 'taxAmountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '>' => [
+            'whereClause' => [
+              'MUL:(taxAmount, taxAmountCurrencyRate.rate)>' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'taxAmountCurrencyRate',
+                2 => [
+                  'taxAmountCurrencyRate.id:' => 'taxAmountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '<' => [
+            'whereClause' => [
+              'MUL:(taxAmount, taxAmountCurrencyRate.rate)<' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'taxAmountCurrencyRate',
+                2 => [
+                  'taxAmountCurrencyRate.id:' => 'taxAmountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '>=' => [
+            'whereClause' => [
+              'MUL:(taxAmount, taxAmountCurrencyRate.rate)>=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'taxAmountCurrencyRate',
+                2 => [
+                  'taxAmountCurrencyRate.id:' => 'taxAmountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '<=' => [
+            'whereClause' => [
+              'MUL:(taxAmount, taxAmountCurrencyRate.rate)<=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'taxAmountCurrencyRate',
+                2 => [
+                  'taxAmountCurrencyRate.id:' => 'taxAmountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '<>' => [
+            'whereClause' => [
+              'MUL:(taxAmount, taxAmountCurrencyRate.rate)!=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'taxAmountCurrencyRate',
+                2 => [
+                  'taxAmountCurrencyRate.id:' => 'taxAmountCurrency'
+                ]
+              ]
+            ]
+          ],
+          'IS NULL' => [
+            'whereClause' => [
+              'taxAmount=' => NULL
+            ]
+          ],
+          'IS NOT NULL' => [
+            'whereClause' => [
+              'taxAmount!=' => NULL
+            ]
+          ]
+        ],
+        'notStorable' => true,
+        'order' => [
+          'order' => [
+            0 => [
+              0 => 'MUL:(taxAmount, taxAmountCurrencyRate.rate)',
+              1 => '{direction}'
+            ]
+          ],
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'taxAmountCurrencyRate',
+              2 => [
+                'taxAmountCurrencyRate.id:' => 'taxAmountCurrency'
+              ]
+            ]
+          ],
+          'additionalSelect' => [
+            0 => 'taxAmountCurrencyRate.rate'
+          ]
+        ],
+        'attributeRole' => 'valueConverted',
+        'fieldType' => 'currency'
+      ],
+      'discountAmountConverted' => [
+        'type' => 'float',
+        'select' => [
+          'select' => 'MUL:(discountAmount, discountAmountCurrencyRate.rate)',
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'discountAmountCurrencyRate',
+              2 => [
+                'discountAmountCurrencyRate.id:' => 'discountAmountCurrency'
+              ]
+            ]
+          ]
+        ],
+        'selectForeign' => [
+          'select' => 'MUL:({alias}.discountAmount, discountAmountCurrencyRateQuote{alias}Foreign.rate)',
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'discountAmountCurrencyRateQuote{alias}Foreign',
+              2 => [
+                'discountAmountCurrencyRateQuote{alias}Foreign.id:' => '{alias}.discountAmountCurrency'
+              ]
+            ]
+          ]
+        ],
+        'where' => [
+          '=' => [
+            'whereClause' => [
+              'MUL:(discountAmount, discountAmountCurrencyRate.rate)=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'discountAmountCurrencyRate',
+                2 => [
+                  'discountAmountCurrencyRate.id:' => 'discountAmountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '>' => [
+            'whereClause' => [
+              'MUL:(discountAmount, discountAmountCurrencyRate.rate)>' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'discountAmountCurrencyRate',
+                2 => [
+                  'discountAmountCurrencyRate.id:' => 'discountAmountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '<' => [
+            'whereClause' => [
+              'MUL:(discountAmount, discountAmountCurrencyRate.rate)<' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'discountAmountCurrencyRate',
+                2 => [
+                  'discountAmountCurrencyRate.id:' => 'discountAmountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '>=' => [
+            'whereClause' => [
+              'MUL:(discountAmount, discountAmountCurrencyRate.rate)>=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'discountAmountCurrencyRate',
+                2 => [
+                  'discountAmountCurrencyRate.id:' => 'discountAmountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '<=' => [
+            'whereClause' => [
+              'MUL:(discountAmount, discountAmountCurrencyRate.rate)<=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'discountAmountCurrencyRate',
+                2 => [
+                  'discountAmountCurrencyRate.id:' => 'discountAmountCurrency'
+                ]
+              ]
+            ]
+          ],
+          '<>' => [
+            'whereClause' => [
+              'MUL:(discountAmount, discountAmountCurrencyRate.rate)!=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'discountAmountCurrencyRate',
+                2 => [
+                  'discountAmountCurrencyRate.id:' => 'discountAmountCurrency'
+                ]
+              ]
+            ]
+          ],
+          'IS NULL' => [
+            'whereClause' => [
+              'discountAmount=' => NULL
+            ]
+          ],
+          'IS NOT NULL' => [
+            'whereClause' => [
+              'discountAmount!=' => NULL
+            ]
+          ]
+        ],
+        'notStorable' => true,
+        'order' => [
+          'order' => [
+            0 => [
+              0 => 'MUL:(discountAmount, discountAmountCurrencyRate.rate)',
+              1 => '{direction}'
+            ]
+          ],
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'discountAmountCurrencyRate',
+              2 => [
+                'discountAmountCurrencyRate.id:' => 'discountAmountCurrency'
+              ]
+            ]
+          ],
+          'additionalSelect' => [
+            0 => 'discountAmountCurrencyRate.rate'
+          ]
+        ],
+        'attributeRole' => 'valueConverted',
+        'fieldType' => 'currency'
+      ],
+      'grandTotalConverted' => [
+        'type' => 'float',
+        'select' => [
+          'select' => 'MUL:(grandTotal, grandTotalCurrencyRate.rate)',
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'grandTotalCurrencyRate',
+              2 => [
+                'grandTotalCurrencyRate.id:' => 'grandTotalCurrency'
+              ]
+            ]
+          ]
+        ],
+        'selectForeign' => [
+          'select' => 'MUL:({alias}.grandTotal, grandTotalCurrencyRateQuote{alias}Foreign.rate)',
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'grandTotalCurrencyRateQuote{alias}Foreign',
+              2 => [
+                'grandTotalCurrencyRateQuote{alias}Foreign.id:' => '{alias}.grandTotalCurrency'
+              ]
+            ]
+          ]
+        ],
+        'where' => [
+          '=' => [
+            'whereClause' => [
+              'MUL:(grandTotal, grandTotalCurrencyRate.rate)=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'grandTotalCurrencyRate',
+                2 => [
+                  'grandTotalCurrencyRate.id:' => 'grandTotalCurrency'
+                ]
+              ]
+            ]
+          ],
+          '>' => [
+            'whereClause' => [
+              'MUL:(grandTotal, grandTotalCurrencyRate.rate)>' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'grandTotalCurrencyRate',
+                2 => [
+                  'grandTotalCurrencyRate.id:' => 'grandTotalCurrency'
+                ]
+              ]
+            ]
+          ],
+          '<' => [
+            'whereClause' => [
+              'MUL:(grandTotal, grandTotalCurrencyRate.rate)<' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'grandTotalCurrencyRate',
+                2 => [
+                  'grandTotalCurrencyRate.id:' => 'grandTotalCurrency'
+                ]
+              ]
+            ]
+          ],
+          '>=' => [
+            'whereClause' => [
+              'MUL:(grandTotal, grandTotalCurrencyRate.rate)>=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'grandTotalCurrencyRate',
+                2 => [
+                  'grandTotalCurrencyRate.id:' => 'grandTotalCurrency'
+                ]
+              ]
+            ]
+          ],
+          '<=' => [
+            'whereClause' => [
+              'MUL:(grandTotal, grandTotalCurrencyRate.rate)<=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'grandTotalCurrencyRate',
+                2 => [
+                  'grandTotalCurrencyRate.id:' => 'grandTotalCurrency'
+                ]
+              ]
+            ]
+          ],
+          '<>' => [
+            'whereClause' => [
+              'MUL:(grandTotal, grandTotalCurrencyRate.rate)!=' => '{value}'
+            ],
+            'leftJoins' => [
+              0 => [
+                0 => 'Currency',
+                1 => 'grandTotalCurrencyRate',
+                2 => [
+                  'grandTotalCurrencyRate.id:' => 'grandTotalCurrency'
+                ]
+              ]
+            ]
+          ],
+          'IS NULL' => [
+            'whereClause' => [
+              'grandTotal=' => NULL
+            ]
+          ],
+          'IS NOT NULL' => [
+            'whereClause' => [
+              'grandTotal!=' => NULL
+            ]
+          ]
+        ],
+        'notStorable' => true,
+        'order' => [
+          'order' => [
+            0 => [
+              0 => 'MUL:(grandTotal, grandTotalCurrencyRate.rate)',
+              1 => '{direction}'
+            ]
+          ],
+          'leftJoins' => [
+            0 => [
+              0 => 'Currency',
+              1 => 'grandTotalCurrencyRate',
+              2 => [
+                'grandTotalCurrencyRate.id:' => 'grandTotalCurrency'
+              ]
+            ]
+          ],
+          'additionalSelect' => [
+            0 => 'grandTotalCurrencyRate.rate'
+          ]
+        ],
+        'attributeRole' => 'valueConverted',
+        'fieldType' => 'currency'
+      ],
+      'accountId' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'foreignId',
+        'index' => true,
+        'attributeRole' => 'id',
+        'fieldType' => 'link',
+        'notNull' => false
+      ],
+      'accountName' => [
+        'type' => 'foreign',
+        'notStorable' => true,
+        'attributeRole' => 'name',
+        'fieldType' => 'link',
+        'relation' => 'account',
+        'foreign' => 'name',
+        'foreignType' => 'varchar'
+      ],
+      'contactId' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'foreignId',
+        'index' => true,
+        'attributeRole' => 'id',
+        'fieldType' => 'link',
+        'notNull' => false
+      ],
+      'contactName' => [
+        'type' => 'foreign',
+        'notStorable' => true,
+        'attributeRole' => 'name',
+        'fieldType' => 'link',
+        'relation' => 'contact',
+        'foreign' => 'name',
+        'foreignType' => 'varchar'
+      ],
+      'opportunityId' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'foreignId',
+        'index' => true,
+        'attributeRole' => 'id',
+        'fieldType' => 'link',
+        'notNull' => false
+      ],
+      'opportunityName' => [
+        'type' => 'foreign',
+        'notStorable' => true,
+        'attributeRole' => 'name',
+        'fieldType' => 'link',
+        'relation' => 'opportunity',
+        'foreign' => 'name',
+        'foreignType' => 'varchar'
+      ],
+      'assignedUserId' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'foreignId',
+        'index' => true,
+        'attributeRole' => 'id',
+        'fieldType' => 'link',
+        'notNull' => false
+      ],
+      'assignedUserName' => [
+        'type' => 'foreign',
+        'notStorable' => true,
+        'attributeRole' => 'name',
+        'fieldType' => 'link',
+        'relation' => 'assignedUser',
+        'foreign' => 'name',
+        'foreignType' => 'varchar'
+      ],
+      'teamsIds' => [
+        'type' => 'jsonArray',
+        'notStorable' => true,
+        'isLinkMultipleIdList' => true,
+        'relation' => 'teams',
+        'isUnordered' => true,
+        'attributeRole' => 'idList',
+        'fieldType' => 'linkMultiple'
+      ],
+      'teamsNames' => [
+        'type' => 'jsonObject',
+        'notStorable' => true,
+        'isLinkMultipleNameMap' => true,
+        'attributeRole' => 'nameMap',
+        'fieldType' => 'linkMultiple'
+      ],
+      'isFollowed' => [
+        'type' => 'bool',
+        'notStorable' => true,
+        'notExportable' => true,
+        'default' => false
+      ],
+      'followersIds' => [
+        'type' => 'jsonArray',
+        'notStorable' => true,
+        'notExportable' => true
+      ],
+      'followersNames' => [
+        'type' => 'jsonObject',
+        'notStorable' => true,
+        'notExportable' => true
+      ]
+    ],
+    'relations' => [
+      'teams' => [
+        'type' => 'manyMany',
+        'entity' => 'Team',
+        'relationName' => 'entityTeam',
+        'midKeys' => [
+          0 => 'entityId',
+          1 => 'teamId'
+        ],
+        'conditions' => [
+          'entityType' => 'Quote'
+        ],
+        'additionalColumns' => [
+          'entityType' => [
+            'type' => 'varchar',
+            'len' => 100
+          ]
+        ],
+        'indexes' => [
+          'entityId' => [
+            'columns' => [
+              0 => 'entityId'
+            ],
+            'key' => 'IDX_ENTITY_ID'
+          ],
+          'teamId' => [
+            'columns' => [
+              0 => 'teamId'
+            ],
+            'key' => 'IDX_TEAM_ID'
+          ],
+          'entityId_teamId_entityType' => [
+            'type' => 'unique',
+            'columns' => [
+              0 => 'entityId',
+              1 => 'teamId',
+              2 => 'entityType'
+            ],
+            'key' => 'UNIQ_ENTITY_ID_TEAM_ID_ENTITY_TYPE'
+          ]
+        ]
+      ],
+      'assignedUser' => [
+        'type' => 'belongsTo',
+        'entity' => 'User',
+        'key' => 'assignedUserId',
+        'foreignKey' => 'id',
+        'foreign' => NULL
+      ],
+      'opportunity' => [
+        'type' => 'belongsTo',
+        'entity' => 'Opportunity',
+        'key' => 'opportunityId',
+        'foreignKey' => 'id',
+        'foreign' => 'quotes'
+      ],
+      'contact' => [
+        'type' => 'belongsTo',
+        'entity' => 'Contact',
+        'key' => 'contactId',
+        'foreignKey' => 'id',
+        'foreign' => NULL
+      ],
+      'account' => [
+        'type' => 'belongsTo',
+        'entity' => 'Account',
+        'key' => 'accountId',
+        'foreignKey' => 'id',
+        'foreign' => 'quotes'
+      ]
+    ],
+    'indexes' => [
+      'number' => [
+        'type' => 'unique',
+        'columns' => [
+          0 => 'number'
+        ],
+        'key' => 'UNIQ_NUMBER'
+      ],
+      'accountId' => [
+        'type' => 'index',
+        'columns' => [
+          0 => 'accountId'
+        ],
+        'key' => 'IDX_ACCOUNT_ID'
+      ],
+      'contactId' => [
+        'type' => 'index',
+        'columns' => [
+          0 => 'contactId'
+        ],
+        'key' => 'IDX_CONTACT_ID'
+      ],
+      'opportunityId' => [
+        'type' => 'index',
+        'columns' => [
+          0 => 'opportunityId'
+        ],
+        'key' => 'IDX_OPPORTUNITY_ID'
+      ],
+      'assignedUserId' => [
+        'type' => 'index',
+        'columns' => [
+          0 => 'assignedUserId'
+        ],
+        'key' => 'IDX_ASSIGNED_USER_ID'
       ]
     ],
     'collection' => [

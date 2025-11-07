@@ -51,72 +51,86 @@ return [
       'text' => '$CRM'
     ],
     1 => 'Account',
-    2 => 'Contact',
-    3 => 'Lead',
+    2 => 'Lead',
+    3 => 'Contact',
     4 => 'Opportunity',
-    5 => (object) [
+    5 => 'Ticket',
+    6 => (object) [
+      'type' => 'divider',
+      'text' => '$Finance',
+      'id' => '789456'
+    ],
+    7 => 'Invoice',
+    8 => 'Quote',
+    9 => 'Payment',
+    10 => 'Expense',
+    11 => (object) [
       'type' => 'divider',
       'text' => '$Activities',
       'id' => '219419'
     ],
-    6 => 'Email',
-    7 => 'Meeting',
-    8 => 'Call',
-    9 => 'Task',
-    10 => 'Calendar',
-    11 => (object) [
+    12 => 'Email',
+    13 => 'Meeting',
+    14 => 'Call',
+    15 => 'Task',
+    16 => 'Calendar',
+    17 => (object) [
       'type' => 'divider',
       'id' => '655187',
       'text' => '$Support'
     ],
-    12 => 'Case',
-    13 => 'KnowledgeBaseArticle',
-    14 => (object) [
+    18 => 'Case',
+    19 => 'KnowledgeBaseArticle',
+    20 => (object) [
       'type' => 'divider',
       'text' => NULL,
       'id' => '137994'
     ],
-    15 => '_delimiter_',
-    16 => (object) [
+    21 => '_delimiter_',
+    22 => (object) [
       'type' => 'divider',
       'text' => '$Marketing',
       'id' => '463280'
     ],
-    17 => 'Campaign',
-    18 => 'TargetList',
-    19 => (object) [
+    23 => 'Campaign',
+    24 => 'TargetList',
+    25 => (object) [
       'type' => 'divider',
       'text' => '$Business',
       'id' => '518202'
     ],
-    20 => 'Document',
-    21 => (object) [
+    26 => 'Document',
+    27 => (object) [
       'type' => 'divider',
       'text' => '$Organization',
       'id' => '566592'
     ],
-    22 => 'User',
-    23 => 'Team',
-    24 => 'WorkingTimeCalendar',
-    25 => (object) [
+    28 => 'User',
+    29 => 'Team',
+    30 => 'WorkingTimeCalendar',
+    31 => (object) [
       'type' => 'divider',
       'text' => NULL,
       'id' => '898671'
     ],
-    26 => 'EmailTemplate',
-    27 => 'Template',
-    28 => 'Import'
+    32 => 'EmailTemplate',
+    33 => 'Template',
+    34 => 'Import'
   ],
   'quickCreateList' => [
     0 => 'Account',
     1 => 'Contact',
     2 => 'Lead',
     3 => 'Opportunity',
-    4 => 'Meeting',
-    5 => 'Call',
-    6 => 'Task',
-    7 => 'Case',
-    8 => 'Email'
+    4 => 'Ticket',
+    5 => 'Invoice',
+    6 => 'Quote',
+    7 => 'Payment',
+    8 => 'Meeting',
+    9 => 'Call',
+    10 => 'Task',
+    11 => 'Case',
+    12 => 'Email'
   ],
   'exportDisabled' => false,
   'adminNotifications' => true,
@@ -327,7 +341,7 @@ return [
     0 => 'youtube.com',
     1 => 'google.com'
   ],
-  'microtime' => 1761559792.800244,
+  'microtime' => 1762371697.865035,
   'siteUrl' => 'http://localhost/tpdcrm',
   'fullTextSearchMinLength' => 4
 ];

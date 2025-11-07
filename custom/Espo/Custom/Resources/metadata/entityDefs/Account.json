@@ -1,0 +1,27 @@
+{
+    "fields": {
+        "name": {
+            "type": "varchar",
+            "required": true,
+            "trim": true
+        },
+        "website": {
+            "type": "url"
+        },
+        "type": {
+            "type": "enum",
+            "options": ["Customer", "Investor", "Partner", "Reseller"]
+        },
+        "billingAddressCountry": {
+            "type": "varchar",
+            "trim": true
+        }
+    },
+    "links": {
+        "tickets": {
+            "type": "hasMany",
+            "entity": "Ticket",
+            "foreign": "account"
+        }
+    }
+}

@@ -1,0 +1,83 @@
+{
+    "fields": {
+        "name": {
+            "type": "varchar",
+            "required": true,
+            "maxLength": 255
+        },
+        "number": {
+            "type": "autoincrement",
+            "unique": true,
+            "prefix": "PAY-",
+            "padLength": 5
+        },
+        "status": {
+            "type": "enum",
+            "options": ["Pending", "Completed", "Failed", "Refunded", "Cancelled"],
+            "default": "Pending",
+            "style": {
+                "Pending": "warning",
+                "Completed": "success",
+                "Failed": "danger",
+                "Refunded": "info",
+                "Cancelled": "default"
+            },
+            "required": true
+        },
+        "paymentDate": {
+            "type": "date",
+            "required": true
+        },
+        "amount": {
+            "type": "currency",
+            "required": true
+        },
+        "paymentMethod": {
+            "type": "enum",
+            "options": ["Cash", "Check", "Credit Card", "Bank Transfer", "PayPal", "Other"]
+        },
+        "reference": {
+            "type": "varchar",
+            "maxLength": 100
+        },
+        "description": {
+            "type": "text"
+        },
+        "account": {
+            "type": "link"
+        },
+        "invoice": {
+            "type": "link"
+        },
+        "assignedUser": {
+            "type": "link"
+        },
+        "teams": {
+            "type": "linkMultiple"
+        }
+    },
+    "links": {
+        "account": {
+            "type": "belongsTo",
+            "entity": "Account"
+        },
+        "invoice": {
+            "type": "belongsTo",
+            "entity": "Invoice",
+            "foreign": "payments"
+        },
+        "assignedUser": {
+            "type": "belongsTo",
+            "entity": "User"
+        },
+        "teams": {
+            "type": "hasMany",
+            "entity": "Team",
+            "relationName": "EntityTeam"
+        }
+    },
+    "collection": {
+        "orderBy": "paymentDate",
+        "order": "desc"
+    }
+}

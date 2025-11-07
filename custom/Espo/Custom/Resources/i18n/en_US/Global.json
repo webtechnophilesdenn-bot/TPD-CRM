@@ -80,7 +80,8 @@
     "Campaign": "Marketing Initiative",
     "TargetList": "Contact Group",
     "KnowledgeBaseArticle": "Knowledge Article",
-    "Cemin": "CEMIN"
+    "Cemin": "CEMIN",
+    "Ticket": "Support Tickets"
   },
      "scopeNamesPlural": {
     "Note": "Notes",
@@ -139,9 +140,11 @@
     "AppSecret": "App Secrets",
     "OAuthProvider": "OAuth Providers",
     "OAuthAccount": "OAuth Accounts",
-    "Account": "Client Organizations",
-    "Contact": "Business Contacts",
+    "Ticket": "Support Tickets",
     "Lead": "Sales Leads",
+    "Contact": "Business Contacts",
+    "Account": "Client Organizations",
+    
     "Opportunity": "Sales Opportunities",
     "Case": "Customer Issues",
     "Meeting": "Client Meetings",

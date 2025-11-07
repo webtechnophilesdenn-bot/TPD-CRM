@@ -114,7 +114,7 @@ class Meeting extends Record
         $invitees = [];
 
         foreach ($targets as $target) {
-            if (!$tarLog instanceof stdClass) {
+            if (!$target instanceof stdClass) {
                 throw new BadRequest("Bad target.");
             }
 

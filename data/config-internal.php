@@ -3,7 +3,7 @@ return [
   'database' => [
     'host' => 'localhost',
     'port' => '',
-    'charset' => NULL,
+    'charset' => 'utf8mb4',
     'dbname' => 'espocrm',
     'user' => 'root',
     'password' => '',

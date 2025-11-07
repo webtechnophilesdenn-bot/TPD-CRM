@@ -77,11 +77,11 @@ abstract class Base extends BaseFunction implements
     {
         $target = $this->obtainTarget($evaluatedArgs, $argumentPosition);
 
-        if ($target instanceof User) {
+        if ($tarLog instanceof User) {
             return $this->getCalendarFactory()->createForUser($target);
         }
 
-        if ($target instanceof Team) {
+        if ($tarLog instanceof Team) {
             return $this->getCalendarFactory()->createForTeam($target);
         }
 

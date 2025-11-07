@@ -1,0 +1,81 @@
+{
+    "controller": "controllers/record",
+    "iconClass": "fas fa-ticket-alt",
+    "color": "#3498db",
+    "kanbanViewMode": true,
+    "dynamicLogic": {
+        "fields": {
+            "resolution": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "or",
+                            "value": [
+                                {
+                                    "type": "equals",
+                                    "attribute": "status",
+                                    "value": "Resolved"
+                                },
+                                {
+                                    "type": "equals",
+                                    "attribute": "status",
+                                    "value": "Closed"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "filterList": [
+        "all",
+        {
+            "name": "open",
+            "label": "Open"
+        },
+        {
+            "name": "closed",
+            "label": "Closed"
+        },
+        {
+            "name": "new",
+            "label": "New"
+        }
+    ],
+    "boolFilterList": [
+        "onlyMy"
+    ],
+    "selectDefaultFilters": {
+        "filter": "open"
+    },
+    "sidePanels": {
+        "detail": [
+            {
+                "name": "activities",
+                "label": "Activities",
+                "view": "crm:views/record/panels/activities",
+                "aclScope": "Activities"
+            },
+            {
+                "name": "history",
+                "label": "History",
+                "view": "crm:views/record/panels/history",
+                "aclScope": "Activities"
+            },
+            {
+                "name": "tasks",
+                "label": "Tasks",
+                "view": "crm:views/record/panels/tasks",
+                "aclScope": "Task"
+            }
+        ]
+    },
+    "relationshipPanels": {
+        "documents": {
+            "create": true,
+            "select": true,
+            "view": "views/record/panels/relationship"
+        }
+    }
+}

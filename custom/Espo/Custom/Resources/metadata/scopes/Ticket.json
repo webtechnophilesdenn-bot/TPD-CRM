@@ -1,0 +1,39 @@
+{
+    "entity": true,
+    "layouts": true,
+    "tab": true,
+    "acl": true,
+    "aclActionList": [
+        "create",
+        "read",
+        "edit",
+        "delete",
+        "stream"
+    ],
+    "aclLevelList": [
+        "all",
+        "team",
+        "own",
+        "no"
+    ],
+    "aclPortal": true,
+    "aclPortalLevelList": [
+        "all",
+        "account",
+        "contact",
+        "own",
+        "no"
+    ],
+    "customizable": true,
+    "importable": true,
+    "notifications": true,
+    "stream": true,
+    "disabled": false,
+    "type": "BasePlus",
+    "module": "Custom",
+    "object": true,
+    "isCustom": true,
+    "hasAssignedUser": true,
+    "statusField": "status",
+    "kanbanStatusIgnoreList": ["Closed", "Cancelled"]
+}

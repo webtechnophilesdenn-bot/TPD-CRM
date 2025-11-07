@@ -80,7 +80,8 @@
     "Campaign": "Marketing Initiative",
     "TargetList": "Contact Group",
     "KnowledgeBaseArticle": "Knowledge Article",
-    "Cemin": "CEMIN"
+    "Cemin": "CEMIN",
+    "Ticket": "Support Tickets"
   },
      "scopeNamesPlural": {
     "Note": "Notes",
@@ -151,7 +152,8 @@
     "Campaign": "Marketing Initiatives",
     "TargetList": "Contact Groups",
     "KnowledgeBaseArticle": "Knowledge Articles",
-    "Cemin": "CEMIN"
+    "Cemin": "CEMIN",
+    "Ticket": "Support Tickets"
   },
     "labels": {
         "Previous Page": "Previous Page",

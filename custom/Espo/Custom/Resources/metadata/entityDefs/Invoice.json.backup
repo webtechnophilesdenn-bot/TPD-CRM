@@ -1,0 +1,118 @@
+{
+  "fields": {
+    "name": {
+      "type": "varchar",
+      "required": true,
+      "maxLength": 255,
+      "trim": true
+    },
+    "number": {
+      "type": "autoincrement",
+      "unique": true,
+      "index": true,
+      "readOnly": true,
+      "prefix": "INV-",
+      "padLength": 5
+    },
+    "status": {
+      "type": "enum",
+      "options": [
+        "Draft",
+        "Sent",
+        "Viewed",
+        "Partially Paid",
+        "Paid",
+        "Overdue",
+        "Cancelled"
+      ],
+      "default": "Draft",
+      "style": {
+        "Draft": "default",
+        "Sent": "info",
+        "Viewed": "primary",
+        "Partially Paid": "warning",
+        "Paid": "success",
+        "Overdue": "danger",
+        "Cancelled": "default"
+      },
+      "required": true,
+      "audited": true
+    },
+    "invoiceDate": {
+      "type": "date",
+      "required": true
+    },
+    "dueDate": {
+      "type": "date",
+      "required": true
+    },
+    "amount": {
+      "type": "currency",
+      "required": true,
+      "audited": true
+    },
+    "taxAmount": {
+      "type": "currency"
+    },
+    "discountAmount": {
+      "type": "currency"
+    },
+    "grandTotal": {
+      "type": "currency",
+      "readOnly": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "account": {
+      "type": "link"
+    },
+    "contact": {
+      "type": "link"
+    },
+    "assignedUser": {
+      "type": "link"
+    },
+    "teams": {
+      "type": "linkMultiple"
+    },
+    "createdAt": {
+      "readOnly": true,
+      "type": "datetime"
+    },
+    "modifiedAt": {
+      "readOnly": true,
+      "type": "datetime"
+    }
+  },
+  "links": {
+    "account": {
+      "type": "belongsTo",
+      "entity": "Account",
+      "foreign": "invoices"
+    },
+    "contact": {
+      "type": "belongsTo",
+      "entity": "Contact",
+      "foreign": "invoices"
+    },
+    "assignedUser": {
+      "type": "belongsTo",
+      "entity": "User"
+    },
+    "teams": {
+      "type": "hasMany",
+      "entity": "Team",
+      "relationName": "EntityTeam"
+    },
+    "payments": {
+      "type": "hasMany",
+      "entity": "Payment",
+      "foreign": "invoice"
+    }
+  },
+  "collection": {
+    "orderBy": "createdAt",
+    "order": "desc"
+  }
+}
