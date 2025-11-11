@@ -1,116 +1,36 @@
 {
-  "fields": {
-    "name": {
-      "type": "varchar",
-      "required": true,
-      "maxLength": 255,
-      "trim": true
+    "fields": {
+        "name": {"type": "varchar", "required": true},
+        "number": {"type": "varchar"},
+        "status": {
+            "type": "enum", 
+            "options": ["Draft", "Sent", "Accepted", "Rejected"],
+            "default": "Draft"
+        },
+        "account": {"type": "link", "required": true},
+        "contact": {"type": "link"},
+        "amount": {"type": "currency", "required": true},
+        "taxAmount": {"type": "currency"},
+        "discountAmount": {"type": "currency"},
+        "grandTotal": {"type": "currency"},
+        "quoteDate": {"type": "date", "required": true},
+        "expirationDate": {"type": "date"},
+        "description": {"type": "text"},
+        "assignedUser": {"type": "link"}
     },
-    "number": {
-      "type": "autoincrement",
-      "unique": true,
-      "index": true,
-      "readOnly": true,
-      "prefix": "QUO-",
-      "padLength": 5
-    },
-    "status": {
-      "type": "enum",
-      "options": [
-        "Draft",
-        "Sent",
-        "Accepted",
-        "Rejected",
-        "Expired",
-        "Cancelled"
-      ],
-      "default": "Draft",
-      "style": {
-        "Draft": "default",
-        "Sent": "info",
-        "Accepted": "success",
-        "Rejected": "danger",
-        "Expired": "warning",
-        "Cancelled": "default"
-      },
-      "required": true,
-      "audited": true
-    },
-    "quoteDate": {
-      "type": "date",
-      "required": true
-    },
-    "expirationDate": {
-      "type": "date"
-    },
-    "amount": {
-      "type": "currency",
-      "required": true
-    },
-    "taxAmount": {
-      "type": "currency"
-    },
-    "discountAmount": {
-      "type": "currency"
-    },
-    "grandTotal": {
-      "type": "currency",
-      "readOnly": true
-    },
-    "description": {
-      "type": "text"
-    },
-    "account": {
-      "type": "link"
-    },
-    "contact": {
-      "type": "link"
-    },
-    "opportunity": {
-      "type": "link"
-    },
-    "assignedUser": {
-      "type": "link"
-    },
-    "teams": {
-      "type": "linkMultiple"
-    },
-    "createdAt": {
-      "readOnly": true,
-      "type": "datetime"
-    },
-    "modifiedAt": {
-      "readOnly": true,
-      "type": "datetime"
+    "links": {
+        "account": {
+            "type": "belongsTo", 
+            "entity": "Account",
+            "foreign": "quotes"
+        },
+        "contact": {
+            "type": "belongsTo",
+            "entity": "Contact"
+        },
+        "assignedUser": {
+            "type": "belongsTo", 
+            "entity": "User"
+        }
     }
-  },
-  "links": {
-    "account": {
-      "type": "belongsTo",
-      "entity": "Account",
-      "foreign": "quotes"
-    },
-    "contact": {
-      "type": "belongsTo",
-      "entity": "Contact"
-    },
-    "opportunity": {
-      "type": "belongsTo",
-      "entity": "Opportunity",
-      "foreign": "quotes"
-    },
-    "assignedUser": {
-      "type": "belongsTo",
-      "entity": "User"
-    },
-    "teams": {
-      "type": "hasMany",
-      "entity": "Team",
-      "relationName": "EntityTeam"
-    }
-  },
-  "collection": {
-    "orderBy": "createdAt",
-    "order": "desc"
-  }
 }

@@ -130,7 +130,14 @@ return [
     9 => 'Call',
     10 => 'Task',
     11 => 'Case',
-    12 => 'Email'
+    12 => 'Email',
+    13 => 'Expense',
+    14 => 'User',
+    15 => 'Campaign',
+    16 => 'KnowledgeBaseArticle',
+    17 => 'TargetList',
+    18 => 'Cemin',
+    19 => 'Document'
   ],
   'exportDisabled' => false,
   'adminNotifications' => true,
@@ -167,7 +174,7 @@ return [
   'maxEmailAccountCount' => 2,
   'followCreatedEntities' => false,
   'b2cMode' => false,
-  'theme' => 'Dark',
+  'theme' => 'Hazyblue',
   'themeParams' => (object) [
     'navbar' => 'side'
   ],
@@ -207,20 +214,36 @@ return [
       'name' => 'My Dashboard',
       'layout' => [
         0 => (object) [
-          'id' => 'default-activities',
-          'name' => 'Activities',
-          'x' => 2,
-          'y' => 2,
-          'width' => 2,
-          'height' => 4
-        ],
-        1 => (object) [
-          'id' => 'default-stream',
-          'name' => 'Stream',
+          'id' => 'd124488',
+          'name' => 'QuoteChart',
           'x' => 0,
           'y' => 0,
           'width' => 2,
-          'height' => 4
+          'height' => 2
+        ],
+        1 => (object) [
+          'id' => 'd854270',
+          'name' => 'InvoiceChart',
+          'x' => 2,
+          'y' => 0,
+          'width' => 2,
+          'height' => 2
+        ],
+        2 => (object) [
+          'id' => 'd593253',
+          'name' => 'ExpenseChart',
+          'x' => 0,
+          'y' => 2,
+          'width' => 2,
+          'height' => 2
+        ],
+        3 => (object) [
+          'id' => 'd807577',
+          'name' => 'PaymentChart',
+          'x' => 2,
+          'y' => 2,
+          'width' => 2,
+          'height' => 2
         ]
       ]
     ]
@@ -341,7 +364,16 @@ return [
     0 => 'youtube.com',
     1 => 'google.com'
   ],
-  'microtime' => 1762371697.865035,
+  'clientCspScriptSourceList' => [
+    0 => 'https://maps.googleapis.com',
+    1 => 'https://cdn.jsdelivr.net'
+  ],
+  'microtime' => 1762897862.08204,
   'siteUrl' => 'http://localhost/tpdcrm',
-  'fullTextSearchMinLength' => 4
+  'fullTextSearchMinLength' => 4,
+  'userThemesDisabled' => false,
+  'avatarsDisabled' => false,
+  'scopeColorsDisabled' => false,
+  'tabIconsDisabled' => false,
+  'dashletsOptions' => (object) []
 ];

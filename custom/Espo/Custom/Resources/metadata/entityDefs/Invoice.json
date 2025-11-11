@@ -1,222 +1,40 @@
 {
     "fields": {
-        "name": {
-            "type": "varchar",
-            "required": true,
-            "maxLength": 255,
-            "trim": true,
-            "audited": true,
-            "index": true
-        },
-        "number": {
-            "type": "varchar",
-            "len": 36,
-            "unique": true,
-            "index": true,
-            "readOnly": true,
-            "layoutDetailDisabled": false,
-            "layoutListDisabled": false,
-            "textFilterDisabled": false
-        },
+        "name": {"type": "varchar", "required": true},
+        "number": {"type": "varchar"},
         "status": {
-            "type": "enum",
-            "options": [
-                "Draft",
-                "Sent",
-                "Paid",
-                "Partially Paid",
-                "Overdue",
-                "Cancelled",
-                "Void"
-            ],
-            "default": "Draft",
-            "style": {
-                "Draft": "default",
-                "Sent": "info",
-                "Paid": "success",
-                "Partially Paid": "warning",
-                "Overdue": "danger",
-                "Cancelled": "default",
-                "Void": "default"
-            },
-            "audited": true,
-            "required": true
+            "type": "enum", 
+            "options": ["Draft", "Sent", "Paid", "Partially Paid", "Overdue", "Cancelled"],
+            "default": "Draft"
         },
-        "invoiceDate": {
-            "type": "date",
-            "required": false,
-            "audited": true
-        },
-        "dueDate": {
-            "type": "date",
-            "required": false,
-            "audited": true
-        },
-        "amount": {
-            "type": "currency",
-            "required": true,
-            "audited": true,
-            "min": 0
-        },
-        "taxAmount": {
-            "type": "currency",
-            "audited": true,
-            "min": 0,
-            "default": 0
-        },
-        "discountAmount": {
-            "type": "currency",
-            "audited": true,
-            "min": 0,
-            "default": 0
-        },
-        "grandTotal": {
-            "type": "currency",
-            "readOnly": true,
-            "notStorable": true,
-            "audited": true
-        },
-        "paidAmount": {
-            "type": "currency",
-            "readOnly": true,
-            "default": 0,
-            "audited": true
-        },
-        "balanceAmount": {
-            "type": "currency",
-            "readOnly": true,
-            "notStorable": true
-        },
-        "billingAddress": {
-            "type": "address",
-            "view": "views/fields/address"
-        },
-        "shippingAddress": {
-            "type": "address",
-            "view": "views/fields/address"
-        },
-        "description": {
-            "type": "text",
-            "rows": 6
-        },
-        "termsAndConditions": {
-            "type": "text",
-            "rows": 6
-        },
-        "account": {
-            "type": "link",
-            "required": true
-        },
-        "contact": {
-            "type": "link"
-        },
-        "opportunity": {
-            "type": "link"
-        },
-        "quote": {
-            "type": "link"
-        },
-        "assignedUser": {
-            "type": "link",
-            "required": false,
-            "view": "views/fields/assigned-user"
-        },
-        "teams": {
-            "type": "linkMultiple",
-            "view": "views/fields/teams"
-        },
-        "createdAt": {
-            "type": "datetime",
-            "readOnly": true
-        },
-        "modifiedAt": {
-            "type": "datetime",
-            "readOnly": true
-        },
-        "createdBy": {
-            "type": "link",
-            "readOnly": true
-        },
-        "modifiedBy": {
-            "type": "link",
-            "readOnly": true
-        }
+        "account": {"type": "link", "required": true},
+        "contact": {"type": "link"},
+        "amount": {"type": "currency", "required": true},
+        "taxAmount": {"type": "currency"},
+        "discountAmount": {"type": "currency"},
+        "paidAmount": {"type": "currency"},
+        "invoiceDate": {"type": "date", "required": true},
+        "dueDate": {"type": "date"},
+        "billingAddress": {"type": "address"},
+        "shippingAddress": {"type": "address"},
+        "description": {"type": "text"},
+        "termsAndConditions": {"type": "text"},
+        "notes": {"type": "text"},
+        "assignedUser": {"type": "link"}
     },
     "links": {
-        "assignedUser": {
-            "type": "belongsTo",
-            "entity": "User"
-        },
-        "teams": {
-            "type": "hasMany",
-            "entity": "Team",
-            "relationName": "EntityTeam"
-        },
-        "createdBy": {
-            "type": "belongsTo",
-            "entity": "User"
-        },
-        "modifiedBy": {
-            "type": "belongsTo",
-            "entity": "User"
-        },
         "account": {
-            "type": "belongsTo",
+            "type": "belongsTo", 
             "entity": "Account",
             "foreign": "invoices"
         },
         "contact": {
             "type": "belongsTo",
-            "entity": "Contact",
-            "foreign": "invoices"
-        },
-        "opportunity": {
-            "type": "belongsTo",
-            "entity": "Opportunity",
-            "foreign": "invoices"
-        },
-        "quote": {
-            "type": "belongsTo",
-            "entity": "Quote",
-            "foreign": "invoices"
-        },
-        "payments": {
-            "type": "hasMany",
-            "entity": "Payment",
-            "foreign": "invoice"
-        },
-        "documents": {
-            "type": "hasMany",
-            "entity": "Document",
-            "foreign": "invoices"
-        }
-    },
-    "collection": {
-        "orderBy": "createdAt",
-        "order": "desc",
-        "textFilterFields": ["name", "number"]
-    },
-    "indexes": {
-        "name": {
-            "columns": ["name", "deleted"]
-        },
-        "status": {
-            "columns": ["status", "deleted"]
+            "entity": "Contact"
         },
         "assignedUser": {
-            "columns": ["assignedUserId", "deleted"]
-        },
-        "createdAt": {
-            "columns": ["createdAt", "deleted"]
-        },
-        "number": {
-            "columns": ["number", "deleted"]
-        },
-        "invoiceDate": {
-            "columns": ["invoiceDate", "deleted"]
-        },
-        "dueDate": {
-            "columns": ["dueDate", "deleted"]
+            "type": "belongsTo", 
+            "entity": "User"
         }
     }
 }

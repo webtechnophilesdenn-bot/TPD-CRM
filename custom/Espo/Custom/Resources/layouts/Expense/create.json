@@ -1,0 +1,35 @@
+{
+    "type": "detail",
+    "blocks": [
+        {
+            "label": "Expense Information",
+            "rows": [
+                [{"name": "name"}],
+                [{"name": "category"}]
+            ]
+        },
+        {
+            "label": "Financial Information",
+            "rows": [
+                [{"name": "amount"}],
+                [{"name": "isBillable"}],
+                [{"name": "isReimbursable"}]
+            ]
+        },
+        {
+            "label": "Details",
+            "rows": [
+                [{"name": "expenseDate"}],
+                [{"name": "vendor"}],
+                [{"name": "paymentMethod"}]
+            ]
+        },
+        {
+            "label": "Additional Information",
+            "rows": [
+                [{"name": "description"}],
+                [{"name": "assignedUser"}]
+            ]
+        }
+    ]
+}

@@ -13,33 +13,63 @@ class Payment extends \Espo\Services\Record
     {
         parent::beforeCreateEntity($entity, $data);
         
-        // Validate required fields
-        if (!$entity->get('name')) {
-            throw new BadRequest('Payment name is required');
-        }
+        try {
+            // Validate required name field
+            if (!$entity->get('name') || trim($entity->get('name')) === '') {
+                throw new BadRequest('Payment name is required');
+            }
 
-        if (!$entity->get('accountId')) {
-            throw new BadRequest('Account is required');
-        }
+            // Make account optional - can use invoice account
+            if (!$entity->get('accountId') && $entity->get('invoiceId')) {
+                $invoice = $this->getEntityManager()->getEntity('Invoice', $entity->get('invoiceId'));
+                if ($invoice) {
+                    $entity->set('accountId', $invoice->get('accountId'));
+                }
+            }
 
-        // Auto-assign to current user if not set
-        if (!$entity->get('assignedUserId')) {
-            $entity->set('assignedUserId', $this->getUser()->getId());
-        }
+            if (!$entity->get('accountId')) {
+                throw new BadRequest('Account is required');
+            }
 
-        // Set default status
-        if (!$entity->get('status')) {
-            $entity->set('status', 'Pending');
-        }
+            // Validate and cast amount
+            $amount = $entity->get('amount');
+            if ($amount !== null && $amount !== '') {
+                if (!is_numeric($amount)) {
+                    throw new BadRequest('Payment amount must be a valid number');
+                }
+                $entity->set('amount', (float)$amount);
+            }
 
-        // Generate payment number
-        if (!$entity->get('number')) {
-            $entity->set('number', $this->generateNumber());
-        }
+            // Auto-assign to current user
+            if (!$entity->get('assignedUserId')) {
+                $entity->set('assignedUserId', $this->getUser()->getId());
+            }
 
-        // Set payment date if not provided
-        if (!$entity->get('paymentDate')) {
-            $entity->set('paymentDate', date('Y-m-d'));
+            // Set default status
+            if (!$entity->get('status')) {
+                $entity->set('status', 'Pending');
+            }
+
+            // Generate payment number
+            if (!$entity->get('number')) {
+                try {
+                    $entity->set('number', $this->generateNumber());
+                } catch (\Exception $e) {
+                    $GLOBALS['log']->error('Payment number generation failed: ' . $e->getMessage());
+                    $entity->set('number', 'PAY-' . time());
+                }
+            }
+
+            // Set payment date
+            if (!$entity->get('paymentDate')) {
+                $entity->set('paymentDate', date('Y-m-d'));
+            }
+
+        } catch (BadRequest $e) {
+            throw $e;
+        } catch (\Exception $e) {
+            $GLOBALS['log']->error('Payment beforeCreateEntity error: ' . $e->getMessage());
+            throw new BadRequest('Error creating payment: ' . $e->getMessage());
         }
     }
 
@@ -47,9 +77,13 @@ class Payment extends \Espo\Services\Record
     {
         parent::beforeUpdateEntity($entity, $data);
         
-        // Track status changes
-        if ($entity->isAttributeChanged('status')) {
-            $this->handleStatusChange($entity);
+        try {
+            if ($entity->isAttributeChanged('status')) {
+                $this->handleStatusChange($entity);
+            }
+        } catch (\Exception $e) {
+            $GLOBALS['log']->error('Payment beforeUpdateEntity error: ' . $e->getMessage());
+            throw $e;
         }
     }
 
@@ -57,9 +91,12 @@ class Payment extends \Espo\Services\Record
     {
         parent::afterCreateEntity($entity, $data);
         
-        // Update invoice paid amount if linked
-        if ($entity->get('invoiceId') && $entity->get('status') === 'Completed') {
-            $this->updateInvoicePaidAmount($entity->get('invoiceId'));
+        try {
+            if ($entity->get('invoiceId') && $entity->get('status') === 'Completed') {
+                $this->updateInvoicePaidAmount($entity->get('invoiceId'));
+            }
+        } catch (\Exception $e) {
+            $GLOBALS['log']->warning('Could not update invoice: ' . $e->getMessage());
         }
     }
 
@@ -67,9 +104,12 @@ class Payment extends \Espo\Services\Record
     {
         parent::afterUpdateEntity($entity, $data);
         
-        // Update invoice paid amount when payment status changes
-        if ($entity->isAttributeChanged('status') && $entity->get('invoiceId')) {
-            $this->updateInvoicePaidAmount($entity->get('invoiceId'));
+        try {
+            if ($entity->isAttributeChanged('status') && $entity->get('invoiceId')) {
+                $this->updateInvoicePaidAmount($entity->get('invoiceId'));
+            }
+        } catch (\Exception $e) {
+            $GLOBALS['log']->warning('Could not update invoice: ' . $e->getMessage());
         }
     }
 
@@ -78,14 +118,12 @@ class Payment extends \Espo\Services\Record
         $newStatus = $entity->get('status');
         $oldStatus = $entity->getFetched('status');
 
-        // When payment is completed, update invoice
         if ($newStatus === 'Completed' && $oldStatus !== 'Completed') {
             if ($entity->get('invoiceId')) {
                 $this->updateInvoicePaidAmount($entity->get('invoiceId'));
             }
         }
 
-        // When payment is refunded or failed, update invoice
         if (($newStatus === 'Refunded' || $newStatus === 'Failed') && $oldStatus === 'Completed') {
             if ($entity->get('invoiceId')) {
                 $this->updateInvoicePaidAmount($entity->get('invoiceId'));
@@ -95,69 +133,71 @@ class Payment extends \Espo\Services\Record
 
     protected function updateInvoicePaidAmount($invoiceId)
     {
-        $em = $this->getEntityManager();
-        $invoice = $em->getEntity('Invoice', $invoiceId);
-        
-        if (!$invoice) {
-            return;
+        try {
+            $em = $this->getEntityManager();
+            $invoice = $em->getEntity('Invoice', $invoiceId);
+            
+            if (!$invoice) {
+                return;
+            }
+
+            $payments = $em->getRDBRepository('Payment')
+                ->where(['invoiceId' => $invoiceId, 'status' => 'Completed'])
+                ->find();
+
+            $totalPaid = 0;
+            foreach ($payments as $payment) {
+                $totalPaid += (float)$payment->get('amount');
+            }
+
+            $invoice->set('paidAmount', $totalPaid);
+            
+            $amount = (float)($invoice->get('amount') ?? 0);
+            $taxAmount = (float)($invoice->get('taxAmount') ?? 0);
+            $discountAmount = (float)($invoice->get('discountAmount') ?? 0);
+            $grandTotal = $amount + $taxAmount - $discountAmount;
+
+            if ($totalPaid >= $grandTotal) {
+                $invoice->set('status', 'Paid');
+            } elseif ($totalPaid > 0 && $totalPaid < $grandTotal) {
+                $invoice->set('status', 'Partially Paid');
+            }
+
+            $em->saveEntity($invoice);
+        } catch (\Exception $e) {
+            $GLOBALS['log']->error('Error updating invoice paid amount: ' . $e->getMessage());
         }
-
-        // Get all completed payments for this invoice
-        $payments = $em->getRDBRepository('Payment')
-            ->where([
-                'invoiceId' => $invoiceId,
-                'status' => 'Completed'
-            ])
-            ->find();
-
-        $totalPaid = 0;
-        foreach ($payments as $payment) {
-            $totalPaid += $payment->get('amount');
-        }
-
-        $invoice->set('paidAmount', $totalPaid);
-        
-        // Update invoice status based on paid amount
-        $amount = $invoice->get('amount') ?? 0;
-        $taxAmount = $invoice->get('taxAmount') ?? 0;
-        $discountAmount = $invoice->get('discountAmount') ?? 0;
-        $grandTotal = $amount + $taxAmount - $discountAmount;
-
-        if ($totalPaid >= $grandTotal) {
-            $invoice->set('status', 'Paid');
-        } elseif ($totalPaid > 0 && $totalPaid < $grandTotal) {
-            $invoice->set('status', 'Partially Paid');
-        }
-
-        $em->saveEntity($invoice);
     }
 
     protected function generateNumber()
     {
         $em = $this->getEntityManager();
         
-        $collection = $em->getRDBRepository('Payment')
-            ->select(['number'])
-            ->where([
-                'number*' => 'PAY-%'
-            ])
-            ->order('number', 'DESC')
-            ->limit(0, 1)
-            ->find();
-        
-        $maxNum = 0;
-        
-        if (count($collection) > 0) {
-            $lastPayment = $collection[0];
-            $lastNumber = $lastPayment->get('number');
+        try {
+            $collection = $em->getRDBRepository('Payment')
+                ->select(['number'])
+                ->where(['number*' => 'PAY-%'])
+                ->order('number', 'DESC')
+                ->limit(0, 1)
+                ->find();
             
-            if (preg_match('/PAY-(\d+)/', $lastNumber, $matches)) {
-                $maxNum = intval($matches[1]);
+            $maxNum = 0;
+            
+            if (count($collection) > 0) {
+                $lastPayment = $collection[0];
+                $lastNumber = $lastPayment->get('number');
+                
+                if (preg_match('/PAY-\d{4}-(\d+)/', $lastNumber, $matches)) {
+                    $maxNum = intval($matches[1]);
+                }
             }
+            
+            $nextNum = $maxNum + 1;
+            
+            return 'PAY-' . date('Y') . '-' . str_pad($nextNum, 5, '0', STR_PAD_LEFT);
+        } catch (\Exception $e) {
+            $GLOBALS['log']->error('Error generating payment number: ' . $e->getMessage());
+            return 'PAY-' . date('Ymd') . '-' . substr(time(), -4);
         }
-        
-        $nextNum = $maxNum + 1;
-        
-        return 'PAY-' . date('Y') . '-' . str_pad($nextNum, 5, '0', STR_PAD_LEFT);
     }
 }

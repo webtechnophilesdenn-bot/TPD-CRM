@@ -1,4 +1,5 @@
 <?php
+
 namespace Espo\Custom\SelectManagers;
 
 class Invoice extends \Espo\Core\SelectManagers\Base
@@ -35,6 +36,13 @@ class Invoice extends \Espo\Core\SelectManagers\Base
     {
         $result['whereClause'][] = [
             'status' => 'Overdue'
+        ];
+    }
+    
+    protected function filterPartiallyPaid(&$result)
+    {
+        $result['whereClause'][] = [
+            'status' => 'Partially Paid'
         ];
     }
 }

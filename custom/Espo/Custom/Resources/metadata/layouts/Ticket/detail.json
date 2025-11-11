@@ -1,0 +1,35 @@
+[
+    {
+        "rows": [
+            [
+                {"name": "name", "span": 2}
+            ],
+            [
+                {"name": "status"},
+                {"name": "priority"}
+            ],
+            [
+                {"name": "type"},
+                {"name": "category"}
+            ],
+            [
+                {"name": "subCategory"},
+                {"name": "source"}
+            ],
+            [
+                {"name": "description", "span": 2}
+            ],
+            [
+                {"name": "account"},
+                {"name": "contact"}
+            ],
+            [
+                {"name": "lead"},
+                {"name": "dueDate"}
+            ],
+            [
+                {"name": "resolution", "span": 2}
+            ]
+        ]
+    }
+]

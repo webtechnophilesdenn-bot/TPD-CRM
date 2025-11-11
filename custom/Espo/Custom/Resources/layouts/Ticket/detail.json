@@ -1,0 +1,62 @@
+[
+    {
+        "rows": [
+            [
+                {
+                    "name": "name"
+                },
+                {
+                    "name": "status"
+                }
+            ],
+            [
+                {
+                    "name": "priority"
+                },
+                {
+                    "name": "category"
+                }
+            ],
+            [
+                {
+                    "name": "type"
+                },
+                {
+                    "name": "description"
+                }
+            ],
+            [
+                {
+                    "name": "subCategory"
+                },
+                {
+                    "name": "account"
+                }
+            ],
+            [
+                {
+                    "name": "contact"
+                },
+                {
+                    "name": "lead"
+                }
+            ],
+            [
+                {
+                    "name": "source"
+                },
+                {
+                    "name": "dueDate"
+                }
+            ],
+            [
+                {
+                    "name": "resolution"
+                },
+                false
+            ]
+        ],
+        "style": "default",
+        "label": "Overview"
+    }
+]

@@ -1,0 +1,195 @@
+[
+    {
+        "label": "Overview",
+        "rows": [
+            [
+                {
+                    "name": "number",
+                    "span": 1
+                },
+                {
+                    "name": "status",
+                    "span": 1
+                }
+            ],
+            [
+                {
+                    "name": "name",
+                    "span": 2
+                }
+            ],
+            [
+                {
+                    "name": "priority",
+                    "span": 1
+                },
+                {
+                    "name": "type",
+                    "span": 1
+                }
+            ],
+            [
+                {
+                    "name": "category",
+                    "span": 1
+                },
+                {
+                    "name": "subCategory",
+                    "span": 1
+                }
+            ],
+            [
+                {
+                    "name": "description",
+                    "span": 2
+                }
+            ]
+        ]
+    },
+    {
+        "label": "Contact Information",
+        "rows": [
+            [
+                {
+                    "name": "account",
+                    "span": 1
+                },
+                {
+                    "name": "contact",
+                    "span": 1
+                }
+            ],
+            [
+                {
+                    "name": "lead",
+                    "span": 1
+                },
+                {
+                    "name": "source",
+                    "span": 1
+                }
+            ]
+        ]
+    },
+    {
+        "label": "Assignment",
+        "rows": [
+            [
+                {
+                    "name": "assignedUser",
+                    "span": 1
+                },
+                {
+                    "name": "teams",
+                    "span": 1
+                }
+            ],
+            [
+                {
+                    "name": "isEscalated",
+                    "span": 1
+                },
+                {
+                    "name": "escalatedTo",
+                    "span": 1
+                }
+            ]
+        ]
+    },
+    {
+        "label": "Timeline",
+        "rows": [
+            [
+                {
+                    "name": "dueDate",
+                    "span": 1
+                },
+                {
+                    "name": "firstResponseAt",
+                    "span": 1
+                }
+            ],
+            [
+                {
+                    "name": "resolvedAt",
+                    "span": 1
+                },
+                {
+                    "name": "closedAt",
+                    "span": 1
+                }
+            ],
+            [
+                {
+                    "name": "responseTime",
+                    "span": 1
+                },
+                {
+                    "name": "resolutionTime",
+                    "span": 1
+                }
+            ],
+            [
+                {
+                    "name": "reopenCount",
+                    "span": 1
+                },
+                false
+            ]
+        ]
+    },
+    {
+        "label": "Resolution",
+        "rows": [
+            [
+                {
+                    "name": "resolution",
+                    "span": 2
+                }
+            ]
+        ]
+    },
+    {
+        "label": "Customer Feedback",
+        "rows": [
+            [
+                {
+                    "name": "satisfactionRating",
+                    "span": 1
+                },
+                false
+            ],
+            [
+                {
+                    "name": "customerFeedback",
+                    "span": 2
+                }
+            ]
+        ]
+    },
+    {
+        "label": "System",
+        "rows": [
+            [
+                {
+                    "name": "createdAt",
+                    "span": 1
+                },
+                {
+                    "name": "modifiedAt",
+                    "span": 1
+                }
+            ],
+            [
+                {
+                    "name": "createdBy",
+                    "span": 1
+                },
+                {
+                    "name": "modifiedBy",
+                    "span": 1
+                }
+            ]
+        ]
+    }
+]

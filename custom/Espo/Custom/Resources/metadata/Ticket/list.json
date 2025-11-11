@@ -1,0 +1,43 @@
+[
+    {
+        "name": "number",
+        "width": 10,
+        "notSortable": false
+    },
+    {
+        "name": "name",
+        "width": 30,
+        "link": true,
+        "notSortable": false
+    },
+    {
+        "name": "status",
+        "width": 12,
+        "notSortable": false
+    },
+    {
+        "name": "priority",
+        "width": 10,
+        "notSortable": false
+    },
+    {
+        "name": "type",
+        "width": 12,
+        "notSortable": false
+    },
+    {
+        "name": "assignedUser",
+        "width": 15,
+        "notSortable": false
+    },
+    {
+        "name": "dueDate",
+        "width": 15,
+        "notSortable": false
+    },
+    {
+        "name": "createdAt",
+        "width": 15,
+        "notSortable": false
+    }
+]

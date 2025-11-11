@@ -1,0 +1,35 @@
+{
+    "type": "detail",
+    "blocks": [
+        {
+            "label": "Quote Information",
+            "rows": [
+                [{"name": "name"}],
+                [{"name": "account"}],
+                [{"name": "contact"}]
+            ]
+        },
+        {
+            "label": "Financial Information",
+            "rows": [
+                [{"name": "amount"}],
+                [{"name": "taxAmount"}],
+                [{"name": "discountAmount"}]
+            ]
+        },
+        {
+            "label": "Dates",
+            "rows": [
+                [{"name": "quoteDate"}],
+                [{"name": "expirationDate"}]
+            ]
+        },
+        {
+            "label": "Additional Information",
+            "rows": [
+                [{"name": "description"}],
+                [{"name": "assignedUser"}]
+            ]
+        }
+    ]
+}

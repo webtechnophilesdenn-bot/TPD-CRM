@@ -1,0 +1,10 @@
+{
+    "primaryFilterClassNameMap": {
+        "draft": "Espo\\Custom\\SelectManagers\\Invoice::filterDraft",
+        "sent": "Espo\\Custom\\SelectManagers\\Invoice::filterSent",
+        "unpaid": "Espo\\Custom\\SelectManagers\\Invoice::filterUnpaid",
+        "paid": "Espo\\Custom\\SelectManagers\\Invoice::filterPaid",
+        "overdue": "Espo\\Custom\\SelectManagers\\Invoice::filterOverdue",
+        "partiallyPaid": "Espo\\Custom\\SelectManagers\\Invoice::filterPartiallyPaid"
+    }
+}

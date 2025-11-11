@@ -1,0 +1,49 @@
+[
+    {
+        "label": "Quote Information",
+        "rows": [
+            [
+                {"name": "name"},
+                {"name": "number"}
+            ],
+            [
+                {"name": "status"},
+                {"name": "account"}
+            ],
+            [
+                {"name": "contact"},
+                {"name": "assignedUser"}
+            ]
+        ]
+    },
+    {
+        "label": "Dates",
+        "rows": [
+            [
+                {"name": "quoteDate"},
+                {"name": "expirationDate"}
+            ]
+        ]
+    },
+    {
+        "label": "Financial Information",
+        "rows": [
+            [
+                {"name": "amount"},
+                {"name": "taxAmount"}
+            ],
+            [
+                {"name": "discountAmount"},
+                {"name": "grandTotal"}
+            ]
+        ]
+    },
+    {
+        "label": "Description",
+        "rows": [
+            [
+                {"name": "description"}
+            ]
+        ]
+    }
+]

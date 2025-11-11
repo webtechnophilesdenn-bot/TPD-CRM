@@ -1,0 +1,5 @@
+{
+    "view": "custom:views/dashlets/invoice-chart",
+    "aclScope": "Invoice",
+    "entityType": "Invoice"
+}

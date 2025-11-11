@@ -1,0 +1,22 @@
+{
+    "InvoiceChart": {
+        "name": "InvoiceChart",
+        "view": "custom:views/dashlets/invoice-chart"
+    },
+    "PaymentChart": {
+        "name": "PaymentChart",
+        "view": "custom:views/dashlets/payment-chart"
+    },
+    "ExpenseChart": {
+        "name": "ExpenseChart",
+        "view": "custom:views/dashlets/expense-chart"
+    },
+    "QuoteChart": {
+        "name": "QuoteChart",
+        "view": "custom:views/dashlets/quote-chart"
+    },
+    "TicketStatsChart": {
+        "name": "TicketStatsChart",
+        "view": "custom:views/dashlets/ticket-stats-chart"
+    }
+}

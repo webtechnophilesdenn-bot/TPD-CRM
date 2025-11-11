@@ -26,6 +26,7 @@
     ],
     "customizable": true,
     "importable": true,
+    "exportable": true,
     "notifications": true,
     "stream": true,
     "disabled": false,
@@ -35,5 +36,6 @@
     "isCustom": true,
     "hasAssignedUser": true,
     "statusField": "status",
-    "kanbanStatusIgnoreList": ["Closed", "Cancelled"]
+    "kanbanStatusIgnoreList": ["Closed", "Cancelled"],
+    "activityStatusList": ["New", "Assigned", "In Progress", "On Hold", "Waiting for Customer"]
 }

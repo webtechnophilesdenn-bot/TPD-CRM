@@ -32,4 +32,7 @@
         "Case",
         "KnowledgeBaseArticle"
     ]
+    , "views": {
+        "header": "custom:views/site/header"
+    }
 }

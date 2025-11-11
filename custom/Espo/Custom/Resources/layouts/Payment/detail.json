@@ -1,0 +1,40 @@
+[
+    {
+        "label": "Payment Information",
+        "rows": [
+            [
+                {"name": "name"},
+                {"name": "number"}
+            ],
+            [
+                {"name": "status"},
+                {"name": "account"}
+            ],
+            [
+                {"name": "invoice"},
+                {"name": "assignedUser"}
+            ]
+        ]
+    },
+    {
+        "label": "Payment Details",
+        "rows": [
+            [
+                {"name": "paymentDate"},
+                {"name": "paymentMethod"}
+            ],
+            [
+                {"name": "amount"},
+                {"name": "reference"}
+            ]
+        ]
+    },
+    {
+        "label": "Description",
+        "rows": [
+            [
+                {"name": "description"}
+            ]
+        ]
+    }
+]

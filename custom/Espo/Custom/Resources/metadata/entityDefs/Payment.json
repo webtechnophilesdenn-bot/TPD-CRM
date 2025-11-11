@@ -1,65 +1,29 @@
 {
     "fields": {
-        "name": {
-            "type": "varchar",
-            "required": true,
-            "maxLength": 255
-        },
-        "number": {
-            "type": "autoincrement",
-            "unique": true,
-            "prefix": "PAY-",
-            "padLength": 5
-        },
+        "name": {"type": "varchar", "required": true},
+        "number": {"type": "varchar"},
         "status": {
-            "type": "enum",
-            "options": ["Pending", "Completed", "Failed", "Refunded", "Cancelled"],
-            "default": "Pending",
-            "style": {
-                "Pending": "warning",
-                "Completed": "success",
-                "Failed": "danger",
-                "Refunded": "info",
-                "Cancelled": "default"
-            },
-            "required": true
+            "type": "enum", 
+            "options": ["Pending", "Completed", "Failed"],
+            "default": "Pending"
         },
-        "paymentDate": {
-            "type": "date",
-            "required": true
-        },
-        "amount": {
-            "type": "currency",
-            "required": true
-        },
+        "account": {"type": "link", "required": true},
+        "invoice": {"type": "link"},
+        "amount": {"type": "currency", "required": true},
+        "paymentDate": {"type": "date", "required": true},
         "paymentMethod": {
             "type": "enum",
             "options": ["Cash", "Check", "Credit Card", "Bank Transfer", "PayPal", "Other"]
         },
-        "reference": {
-            "type": "varchar",
-            "maxLength": 100
-        },
-        "description": {
-            "type": "text"
-        },
-        "account": {
-            "type": "link"
-        },
-        "invoice": {
-            "type": "link"
-        },
-        "assignedUser": {
-            "type": "link"
-        },
-        "teams": {
-            "type": "linkMultiple"
-        }
+        "reference": {"type": "varchar"},
+        "description": {"type": "text"},
+        "assignedUser": {"type": "link"}
     },
     "links": {
         "account": {
-            "type": "belongsTo",
-            "entity": "Account"
+            "type": "belongsTo", 
+            "entity": "Account",
+            "foreign": "payments"
         },
         "invoice": {
             "type": "belongsTo",
@@ -67,17 +31,8 @@
             "foreign": "payments"
         },
         "assignedUser": {
-            "type": "belongsTo",
+            "type": "belongsTo", 
             "entity": "User"
-        },
-        "teams": {
-            "type": "hasMany",
-            "entity": "Team",
-            "relationName": "EntityTeam"
         }
-    },
-    "collection": {
-        "orderBy": "paymentDate",
-        "order": "desc"
     }
 }

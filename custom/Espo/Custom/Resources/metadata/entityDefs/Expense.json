@@ -1,41 +1,60 @@
+
 {
     "fields": {
         "name": {
             "type": "varchar",
             "required": true,
-            "maxLength": 255
+            "trim": true
         },
         "number": {
-            "type": "autoincrement",
-            "unique": true,
-            "prefix": "EXP-",
-            "padLength": 5
+            "type": "varchar",
+            "readOnly": true,
+            "view": "views/fields/varchar"
         },
         "status": {
             "type": "enum",
-            "options": ["Draft", "Submitted", "Approved", "Rejected", "Paid", "Cancelled"],
+            "options": ["Draft", "Submitted", "Approved", "Rejected", "Paid"],
             "default": "Draft",
             "style": {
                 "Draft": "default",
-                "Submitted": "info",
+                "Submitted": "warning",
                 "Approved": "success",
                 "Rejected": "danger",
-                "Paid": "success",
-                "Cancelled": "default"
+                "Paid": "primary"
             },
-            "required": true
-        },
-        "expenseDate": {
-            "type": "date",
-            "required": true
-        },
-        "amount": {
-            "type": "currency",
-            "required": true
+            "audited": true
         },
         "category": {
             "type": "enum",
-            "options": ["Travel", "Meals", "Office Supplies", "Marketing", "Other"]
+            "required": true,
+            "options": [
+                "Travel",
+                "Meals",
+                "Office Supplies",
+                "Marketing",
+                "Utilities",
+                "Software",
+                "Training",
+                "Entertainment",
+                "Other"
+            ],
+            "default": "Other",
+            "audited": true
+        },
+        "amount": {
+            "type": "currency",
+            "required": true,
+            "min": 0,
+            "audited": true
+        },
+        "expenseDate": {
+            "type": "date",
+            "required": true,
+            "default": "javascript: return this.dateTime.getToday();"
+        },
+        "isBillable": {
+            "type": "bool",
+            "default": false
         },
         "isReimbursable": {
             "type": "bool",
@@ -44,33 +63,53 @@
         "description": {
             "type": "text"
         },
+        "notes": {
+            "type": "text"
+        },
+        "assignedUser": {
+            "type": "link",
+            "required": true
+        },
         "account": {
             "type": "link"
         },
-        "assignedUser": {
-            "type": "link"
+        "createdAt": {
+            "type": "datetime",
+            "readOnly": true
         },
-        "teams": {
-            "type": "linkMultiple"
+        "modifiedAt": {
+            "type": "datetime",
+            "readOnly": true
+        },
+        "createdBy": {
+            "type": "link",
+            "readOnly": true
+        },
+        "modifiedBy": {
+            "type": "link",
+            "readOnly": true
         }
     },
     "links": {
-        "account": {
-            "type": "belongsTo",
-            "entity": "Account"
-        },
         "assignedUser": {
             "type": "belongsTo",
             "entity": "User"
         },
-        "teams": {
-            "type": "hasMany",
-            "entity": "Team",
-            "relationName": "EntityTeam"
+        "account": {
+            "type": "belongsTo",
+            "entity": "Account"
+        },
+        "createdBy": {
+            "type": "belongsTo",
+            "entity": "User"
+        },
+        "modifiedBy": {
+            "type": "belongsTo",
+            "entity": "User"
         }
     },
     "collection": {
-        "orderBy": "expenseDate",
-        "order": "desc"
+        "sortBy": "createdAt",
+        "asc": false
     }
 }

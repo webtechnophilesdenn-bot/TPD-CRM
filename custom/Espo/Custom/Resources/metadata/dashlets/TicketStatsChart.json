@@ -1,0 +1,9 @@
+{
+    "view": "custom:views/dashlets/ticket-stats-chart",
+    "aclScope": "Ticket",
+    "entityType": "Ticket",
+    "options": {
+        "title": "Ticket Status Overview",
+        "autorefreshInterval": 5
+    }
+}

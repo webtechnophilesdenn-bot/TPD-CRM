@@ -1024,10 +1024,12 @@ return [
     'client' => [
       'scriptList' => [
         0 => 'client/lib/espo.js',
-        1 => 'client/lib/espo-main.js'
+        1 => 'client/lib/espo-main.js',
+        2 => 'client/custom/lib/js/customLogin.js'
       ],
       'developerModeScriptList' => [
-        0 => 'client/src/loader.js'
+        0 => 'client/src/loader.js',
+        1 => 'client/custom/lib/js/customLogin.js'
       ],
       'linkList' => [
         0 => [
@@ -1078,6 +1080,12 @@ return [
           'noTimestamp' => true,
           'crossorigin' => true
         ]
+      ],
+      'cssList' => [
+        0 => 'client/custom/lib/css/customLogin.css'
+      ],
+      'developerModeCssList' => [
+        0 => 'client/custom/lib/css/customLogin.css'
       ]
     ],
     'clientIcons' => [
@@ -4823,6 +4831,28 @@ return [
         'portalDisabled' => true,
         'view' => 'crm:views/meeting/popup-notification'
       ]
+    ],
+    'dashlets' => [
+      'InvoiceChart' => [
+        'name' => 'InvoiceChart',
+        'view' => 'custom:views/dashlets/invoice-chart'
+      ],
+      'PaymentChart' => [
+        'name' => 'PaymentChart',
+        'view' => 'custom:views/dashlets/payment-chart'
+      ],
+      'ExpenseChart' => [
+        'name' => 'ExpenseChart',
+        'view' => 'custom:views/dashlets/expense-chart'
+      ],
+      'QuoteChart' => [
+        'name' => 'QuoteChart',
+        'view' => 'custom:views/dashlets/quote-chart'
+      ],
+      'TicketStatsChart' => [
+        'name' => 'TicketStatsChart',
+        'view' => 'custom:views/dashlets/ticket-stats-chart'
+      ]
     ]
   ],
   'authenticationMethods' => [
@@ -6477,6 +6507,9 @@ return [
         10 => 'Calendar',
         11 => 'Case',
         12 => 'KnowledgeBaseArticle'
+      ],
+      'views' => [
+        'header' => 'custom:views/site/header'
       ]
     ],
     'GlobalStream' => [
@@ -8748,282 +8781,44 @@ return [
       'iconClass' => 'fas fa-tasks',
       'kanbanViewMode' => true
     ],
+    'App' => [
+      'loginView' => 'custom:views/login'
+    ],
     'Expense' => [
       'controller' => 'controllers/record',
-      'iconClass' => 'fas fa-receipt',
-      'color' => '#e74c3c',
-      'kanbanViewMode' => true,
-      'filterList' => [
-        0 => 'all',
-        1 => [
-          'name' => 'draft',
-          'label' => 'Draft'
-        ],
-        2 => [
-          'name' => 'submitted',
-          'label' => 'Submitted'
-        ],
-        3 => [
-          'name' => 'approved',
-          'label' => 'Approved'
-        ],
-        4 => [
-          'name' => 'pending',
-          'label' => 'Pending Approval'
-        ],
-        5 => [
-          'name' => 'reimbursable',
-          'label' => 'Reimbursable'
-        ]
-      ],
-      'boolFilterList' => [
-        0 => 'onlyMy'
-      ],
-      'selectDefaultFilters' => [
-        'filter' => 'pending'
-      ],
-      'sidePanels' => [
-        'detail' => [
-          0 => [
-            'name' => 'activities',
-            'label' => 'Activities',
-            'view' => 'crm:views/record/panels/activities',
-            'aclScope' => 'Activities'
-          ],
-          1 => [
-            'name' => 'history',
-            'label' => 'History',
-            'view' => 'crm:views/record/panels/history',
-            'aclScope' => 'Activities'
-          ]
-        ]
-      ],
-      'relationshipPanels' => [
-        'documents' => [
-          'create' => true,
-          'select' => true,
-          'view' => 'views/record/panels/relationship'
-        ]
-      ]
+      'iconClass' => 'fas fa-receipt'
     ],
     'Invoice' => [
       'controller' => 'controllers/record',
-      'iconClass' => 'fas fa-file-invoice-dollar',
-      'color' => '#2ecc71',
-      'kanbanViewMode' => true,
-      'dynamicLogic' => [
-        'fields' => [
-          'paidAmount' => [
-            'visible' => [
-              'conditionGroup' => [
-                0 => [
-                  'type' => 'or',
-                  'value' => [
-                    0 => [
-                      'type' => 'equals',
-                      'attribute' => 'status',
-                      'value' => 'Paid'
-                    ],
-                    1 => [
-                      'type' => 'equals',
-                      'attribute' => 'status',
-                      'value' => 'Partially Paid'
-                    ]
-                  ]
-                ]
-              ]
-            ]
-          ]
-        ]
-      ],
-      'filterList' => [
-        0 => 'all',
-        1 => [
-          'name' => 'draft',
-          'label' => 'Draft'
-        ],
-        2 => [
-          'name' => 'sent',
-          'label' => 'Sent'
-        ],
-        3 => [
-          'name' => 'unpaid',
-          'label' => 'Unpaid'
-        ],
-        4 => [
-          'name' => 'paid',
-          'label' => 'Paid'
-        ],
-        5 => [
-          'name' => 'overdue',
-          'label' => 'Overdue'
-        ]
-      ],
-      'boolFilterList' => [
-        0 => 'onlyMy'
-      ],
-      'selectDefaultFilters' => [
-        'filter' => 'unpaid'
-      ],
-      'sidePanels' => [
-        'detail' => [
-          0 => [
-            'name' => 'payments',
-            'label' => 'Payments',
-            'view' => 'views/record/panels/relationship',
-            'aclScope' => 'Payment'
-          ],
-          1 => [
-            'name' => 'activities',
-            'label' => 'Activities',
-            'view' => 'crm:views/record/panels/activities',
-            'aclScope' => 'Activities'
-          ],
-          2 => [
-            'name' => 'history',
-            'label' => 'History',
-            'view' => 'crm:views/record/panels/history',
-            'aclScope' => 'Activities'
-          ]
-        ]
-      ],
-      'relationshipPanels' => [
-        'payments' => [
-          'create' => true,
-          'select' => false,
-          'view' => 'views/record/panels/relationship'
-        ],
-        'documents' => [
-          'create' => true,
-          'select' => true,
-          'view' => 'views/record/panels/relationship'
-        ]
-      ]
+      'iconClass' => 'fas fa-file-invoice-dollar'
     ],
     'Payment' => [
       'controller' => 'controllers/record',
-      'iconClass' => 'fas fa-money-bill-wave',
-      'color' => '#27ae60',
-      'kanbanViewMode' => true,
-      'filterList' => [
-        0 => 'all',
-        1 => [
-          'name' => 'pending',
-          'label' => 'Pending'
-        ],
-        2 => [
-          'name' => 'completed',
-          'label' => 'Completed'
-        ],
-        3 => [
-          'name' => 'failed',
-          'label' => 'Failed'
-        ],
-        4 => [
-          'name' => 'recent',
-          'label' => 'Recent'
-        ]
-      ],
-      'boolFilterList' => [
-        0 => 'onlyMy'
-      ],
-      'selectDefaultFilters' => [
-        'filter' => 'completed'
-      ],
-      'sidePanels' => [
-        'detail' => [
-          0 => [
-            'name' => 'activities',
-            'label' => 'Activities',
-            'view' => 'crm:views/record/panels/activities',
-            'aclScope' => 'Activities'
-          ],
-          1 => [
-            'name' => 'history',
-            'label' => 'History',
-            'view' => 'crm:views/record/panels/history',
-            'aclScope' => 'Activities'
-          ]
-        ]
-      ],
-      'relationshipPanels' => [
-        'documents' => [
-          'create' => true,
-          'select' => true,
-          'view' => 'views/record/panels/relationship'
-        ]
-      ]
+      'iconClass' => 'fas fa-credit-card'
     ],
     'Quote' => [
       'controller' => 'controllers/record',
-      'iconClass' => 'fas fa-file-contract',
-      'color' => '#3498db',
-      'kanbanViewMode' => true,
-      'filterList' => [
-        0 => 'all',
-        1 => [
-          'name' => 'draft',
-          'label' => 'Draft'
-        ],
-        2 => [
-          'name' => 'sent',
-          'label' => 'Sent'
-        ],
-        3 => [
-          'name' => 'accepted',
-          'label' => 'Accepted'
-        ],
-        4 => [
-          'name' => 'active',
-          'label' => 'Active'
-        ]
-      ],
-      'boolFilterList' => [
-        0 => 'onlyMy'
-      ],
-      'selectDefaultFilters' => [
-        'filter' => 'active'
-      ],
-      'sidePanels' => [
-        'detail' => [
-          0 => [
-            'name' => 'invoices',
-            'label' => 'Invoices',
-            'view' => 'views/record/panels/relationship',
-            'aclScope' => 'Invoice'
-          ],
-          1 => [
-            'name' => 'activities',
-            'label' => 'Activities',
-            'view' => 'crm:views/record/panels/activities',
-            'aclScope' => 'Activities'
-          ],
-          2 => [
-            'name' => 'history',
-            'label' => 'History',
-            'view' => 'crm:views/record/panels/history',
-            'aclScope' => 'Activities'
-          ]
-        ]
-      ],
-      'relationshipPanels' => [
-        'invoices' => [
-          'create' => true,
-          'select' => false,
-          'view' => 'views/record/panels/relationship'
-        ],
-        'documents' => [
-          'create' => true,
-          'select' => true,
-          'view' => 'views/record/panels/relationship'
-        ]
-      ]
+      'iconClass' => 'fas fa-file-contract'
     ],
     'Ticket' => [
       'controller' => 'controllers/record',
       'iconClass' => 'fas fa-ticket-alt',
       'color' => '#3498db',
       'kanbanViewMode' => true,
+      'sidePanels' => [
+        'detail' => [
+          0 => [
+            'name' => 'info',
+            'label' => 'Ticket Info',
+            'view' => 'custom:views/ticket/panels/info',
+            'notRefreshable' => false,
+            'isForm' => false,
+            'options' => [
+              'style' => 'default'
+            ]
+          ]
+        ]
+      ],
       'dynamicLogic' => [
         'fields' => [
           'resolution' => [
@@ -9046,6 +8841,39 @@ return [
                 ]
               ]
             ]
+          ],
+          'satisfactionRating' => [
+            'visible' => [
+              'conditionGroup' => [
+                0 => [
+                  'type' => 'equals',
+                  'attribute' => 'status',
+                  'value' => 'Closed'
+                ]
+              ]
+            ]
+          ],
+          'customerFeedback' => [
+            'visible' => [
+              'conditionGroup' => [
+                0 => [
+                  'type' => 'equals',
+                  'attribute' => 'status',
+                  'value' => 'Closed'
+                ]
+              ]
+            ]
+          ],
+          'escalatedTo' => [
+            'visible' => [
+              'conditionGroup' => [
+                0 => [
+                  'type' => 'equals',
+                  'attribute' => 'isEscalated',
+                  'value' => true
+                ]
+              ]
+            ]
           ]
         ]
       ],
@@ -9053,15 +8881,39 @@ return [
         0 => 'all',
         1 => [
           'name' => 'open',
-          'label' => 'Open'
+          'label' => 'Open Tickets'
         ],
         2 => [
-          'name' => 'closed',
-          'label' => 'Closed'
+          'name' => 'myOpen',
+          'label' => 'My Open Tickets'
         ],
         3 => [
           'name' => 'new',
-          'label' => 'New'
+          'label' => 'New Tickets'
+        ],
+        4 => [
+          'name' => 'urgent',
+          'label' => 'Urgent Tickets'
+        ],
+        5 => [
+          'name' => 'escalated',
+          'label' => 'Escalated'
+        ],
+        6 => [
+          'name' => 'overdue',
+          'label' => 'Overdue'
+        ],
+        7 => [
+          'name' => 'unassigned',
+          'label' => 'Unassigned'
+        ],
+        8 => [
+          'name' => 'pendingCustomer',
+          'label' => 'Pending Customer'
+        ],
+        9 => [
+          'name' => 'closed',
+          'label' => 'Closed'
         ]
       ],
       'boolFilterList' => [
@@ -9070,33 +8922,15 @@ return [
       'selectDefaultFilters' => [
         'filter' => 'open'
       ],
-      'sidePanels' => [
-        'detail' => [
-          0 => [
-            'name' => 'activities',
-            'label' => 'Activities',
-            'view' => 'crm:views/record/panels/activities',
-            'aclScope' => 'Activities'
-          ],
-          1 => [
-            'name' => 'history',
-            'label' => 'History',
-            'view' => 'crm:views/record/panels/history',
-            'aclScope' => 'Activities'
-          ],
-          2 => [
-            'name' => 'tasks',
-            'label' => 'Tasks',
-            'view' => 'crm:views/record/panels/tasks',
-            'aclScope' => 'Task'
-          ]
-        ]
-      ],
       'relationshipPanels' => [
         'documents' => [
           'create' => true,
+          'select' => true
+        ],
+        'childTickets' => [
+          'create' => true,
           'select' => true,
-          'view' => 'views/record/panels/relationship'
+          'label' => 'Related Tickets'
         ]
       ]
     ]
@@ -10531,6 +10365,35 @@ return [
         0 => [
           'inPortalDisabled' => true
         ]
+      ]
+    ],
+    'ExpenseChart' => [
+      'view' => 'custom:views/dashlets/expense-chart',
+      'aclScope' => 'Expense',
+      'entityType' => 'Expense'
+    ],
+    'InvoiceChart' => [
+      'view' => 'custom:views/dashlets/invoice-chart',
+      'aclScope' => 'Invoice',
+      'entityType' => 'Invoice'
+    ],
+    'PaymentChart' => [
+      'view' => 'custom:views/dashlets/payment-chart',
+      'aclScope' => 'Payment',
+      'entityType' => 'Payment'
+    ],
+    'QuoteChart' => [
+      'view' => 'custom:views/dashlets/quote-chart',
+      'aclScope' => 'Quote',
+      'entityType' => 'Quote'
+    ],
+    'TicketStatsChart' => [
+      'view' => 'custom:views/dashlets/ticket-stats-chart',
+      'aclScope' => 'Ticket',
+      'entityType' => 'Ticket',
+      'options' => [
+        'title' => 'Ticket Status Overview',
+        'autorefreshInterval' => 5
       ]
     ]
   ],
@@ -18316,14 +18179,13 @@ return [
           'index' => true
         ],
         'number' => [
-          'type' => 'varchar',
+          'type' => 'autoincrement',
           'index' => true,
-          'len' => 36,
+          'autoincrement' => true,
           'unique' => true,
           'readOnly' => true,
-          'layoutDetailDisabled' => false,
-          'layoutListDisabled' => false,
-          'textFilterDisabled' => false
+          'prefix' => 'TKT-',
+          'padLength' => 6
         ],
         'status' => [
           'type' => 'enum',
@@ -18331,11 +18193,12 @@ return [
             0 => 'New',
             1 => 'Assigned',
             2 => 'In Progress',
-            3 => 'Pending',
-            4 => 'Resolved',
-            5 => 'Closed',
-            6 => 'Reopened',
-            7 => 'Cancelled'
+            3 => 'On Hold',
+            4 => 'Waiting for Customer',
+            5 => 'Resolved',
+            6 => 'Closed',
+            7 => 'Reopened',
+            8 => 'Cancelled'
           ],
           'default' => 'New',
           'index' => true,
@@ -18343,10 +18206,11 @@ return [
             'New' => 'primary',
             'Assigned' => 'info',
             'In Progress' => 'warning',
-            'Pending' => 'default',
+            'On Hold' => 'default',
+            'Waiting for Customer' => 'default',
             'Resolved' => 'success',
             'Closed' => 'default',
-            'Reopened' => 'warning',
+            'Reopened' => 'danger',
             'Cancelled' => 'danger'
           ],
           'audited' => true,
@@ -18358,7 +18222,8 @@ return [
             0 => 'Low',
             1 => 'Normal',
             2 => 'High',
-            3 => 'Urgent'
+            3 => 'Urgent',
+            4 => 'Critical'
           ],
           'default' => 'Normal',
           'index' => true,
@@ -18366,26 +18231,28 @@ return [
             'Low' => 'default',
             'Normal' => 'info',
             'High' => 'warning',
-            'Urgent' => 'danger'
+            'Urgent' => 'danger',
+            'Critical' => 'danger'
           ],
           'audited' => true,
           'required' => true
         ],
         'description' => [
           'type' => 'text',
-          'rows' => 8
+          'rows' => 10,
+          'required' => false
         ],
         'assignedUser' => [
           'type' => 'link',
           'required' => false,
-          'view' => 'views/fields/assigned-user'
+          'audited' => true
         ],
         'teams' => [
-          'type' => 'linkMultiple',
-          'view' => 'views/fields/teams'
+          'type' => 'linkMultiple'
         ],
         'contact' => [
-          'type' => 'link'
+          'type' => 'link',
+          'audited' => true
         ],
         'createdAt' => [
           'type' => 'datetime',
@@ -18409,9 +18276,14 @@ return [
             0 => 'Question',
             1 => 'Incident',
             2 => 'Problem',
-            3 => 'Feature Request'
+            3 => 'Service Request',
+            4 => 'Feature Request',
+            5 => 'Bug Report',
+            6 => 'Complaint'
           ],
-          'audited' => true
+          'default' => 'Incident',
+          'audited' => true,
+          'required' => true
         ],
         'category' => [
           'type' => 'enum',
@@ -18419,20 +18291,105 @@ return [
             0 => 'Technical Support',
             1 => 'Billing',
             2 => 'Sales Inquiry',
-            3 => 'General',
-            4 => 'Other'
+            3 => 'Product Issue',
+            4 => 'Account Management',
+            5 => 'General Inquiry',
+            6 => 'Other'
           ],
-          'audited' => true
+          'audited' => true,
+          'required' => true
+        ],
+        'subCategory' => [
+          'type' => 'varchar',
+          'maxLength' => 100
         ],
         'resolution' => [
           'type' => 'text',
-          'rows' => 6
+          'rows' => 8
+        ],
+        'dueDate' => [
+          'type' => 'datetime',
+          'audited' => true
+        ],
+        'responseTime' => [
+          'type' => 'int',
+          'min' => 0,
+          'readOnly' => true,
+          'tooltip' => 'Response time in minutes'
+        ],
+        'resolutionTime' => [
+          'type' => 'int',
+          'min' => 0,
+          'readOnly' => true,
+          'tooltip' => 'Resolution time in minutes'
+        ],
+        'firstResponseAt' => [
+          'type' => 'datetime',
+          'readOnly' => true
+        ],
+        'resolvedAt' => [
+          'type' => 'datetime',
+          'readOnly' => true
+        ],
+        'closedAt' => [
+          'type' => 'datetime',
+          'readOnly' => true
+        ],
+        'reopenCount' => [
+          'type' => 'int',
+          'default' => 0,
+          'readOnly' => true
+        ],
+        'satisfactionRating' => [
+          'type' => 'enum',
+          'options' => [
+            0 => 'Very Satisfied',
+            1 => 'Satisfied',
+            2 => 'Neutral',
+            3 => 'Dissatisfied',
+            4 => 'Very Dissatisfied'
+          ],
+          'style' => [
+            'Very Satisfied' => 'success',
+            'Satisfied' => 'info',
+            'Neutral' => 'default',
+            'Dissatisfied' => 'warning',
+            'Very Dissatisfied' => 'danger'
+          ]
+        ],
+        'customerFeedback' => [
+          'type' => 'text',
+          'rows' => 4
+        ],
+        'isEscalated' => [
+          'type' => 'bool',
+          'default' => false,
+          'audited' => true
+        ],
+        'escalatedTo' => [
+          'type' => 'link'
+        ],
+        'source' => [
+          'type' => 'enum',
+          'options' => [
+            0 => 'Email',
+            1 => 'Phone',
+            2 => 'Web Form',
+            3 => 'Chat',
+            4 => 'Portal',
+            5 => 'Social Media',
+            6 => 'Walk-in'
+          ],
+          'default' => 'Email'
         ],
         'account' => [
           'type' => 'link',
-          'view' => 'views/fields/parent'
+          'audited' => true
         ],
         'lead' => [
+          'type' => 'link'
+        ],
+        'parentTicket' => [
           'type' => 'link'
         ],
         'inboundEmail' => [
@@ -18453,8 +18410,7 @@ return [
         'teams' => [
           'type' => 'hasMany',
           'entity' => 'Team',
-          'relationName' => 'EntityTeam',
-          'layoutRelationshipsDisabled' => true
+          'relationName' => 'EntityTeam'
         ],
         'contact' => [
           'type' => 'belongsTo',
@@ -18479,6 +18435,20 @@ return [
           'entity' => 'Lead',
           'foreign' => 'tickets'
         ],
+        'parentTicket' => [
+          'type' => 'belongsTo',
+          'entity' => 'Ticket',
+          'foreign' => 'childTickets'
+        ],
+        'childTickets' => [
+          'type' => 'hasMany',
+          'entity' => 'Ticket',
+          'foreign' => 'parentTicket'
+        ],
+        'escalatedTo' => [
+          'type' => 'belongsTo',
+          'entity' => 'User'
+        ],
         'inboundEmail' => [
           'type' => 'belongsTo',
           'entity' => 'InboundEmail'
@@ -18486,32 +18456,32 @@ return [
         'meetings' => [
           'type' => 'hasMany',
           'entity' => 'Meeting',
-          'foreign' => 'parent',
-          'layoutRelationshipsDisabled' => true
+          'foreign' => 'parent'
         ],
         'calls' => [
           'type' => 'hasMany',
           'entity' => 'Call',
-          'foreign' => 'parent',
-          'layoutRelationshipsDisabled' => true
+          'foreign' => 'parent'
         ],
         'tasks' => [
           'type' => 'hasChildren',
           'entity' => 'Task',
-          'foreign' => 'parent',
-          'layoutRelationshipsDisabled' => true
+          'foreign' => 'parent'
         ],
         'emails' => [
           'type' => 'hasChildren',
           'entity' => 'Email',
-          'foreign' => 'parent',
-          'layoutRelationshipsDisabled' => true
+          'foreign' => 'parent'
         ],
         'documents' => [
           'type' => 'hasMany',
           'entity' => 'Document',
-          'foreign' => 'tickets',
-          'audited' => true
+          'foreign' => 'tickets'
+        ],
+        'knowledgeBaseArticles' => [
+          'type' => 'hasMany',
+          'entity' => 'KnowledgeBaseArticle',
+          'foreign' => 'tickets'
         ]
       ],
       'collection' => [
@@ -18519,42 +18489,11 @@ return [
         'order' => 'desc',
         'textFilterFields' => [
           0 => 'name',
-          1 => 'number'
+          1 => 'number',
+          2 => 'description'
         ],
         'sortBy' => 'createdAt',
         'asc' => false
-      ],
-      'indexes' => [
-        'name' => [
-          'columns' => [
-            0 => 'name',
-            1 => 'deleted'
-          ]
-        ],
-        'status' => [
-          'columns' => [
-            0 => 'status',
-            1 => 'deleted'
-          ]
-        ],
-        'assignedUser' => [
-          'columns' => [
-            0 => 'assignedUserId',
-            1 => 'deleted'
-          ]
-        ],
-        'createdAt' => [
-          'columns' => [
-            0 => 'createdAt',
-            1 => 'deleted'
-          ]
-        ],
-        'number' => [
-          'columns' => [
-            0 => 'number',
-            1 => 'deleted'
-          ]
-        ]
       ]
     ],
     'TwoFactorCode' => [
@@ -26311,13 +26250,12 @@ return [
         'name' => [
           'type' => 'varchar',
           'required' => true,
-          'maxLength' => 255
+          'trim' => true
         ],
         'number' => [
-          'type' => 'autoincrement',
-          'unique' => true,
-          'prefix' => 'EXP-',
-          'padLength' => 5
+          'type' => 'varchar',
+          'readOnly' => true,
+          'view' => 'views/fields/varchar'
         ],
         'status' => [
           'type' => 'enum',
@@ -26326,37 +26264,49 @@ return [
             1 => 'Submitted',
             2 => 'Approved',
             3 => 'Rejected',
-            4 => 'Paid',
-            5 => 'Cancelled'
+            4 => 'Paid'
           ],
           'default' => 'Draft',
           'style' => [
             'Draft' => 'default',
-            'Submitted' => 'info',
+            'Submitted' => 'warning',
             'Approved' => 'success',
             'Rejected' => 'danger',
-            'Paid' => 'success',
-            'Cancelled' => 'default'
+            'Paid' => 'primary'
           ],
-          'required' => true
-        ],
-        'expenseDate' => [
-          'type' => 'date',
-          'required' => true
-        ],
-        'amount' => [
-          'type' => 'currency',
-          'required' => true
+          'audited' => true
         ],
         'category' => [
           'type' => 'enum',
+          'required' => true,
           'options' => [
             0 => 'Travel',
             1 => 'Meals',
             2 => 'Office Supplies',
             3 => 'Marketing',
-            4 => 'Other'
-          ]
+            4 => 'Utilities',
+            5 => 'Software',
+            6 => 'Training',
+            7 => 'Entertainment',
+            8 => 'Other'
+          ],
+          'default' => 'Other',
+          'audited' => true
+        ],
+        'amount' => [
+          'type' => 'currency',
+          'required' => true,
+          'min' => 0,
+          'audited' => true
+        ],
+        'expenseDate' => [
+          'type' => 'date',
+          'required' => true,
+          'default' => 'javascript: return this.dateTime.getToday();'
+        ],
+        'isBillable' => [
+          'type' => 'bool',
+          'default' => false
         ],
         'isReimbursable' => [
           'type' => 'bool',
@@ -26365,14 +26315,31 @@ return [
         'description' => [
           'type' => 'text'
         ],
+        'notes' => [
+          'type' => 'text'
+        ],
+        'assignedUser' => [
+          'type' => 'link',
+          'required' => true
+        ],
         'account' => [
           'type' => 'link'
         ],
-        'assignedUser' => [
-          'type' => 'link'
+        'createdAt' => [
+          'type' => 'datetime',
+          'readOnly' => true
         ],
-        'teams' => [
-          'type' => 'linkMultiple'
+        'modifiedAt' => [
+          'type' => 'datetime',
+          'readOnly' => true
+        ],
+        'createdBy' => [
+          'type' => 'link',
+          'readOnly' => true
+        ],
+        'modifiedBy' => [
+          'type' => 'link',
+          'readOnly' => true
         ],
         'amountCurrency' => [
           'type' => 'enum',
@@ -26410,46 +26377,38 @@ return [
         ]
       ],
       'links' => [
-        'account' => [
-          'type' => 'belongsTo',
-          'entity' => 'Account'
-        ],
         'assignedUser' => [
           'type' => 'belongsTo',
           'entity' => 'User'
         ],
-        'teams' => [
-          'type' => 'hasMany',
-          'entity' => 'Team',
-          'relationName' => 'EntityTeam'
+        'account' => [
+          'type' => 'belongsTo',
+          'entity' => 'Account'
+        ],
+        'createdBy' => [
+          'type' => 'belongsTo',
+          'entity' => 'User'
+        ],
+        'modifiedBy' => [
+          'type' => 'belongsTo',
+          'entity' => 'User'
         ]
       ],
       'collection' => [
-        'orderBy' => 'expenseDate',
-        'order' => 'desc',
-        'sortBy' => 'expenseDate',
-        'asc' => false
+        'sortBy' => 'createdAt',
+        'asc' => false,
+        'orderBy' => 'createdAt',
+        'order' => 'desc'
       ]
     ],
     'Invoice' => [
       'fields' => [
         'name' => [
           'type' => 'varchar',
-          'required' => true,
-          'maxLength' => 255,
-          'trim' => true,
-          'audited' => true,
-          'index' => true
+          'required' => true
         ],
         'number' => [
-          'type' => 'varchar',
-          'len' => 36,
-          'unique' => true,
-          'index' => true,
-          'readOnly' => true,
-          'layoutDetailDisabled' => false,
-          'layoutListDisabled' => false,
-          'textFilterDisabled' => false
+          'type' => 'varchar'
         ],
         'status' => [
           'type' => 'enum',
@@ -26459,82 +26418,9 @@ return [
             2 => 'Paid',
             3 => 'Partially Paid',
             4 => 'Overdue',
-            5 => 'Cancelled',
-            6 => 'Void'
+            5 => 'Cancelled'
           ],
-          'default' => 'Draft',
-          'style' => [
-            'Draft' => 'default',
-            'Sent' => 'info',
-            'Paid' => 'success',
-            'Partially Paid' => 'warning',
-            'Overdue' => 'danger',
-            'Cancelled' => 'default',
-            'Void' => 'default'
-          ],
-          'audited' => true,
-          'required' => true
-        ],
-        'invoiceDate' => [
-          'type' => 'date',
-          'required' => false,
-          'audited' => true
-        ],
-        'dueDate' => [
-          'type' => 'date',
-          'required' => false,
-          'audited' => true
-        ],
-        'amount' => [
-          'type' => 'currency',
-          'required' => true,
-          'audited' => true,
-          'min' => 0
-        ],
-        'taxAmount' => [
-          'type' => 'currency',
-          'audited' => true,
-          'min' => 0,
-          'default' => 0
-        ],
-        'discountAmount' => [
-          'type' => 'currency',
-          'audited' => true,
-          'min' => 0,
-          'default' => 0
-        ],
-        'grandTotal' => [
-          'type' => 'currency',
-          'readOnly' => true,
-          'notStorable' => true,
-          'audited' => true
-        ],
-        'paidAmount' => [
-          'type' => 'currency',
-          'readOnly' => true,
-          'default' => 0,
-          'audited' => true
-        ],
-        'balanceAmount' => [
-          'type' => 'currency',
-          'readOnly' => true,
-          'notStorable' => true
-        ],
-        'billingAddress' => [
-          'type' => 'address',
-          'view' => 'views/fields/address'
-        ],
-        'shippingAddress' => [
-          'type' => 'address',
-          'view' => 'views/fields/address'
-        ],
-        'description' => [
-          'type' => 'text',
-          'rows' => 6
-        ],
-        'termsAndConditions' => [
-          'type' => 'text',
-          'rows' => 6
+          'default' => 'Draft'
         ],
         'account' => [
           'type' => 'link',
@@ -26543,36 +26429,43 @@ return [
         'contact' => [
           'type' => 'link'
         ],
-        'opportunity' => [
-          'type' => 'link'
+        'amount' => [
+          'type' => 'currency',
+          'required' => true
         ],
-        'quote' => [
-          'type' => 'link'
+        'taxAmount' => [
+          'type' => 'currency'
+        ],
+        'discountAmount' => [
+          'type' => 'currency'
+        ],
+        'paidAmount' => [
+          'type' => 'currency'
+        ],
+        'invoiceDate' => [
+          'type' => 'date',
+          'required' => true
+        ],
+        'dueDate' => [
+          'type' => 'date'
+        ],
+        'billingAddress' => [
+          'type' => 'address'
+        ],
+        'shippingAddress' => [
+          'type' => 'address'
+        ],
+        'description' => [
+          'type' => 'text'
+        ],
+        'termsAndConditions' => [
+          'type' => 'text'
+        ],
+        'notes' => [
+          'type' => 'text'
         ],
         'assignedUser' => [
-          'type' => 'link',
-          'required' => false,
-          'view' => 'views/fields/assigned-user'
-        ],
-        'teams' => [
-          'type' => 'linkMultiple',
-          'view' => 'views/fields/teams'
-        ],
-        'createdAt' => [
-          'type' => 'datetime',
-          'readOnly' => true
-        ],
-        'modifiedAt' => [
-          'type' => 'datetime',
-          'readOnly' => true
-        ],
-        'createdBy' => [
-          'type' => 'link',
-          'readOnly' => true
-        ],
-        'modifiedBy' => [
-          'type' => 'link',
-          'readOnly' => true
+          'type' => 'link'
         ],
         'amountCurrency' => [
           'type' => 'enum',
@@ -26661,40 +26554,7 @@ return [
           'customizationInlineEditDisabledDisabled' => true,
           'detailLayoutIncompatibleFieldList' => []
         ],
-        'grandTotalCurrency' => [
-          'readOnly' => true,
-          'notStorable' => true,
-          'type' => 'enum',
-          'view' => 'views/fields/currency-list',
-          'layoutDetailDisabled' => true,
-          'layoutListDisabled' => true,
-          'layoutMassUpdateDisabled' => true,
-          'layoutDefaultSidePanelDisabled' => true,
-          'customizationRequiredDisabled' => true,
-          'customizationOptionsDisabled' => true,
-          'customizationOptionsReferenceDisabled' => true,
-          'customizationIsSortedDisabled' => true,
-          'customizationDisplayAsLabelDisabled' => true,
-          'customizationAuditedDisabled' => true,
-          'customizationReadOnlyDisabled' => true,
-          'customizationInlineEditDisabledDisabled' => true,
-          'customizationDefaultView' => 'views/admin/field-manager/fields/currency-default',
-          'customizationTooltipTextDisabled' => true,
-          'maxLength' => 3,
-          'detailLayoutIncompatibleFieldList' => [
-            0 => 'grandTotal'
-          ]
-        ],
-        'grandTotalConverted' => [
-          'readOnly' => true,
-          'notStorable' => true,
-          'type' => 'currencyConverted',
-          'importDisabled' => true,
-          'customizationInlineEditDisabledDisabled' => true,
-          'detailLayoutIncompatibleFieldList' => []
-        ],
         'paidAmountCurrency' => [
-          'readOnly' => true,
           'type' => 'enum',
           'view' => 'views/fields/currency-list',
           'layoutDetailDisabled' => true,
@@ -26717,40 +26577,8 @@ return [
           ]
         ],
         'paidAmountConverted' => [
-          'readOnly' => true,
           'type' => 'currencyConverted',
-          'importDisabled' => true,
-          'customizationInlineEditDisabledDisabled' => true,
-          'detailLayoutIncompatibleFieldList' => []
-        ],
-        'balanceAmountCurrency' => [
           'readOnly' => true,
-          'notStorable' => true,
-          'type' => 'enum',
-          'view' => 'views/fields/currency-list',
-          'layoutDetailDisabled' => true,
-          'layoutListDisabled' => true,
-          'layoutMassUpdateDisabled' => true,
-          'layoutDefaultSidePanelDisabled' => true,
-          'customizationRequiredDisabled' => true,
-          'customizationOptionsDisabled' => true,
-          'customizationOptionsReferenceDisabled' => true,
-          'customizationIsSortedDisabled' => true,
-          'customizationDisplayAsLabelDisabled' => true,
-          'customizationAuditedDisabled' => true,
-          'customizationReadOnlyDisabled' => true,
-          'customizationInlineEditDisabledDisabled' => true,
-          'customizationDefaultView' => 'views/admin/field-manager/fields/currency-default',
-          'customizationTooltipTextDisabled' => true,
-          'maxLength' => 3,
-          'detailLayoutIncompatibleFieldList' => [
-            0 => 'balanceAmount'
-          ]
-        ],
-        'balanceAmountConverted' => [
-          'readOnly' => true,
-          'notStorable' => true,
-          'type' => 'currencyConverted',
           'importDisabled' => true,
           'customizationInlineEditDisabledDisabled' => true,
           'detailLayoutIncompatibleFieldList' => []
@@ -26884,23 +26712,6 @@ return [
         ]
       ],
       'links' => [
-        'assignedUser' => [
-          'type' => 'belongsTo',
-          'entity' => 'User'
-        ],
-        'teams' => [
-          'type' => 'hasMany',
-          'entity' => 'Team',
-          'relationName' => 'EntityTeam'
-        ],
-        'createdBy' => [
-          'type' => 'belongsTo',
-          'entity' => 'User'
-        ],
-        'modifiedBy' => [
-          'type' => 'belongsTo',
-          'entity' => 'User'
-        ],
         'account' => [
           'type' => 'belongsTo',
           'entity' => 'Account',
@@ -26908,82 +26719,11 @@ return [
         ],
         'contact' => [
           'type' => 'belongsTo',
-          'entity' => 'Contact',
-          'foreign' => 'invoices'
-        ],
-        'opportunity' => [
-          'type' => 'belongsTo',
-          'entity' => 'Opportunity',
-          'foreign' => 'invoices'
-        ],
-        'quote' => [
-          'type' => 'belongsTo',
-          'entity' => 'Quote',
-          'foreign' => 'invoices'
-        ],
-        'payments' => [
-          'type' => 'hasMany',
-          'entity' => 'Payment',
-          'foreign' => 'invoice'
-        ],
-        'documents' => [
-          'type' => 'hasMany',
-          'entity' => 'Document',
-          'foreign' => 'invoices'
-        ]
-      ],
-      'collection' => [
-        'orderBy' => 'createdAt',
-        'order' => 'desc',
-        'textFilterFields' => [
-          0 => 'name',
-          1 => 'number'
-        ],
-        'sortBy' => 'createdAt',
-        'asc' => false
-      ],
-      'indexes' => [
-        'name' => [
-          'columns' => [
-            0 => 'name',
-            1 => 'deleted'
-          ]
-        ],
-        'status' => [
-          'columns' => [
-            0 => 'status',
-            1 => 'deleted'
-          ]
+          'entity' => 'Contact'
         ],
         'assignedUser' => [
-          'columns' => [
-            0 => 'assignedUserId',
-            1 => 'deleted'
-          ]
-        ],
-        'createdAt' => [
-          'columns' => [
-            0 => 'createdAt',
-            1 => 'deleted'
-          ]
-        ],
-        'number' => [
-          'columns' => [
-            0 => 'number',
-            1 => 'deleted'
-          ]
-        ],
-        'invoiceDate' => [
-          'columns' => [
-            0 => 'invoiceDate',
-            1 => 'deleted'
-          ]
-        ],
-        'dueDate' => [
-          'columns' => [
-            0 => 'dueDate',
-            1 => 'deleted'
-          ]
+          'type' => 'belongsTo',
+          'entity' => 'User'
         ]
       ]
     ],
@@ -26991,40 +26731,33 @@ return [
       'fields' => [
         'name' => [
           'type' => 'varchar',
-          'required' => true,
-          'maxLength' => 255
+          'required' => true
         ],
         'number' => [
-          'type' => 'autoincrement',
-          'unique' => true,
-          'prefix' => 'PAY-',
-          'padLength' => 5
+          'type' => 'varchar'
         ],
         'status' => [
           'type' => 'enum',
           'options' => [
             0 => 'Pending',
             1 => 'Completed',
-            2 => 'Failed',
-            3 => 'Refunded',
-            4 => 'Cancelled'
+            2 => 'Failed'
           ],
-          'default' => 'Pending',
-          'style' => [
-            'Pending' => 'warning',
-            'Completed' => 'success',
-            'Failed' => 'danger',
-            'Refunded' => 'info',
-            'Cancelled' => 'default'
-          ],
+          'default' => 'Pending'
+        ],
+        'account' => [
+          'type' => 'link',
+          'required' => true
+        ],
+        'invoice' => [
+          'type' => 'link'
+        ],
+        'amount' => [
+          'type' => 'currency',
           'required' => true
         ],
         'paymentDate' => [
           'type' => 'date',
-          'required' => true
-        ],
-        'amount' => [
-          'type' => 'currency',
           'required' => true
         ],
         'paymentMethod' => [
@@ -27039,23 +26772,13 @@ return [
           ]
         ],
         'reference' => [
-          'type' => 'varchar',
-          'maxLength' => 100
+          'type' => 'varchar'
         ],
         'description' => [
           'type' => 'text'
         ],
-        'account' => [
-          'type' => 'link'
-        ],
-        'invoice' => [
-          'type' => 'link'
-        ],
         'assignedUser' => [
           'type' => 'link'
-        ],
-        'teams' => [
-          'type' => 'linkMultiple'
         ],
         'amountCurrency' => [
           'type' => 'enum',
@@ -27095,7 +26818,8 @@ return [
       'links' => [
         'account' => [
           'type' => 'belongsTo',
-          'entity' => 'Account'
+          'entity' => 'Account',
+          'foreign' => 'payments'
         ],
         'invoice' => [
           'type' => 'belongsTo',
@@ -27105,35 +26829,17 @@ return [
         'assignedUser' => [
           'type' => 'belongsTo',
           'entity' => 'User'
-        ],
-        'teams' => [
-          'type' => 'hasMany',
-          'entity' => 'Team',
-          'relationName' => 'EntityTeam'
         ]
-      ],
-      'collection' => [
-        'orderBy' => 'paymentDate',
-        'order' => 'desc',
-        'sortBy' => 'paymentDate',
-        'asc' => false
       ]
     ],
     'Quote' => [
       'fields' => [
         'name' => [
           'type' => 'varchar',
-          'required' => true,
-          'maxLength' => 255,
-          'trim' => true
+          'required' => true
         ],
         'number' => [
-          'type' => 'autoincrement',
-          'unique' => true,
-          'index' => true,
-          'readOnly' => true,
-          'prefix' => 'QUO-',
-          'padLength' => 5
+          'type' => 'varchar'
         ],
         'status' => [
           'type' => 'enum',
@@ -27141,28 +26847,16 @@ return [
             0 => 'Draft',
             1 => 'Sent',
             2 => 'Accepted',
-            3 => 'Rejected',
-            4 => 'Expired',
-            5 => 'Cancelled'
+            3 => 'Rejected'
           ],
-          'default' => 'Draft',
-          'style' => [
-            'Draft' => 'default',
-            'Sent' => 'info',
-            'Accepted' => 'success',
-            'Rejected' => 'danger',
-            'Expired' => 'warning',
-            'Cancelled' => 'default'
-          ],
-          'required' => true,
-          'audited' => true
+          'default' => 'Draft'
         ],
-        'quoteDate' => [
-          'type' => 'date',
+        'account' => [
+          'type' => 'link',
           'required' => true
         ],
-        'expirationDate' => [
-          'type' => 'date'
+        'contact' => [
+          'type' => 'link'
         ],
         'amount' => [
           'type' => 'currency',
@@ -27175,34 +26869,20 @@ return [
           'type' => 'currency'
         ],
         'grandTotal' => [
-          'type' => 'currency',
-          'readOnly' => true
+          'type' => 'currency'
+        ],
+        'quoteDate' => [
+          'type' => 'date',
+          'required' => true
+        ],
+        'expirationDate' => [
+          'type' => 'date'
         ],
         'description' => [
           'type' => 'text'
         ],
-        'account' => [
-          'type' => 'link'
-        ],
-        'contact' => [
-          'type' => 'link'
-        ],
-        'opportunity' => [
-          'type' => 'link'
-        ],
         'assignedUser' => [
           'type' => 'link'
-        ],
-        'teams' => [
-          'type' => 'linkMultiple'
-        ],
-        'createdAt' => [
-          'readOnly' => true,
-          'type' => 'datetime'
-        ],
-        'modifiedAt' => [
-          'readOnly' => true,
-          'type' => 'datetime'
         ],
         'amountCurrency' => [
           'type' => 'enum',
@@ -27292,7 +26972,6 @@ return [
           'detailLayoutIncompatibleFieldList' => []
         ],
         'grandTotalCurrency' => [
-          'readOnly' => true,
           'type' => 'enum',
           'view' => 'views/fields/currency-list',
           'layoutDetailDisabled' => true,
@@ -27315,8 +26994,8 @@ return [
           ]
         ],
         'grandTotalConverted' => [
-          'readOnly' => true,
           'type' => 'currencyConverted',
+          'readOnly' => true,
           'importDisabled' => true,
           'customizationInlineEditDisabledDisabled' => true,
           'detailLayoutIncompatibleFieldList' => []
@@ -27337,26 +27016,10 @@ return [
           'type' => 'belongsTo',
           'entity' => 'Contact'
         ],
-        'opportunity' => [
-          'type' => 'belongsTo',
-          'entity' => 'Opportunity',
-          'foreign' => 'quotes'
-        ],
         'assignedUser' => [
           'type' => 'belongsTo',
           'entity' => 'User'
-        ],
-        'teams' => [
-          'type' => 'hasMany',
-          'entity' => 'Team',
-          'relationName' => 'EntityTeam'
         ]
-      ],
-      'collection' => [
-        'orderBy' => 'createdAt',
-        'order' => 'desc',
-        'sortBy' => 'createdAt',
-        'asc' => false
       ]
     ]
   ],
@@ -31479,31 +31142,6 @@ return [
         ]
       ]
     ],
-    'Invoice' => [
-      'fields' => [
-        'paidAmount' => [
-          'visible' => [
-            'conditionGroup' => [
-              0 => [
-                'type' => 'or',
-                'value' => [
-                  0 => [
-                    'type' => 'equals',
-                    'attribute' => 'status',
-                    'value' => 'Paid'
-                  ],
-                  1 => [
-                    'type' => 'equals',
-                    'attribute' => 'status',
-                    'value' => 'Partially Paid'
-                  ]
-                ]
-              ]
-            ]
-          ]
-        ]
-      ]
-    ],
     'Ticket' => [
       'fields' => [
         'resolution' => [
@@ -31523,6 +31161,39 @@ return [
                     'value' => 'Closed'
                   ]
                 ]
+              ]
+            ]
+          ]
+        ],
+        'satisfactionRating' => [
+          'visible' => [
+            'conditionGroup' => [
+              0 => [
+                'type' => 'equals',
+                'attribute' => 'status',
+                'value' => 'Closed'
+              ]
+            ]
+          ]
+        ],
+        'customerFeedback' => [
+          'visible' => [
+            'conditionGroup' => [
+              0 => [
+                'type' => 'equals',
+                'attribute' => 'status',
+                'value' => 'Closed'
+              ]
+            ]
+          ]
+        ],
+        'escalatedTo' => [
+          'visible' => [
+            'conditionGroup' => [
+              0 => [
+                'type' => 'equals',
+                'attribute' => 'isEscalated',
+                'value' => true
               ]
             ]
           ]
@@ -33129,6 +32800,7 @@ return [
         4 => 'no'
       ],
       'importable' => true,
+      'exportable' => true,
       'notifications' => true,
       'stream' => true,
       'disabled' => false,
@@ -33141,6 +32813,13 @@ return [
       'kanbanStatusIgnoreList' => [
         0 => 'Closed',
         1 => 'Cancelled'
+      ],
+      'activityStatusList' => [
+        0 => 'New',
+        1 => 'Assigned',
+        2 => 'In Progress',
+        3 => 'On Hold',
+        4 => 'Waiting for Customer'
       ]
     ],
     'UniqueId' => [
@@ -34119,6 +33798,16 @@ return [
       'ordererClassNameMap' => [
         'dateUpcoming' => 'Espo\\Modules\\Crm\\Classes\\Select\\Task\\Orderers\\DateUpcoming'
       ]
+    ],
+    'Invoice' => [
+      'primaryFilterClassNameMap' => [
+        'draft' => 'Espo\\Custom\\SelectManagers\\Invoice::filterDraft',
+        'sent' => 'Espo\\Custom\\SelectManagers\\Invoice::filterSent',
+        'unpaid' => 'Espo\\Custom\\SelectManagers\\Invoice::filterUnpaid',
+        'paid' => 'Espo\\Custom\\SelectManagers\\Invoice::filterPaid',
+        'overdue' => 'Espo\\Custom\\SelectManagers\\Invoice::filterOverdue',
+        'partiallyPaid' => 'Espo\\Custom\\SelectManagers\\Invoice::filterPartiallyPaid'
+      ]
     ]
   ],
   'themes' => [
@@ -34422,5 +34111,356 @@ return [
         ]
       ]
     ]
-  ]
+  ],
+  'Ticket' => [
+    'detail' => [
+      0 => [
+        'label' => 'Overview',
+        'rows' => [
+          0 => [
+            0 => [
+              'name' => 'number',
+              'span' => 1
+            ],
+            1 => [
+              'name' => 'status',
+              'span' => 1
+            ]
+          ],
+          1 => [
+            0 => [
+              'name' => 'name',
+              'span' => 2
+            ]
+          ],
+          2 => [
+            0 => [
+              'name' => 'priority',
+              'span' => 1
+            ],
+            1 => [
+              'name' => 'type',
+              'span' => 1
+            ]
+          ],
+          3 => [
+            0 => [
+              'name' => 'category',
+              'span' => 1
+            ],
+            1 => [
+              'name' => 'subCategory',
+              'span' => 1
+            ]
+          ],
+          4 => [
+            0 => [
+              'name' => 'description',
+              'span' => 2
+            ]
+          ]
+        ]
+      ],
+      1 => [
+        'label' => 'Contact Information',
+        'rows' => [
+          0 => [
+            0 => [
+              'name' => 'account',
+              'span' => 1
+            ],
+            1 => [
+              'name' => 'contact',
+              'span' => 1
+            ]
+          ],
+          1 => [
+            0 => [
+              'name' => 'lead',
+              'span' => 1
+            ],
+            1 => [
+              'name' => 'source',
+              'span' => 1
+            ]
+          ]
+        ]
+      ],
+      2 => [
+        'label' => 'Assignment',
+        'rows' => [
+          0 => [
+            0 => [
+              'name' => 'assignedUser',
+              'span' => 1
+            ],
+            1 => [
+              'name' => 'teams',
+              'span' => 1
+            ]
+          ],
+          1 => [
+            0 => [
+              'name' => 'isEscalated',
+              'span' => 1
+            ],
+            1 => [
+              'name' => 'escalatedTo',
+              'span' => 1
+            ]
+          ]
+        ]
+      ],
+      3 => [
+        'label' => 'Timeline',
+        'rows' => [
+          0 => [
+            0 => [
+              'name' => 'dueDate',
+              'span' => 1
+            ],
+            1 => [
+              'name' => 'firstResponseAt',
+              'span' => 1
+            ]
+          ],
+          1 => [
+            0 => [
+              'name' => 'resolvedAt',
+              'span' => 1
+            ],
+            1 => [
+              'name' => 'closedAt',
+              'span' => 1
+            ]
+          ],
+          2 => [
+            0 => [
+              'name' => 'responseTime',
+              'span' => 1
+            ],
+            1 => [
+              'name' => 'resolutionTime',
+              'span' => 1
+            ]
+          ],
+          3 => [
+            0 => [
+              'name' => 'reopenCount',
+              'span' => 1
+            ],
+            1 => false
+          ]
+        ]
+      ],
+      4 => [
+        'label' => 'Resolution',
+        'rows' => [
+          0 => [
+            0 => [
+              'name' => 'resolution',
+              'span' => 2
+            ]
+          ]
+        ]
+      ],
+      5 => [
+        'label' => 'Customer Feedback',
+        'rows' => [
+          0 => [
+            0 => [
+              'name' => 'satisfactionRating',
+              'span' => 1
+            ],
+            1 => false
+          ],
+          1 => [
+            0 => [
+              'name' => 'customerFeedback',
+              'span' => 2
+            ]
+          ]
+        ]
+      ],
+      6 => [
+        'label' => 'System',
+        'rows' => [
+          0 => [
+            0 => [
+              'name' => 'createdAt',
+              'span' => 1
+            ],
+            1 => [
+              'name' => 'modifiedAt',
+              'span' => 1
+            ]
+          ],
+          1 => [
+            0 => [
+              'name' => 'createdBy',
+              'span' => 1
+            ],
+            1 => [
+              'name' => 'modifiedBy',
+              'span' => 1
+            ]
+          ]
+        ]
+      ]
+    ],
+    'detailSmall' => [
+      0 => [
+        'rows' => [
+          0 => [
+            0 => [
+              'name' => 'number',
+              'span' => 1
+            ],
+            1 => [
+              'name' => 'status',
+              'span' => 1
+            ]
+          ],
+          1 => [
+            0 => [
+              'name' => 'name',
+              'span' => 2
+            ]
+          ],
+          2 => [
+            0 => [
+              'name' => 'priority',
+              'span' => 1
+            ],
+            1 => [
+              'name' => 'type',
+              'span' => 1
+            ]
+          ],
+          3 => [
+            0 => [
+              'name' => 'assignedUser',
+              'span' => 1
+            ],
+            1 => [
+              'name' => 'dueDate',
+              'span' => 1
+            ]
+          ],
+          4 => [
+            0 => [
+              'name' => 'account',
+              'span' => 1
+            ],
+            1 => [
+              'name' => 'contact',
+              'span' => 1
+            ]
+          ]
+        ]
+      ]
+    ],
+    'list' => [
+      0 => [
+        'name' => 'number',
+        'width' => 10,
+        'notSortable' => false
+      ],
+      1 => [
+        'name' => 'name',
+        'width' => 30,
+        'link' => true,
+        'notSortable' => false
+      ],
+      2 => [
+        'name' => 'status',
+        'width' => 12,
+        'notSortable' => false
+      ],
+      3 => [
+        'name' => 'priority',
+        'width' => 10,
+        'notSortable' => false
+      ],
+      4 => [
+        'name' => 'type',
+        'width' => 12,
+        'notSortable' => false
+      ],
+      5 => [
+        'name' => 'assignedUser',
+        'width' => 15,
+        'notSortable' => false
+      ],
+      6 => [
+        'name' => 'dueDate',
+        'width' => 15,
+        'notSortable' => false
+      ],
+      7 => [
+        'name' => 'createdAt',
+        'width' => 15,
+        'notSortable' => false
+      ]
+    ],
+    'listSmall' => [
+      0 => [
+        'name' => 'number',
+        'width' => 15,
+        'link' => true
+      ],
+      1 => [
+        'name' => 'name',
+        'width' => 40,
+        'link' => true
+      ],
+      2 => [
+        'name' => 'status',
+        'width' => 20
+      ],
+      3 => [
+        'name' => 'priority',
+        'width' => 15
+      ],
+      4 => [
+        'name' => 'assignedUser',
+        'width' => 20
+      ]
+    ],
+    'sidePanelsDetail' => [
+      0 => [
+        'name' => 'default',
+        'label' => false,
+        'view' => 'views/record/panels/default-side',
+        'options' => [
+          'fieldList' => [
+            0 => 'status',
+            1 => 'priority',
+            2 => 'type',
+            3 => 'assignedUser',
+            4 => 'teams'
+          ]
+        ]
+      ],
+      1 => [
+        'name' => 'activities',
+        'label' => 'Activities',
+        'view' => 'crm:views/record/panels/activities',
+        'aclScope' => 'Activities'
+      ],
+      2 => [
+        'name' => 'history',
+        'label' => 'History',
+        'view' => 'crm:views/record/panels/history',
+        'aclScope' => 'Activities'
+      ],
+      3 => [
+        'name' => 'tasks',
+        'label' => 'Tasks',
+        'view' => 'crm:views/record/panels/tasks',
+        'aclScope' => 'Task'
+      ]
+    ]
+  ],
+  'layouts' => []
 ];

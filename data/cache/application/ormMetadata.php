@@ -11904,11 +11904,12 @@ return [
         'default' => false
       ],
       'number' => [
-        'type' => 'varchar',
-        'len' => 36,
+        'type' => 'int',
+        'autoincrement' => true,
         'unique' => true,
         'index' => true,
-        'fieldType' => 'varchar'
+        'fieldType' => 'int',
+        'len' => 11
       ],
       'status' => [
         'type' => 'varchar',
@@ -11940,6 +11941,7 @@ return [
       ],
       'type' => [
         'type' => 'varchar',
+        'default' => 'Incident',
         'fieldType' => 'varchar',
         'len' => 255
       ],
@@ -11948,9 +11950,71 @@ return [
         'fieldType' => 'varchar',
         'len' => 255
       ],
+      'subCategory' => [
+        'type' => 'varchar',
+        'len' => 100,
+        'fieldType' => 'varchar'
+      ],
       'resolution' => [
         'type' => 'text',
         'fieldType' => 'text'
+      ],
+      'dueDate' => [
+        'type' => 'datetime',
+        'notNull' => false,
+        'fieldType' => 'datetime'
+      ],
+      'responseTime' => [
+        'type' => 'int',
+        'fieldType' => 'int',
+        'len' => 11
+      ],
+      'resolutionTime' => [
+        'type' => 'int',
+        'fieldType' => 'int',
+        'len' => 11
+      ],
+      'firstResponseAt' => [
+        'type' => 'datetime',
+        'notNull' => false,
+        'fieldType' => 'datetime'
+      ],
+      'resolvedAt' => [
+        'type' => 'datetime',
+        'notNull' => false,
+        'fieldType' => 'datetime'
+      ],
+      'closedAt' => [
+        'type' => 'datetime',
+        'notNull' => false,
+        'fieldType' => 'datetime'
+      ],
+      'reopenCount' => [
+        'type' => 'int',
+        'default' => 0,
+        'fieldType' => 'int',
+        'len' => 11
+      ],
+      'satisfactionRating' => [
+        'type' => 'varchar',
+        'fieldType' => 'varchar',
+        'len' => 255
+      ],
+      'customerFeedback' => [
+        'type' => 'text',
+        'fieldType' => 'text'
+      ],
+      'isEscalated' => [
+        'type' => 'bool',
+        'notNull' => true,
+        'default' => false,
+        'fieldType' => 'bool'
+      ],
+      'source' => [
+        'type' => 'varchar',
+        'default' => 'Email',
+        'fieldType' => 'varchar',
+        'len' => 255
       ],
       'streamUpdatedAt' => [
         'type' => 'datetime',
@@ -12045,6 +12109,24 @@ return [
         'foreign' => 'name',
         'foreignType' => 'varchar'
       ],
+      'escalatedToId' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'foreignId',
+        'index' => true,
+        'attributeRole' => 'id',
+        'fieldType' => 'link',
+        'notNull' => false
+      ],
+      'escalatedToName' => [
+        'type' => 'foreign',
+        'notStorable' => true,
+        'attributeRole' => 'name',
+        'fieldType' => 'link',
+        'relation' => 'escalatedTo',
+        'foreign' => 'name',
+        'foreignType' => 'varchar'
+      ],
       'accountId' => [
         'len' => 17,
         'dbType' => 'string',
@@ -12081,6 +12163,24 @@ return [
         'foreign' => 'name',
         'foreignType' => 'varchar'
       ],
+      'parentTicketId' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'foreignId',
+        'index' => true,
+        'attributeRole' => 'id',
+        'fieldType' => 'link',
+        'notNull' => false
+      ],
+      'parentTicketName' => [
+        'type' => 'foreign',
+        'notStorable' => true,
+        'attributeRole' => 'name',
+        'fieldType' => 'link',
+        'relation' => 'parentTicket',
+        'foreign' => 'name',
+        'foreignType' => 'varchar'
+      ],
       'inboundEmailId' => [
         'len' => 17,
         'dbType' => 'string',
@@ -12114,6 +12214,16 @@ return [
         'type' => 'jsonObject',
         'notStorable' => true,
         'notExportable' => true
+      ],
+      'knowledgeBaseArticlesIds' => [
+        'type' => 'jsonArray',
+        'notStorable' => true,
+        'isLinkStub' => true
+      ],
+      'knowledgeBaseArticlesNames' => [
+        'type' => 'jsonObject',
+        'notStorable' => true,
+        'isLinkStub' => true
       ],
       'documentsIds' => [
         'type' => 'jsonArray',
@@ -12164,9 +12274,25 @@ return [
         'type' => 'jsonObject',
         'notStorable' => true,
         'isLinkStub' => true
+      ],
+      'childTicketsIds' => [
+        'type' => 'jsonArray',
+        'notStorable' => true,
+        'isLinkStub' => true
+      ],
+      'childTicketsNames' => [
+        'type' => 'jsonObject',
+        'notStorable' => true,
+        'isLinkStub' => true
       ]
     ],
     'relations' => [
+      'knowledgeBaseArticles' => [
+        'type' => 'hasMany',
+        'entity' => 'KnowledgeBaseArticle',
+        'foreignKey' => 'ticketsId',
+        'foreign' => 'tickets'
+      ],
       'documents' => [
         'type' => 'hasMany',
         'entity' => 'Document',
@@ -12205,6 +12331,26 @@ return [
         'key' => 'inboundEmailId',
         'foreignKey' => 'id',
         'foreign' => NULL
+      ],
+      'escalatedTo' => [
+        'type' => 'belongsTo',
+        'entity' => 'User',
+        'key' => 'escalatedToId',
+        'foreignKey' => 'id',
+        'foreign' => NULL
+      ],
+      'childTickets' => [
+        'type' => 'hasMany',
+        'entity' => 'Ticket',
+        'foreignKey' => 'parentTicketId',
+        'foreign' => 'parentTicket'
+      ],
+      'parentTicket' => [
+        'type' => 'belongsTo',
+        'entity' => 'Ticket',
+        'key' => 'parentTicketId',
+        'foreignKey' => 'id',
+        'foreign' => 'childTickets'
       ],
       'lead' => [
         'type' => 'belongsTo',
@@ -12292,39 +12438,25 @@ return [
     ],
     'indexes' => [
       'name' => [
+        'type' => 'index',
         'columns' => [
-          0 => 'name',
-          1 => 'deleted'
+          0 => 'name'
         ],
         'key' => 'IDX_NAME'
       ],
-      'status' => [
+      'number' => [
+        'type' => 'unique',
         'columns' => [
-          0 => 'status',
-          1 => 'deleted'
+          0 => 'number'
+        ],
+        'key' => 'UNIQ_NUMBER'
+      ],
+      'status' => [
+        'type' => 'index',
+        'columns' => [
+          0 => 'status'
         ],
         'key' => 'IDX_STATUS'
-      ],
-      'assignedUser' => [
-        'columns' => [
-          0 => 'assignedUserId',
-          1 => 'deleted'
-        ],
-        'key' => 'IDX_ASSIGNED_USER'
-      ],
-      'createdAt' => [
-        'columns' => [
-          0 => 'createdAt',
-          1 => 'deleted'
-        ],
-        'key' => 'IDX_CREATED_AT'
-      ],
-      'number' => [
-        'columns' => [
-          0 => 'number',
-          1 => 'deleted'
-        ],
-        'key' => 'IDX_NUMBER'
       ],
       'priority' => [
         'type' => 'index',
@@ -12361,6 +12493,13 @@ return [
         ],
         'key' => 'IDX_MODIFIED_BY_ID'
       ],
+      'escalatedToId' => [
+        'type' => 'index',
+        'columns' => [
+          0 => 'escalatedToId'
+        ],
+        'key' => 'IDX_ESCALATED_TO_ID'
+      ],
       'accountId' => [
         'type' => 'index',
         'columns' => [
@@ -12374,6 +12513,13 @@ return [
           0 => 'leadId'
         ],
         'key' => 'IDX_LEAD_ID'
+      ],
+      'parentTicketId' => [
+        'type' => 'index',
+        'columns' => [
+          0 => 'parentTicketId'
+        ],
+        'key' => 'IDX_PARENT_TICKET_ID'
       ],
       'inboundEmailId' => [
         'type' => 'index',
@@ -32580,19 +32726,17 @@ return [
       ],
       'name' => [
         'type' => 'varchar',
-        'len' => 255,
-        'fieldType' => 'varchar'
+        'fieldType' => 'varchar',
+        'len' => 255
       ],
       'deleted' => [
         'type' => 'bool',
         'default' => false
       ],
       'number' => [
-        'type' => 'int',
-        'autoincrement' => true,
-        'unique' => true,
-        'fieldType' => 'int',
-        'len' => 11
+        'type' => 'varchar',
+        'fieldType' => 'varchar',
+        'len' => 255
       ],
       'status' => [
         'type' => 'varchar',
@@ -32600,9 +32744,11 @@ return [
         'fieldType' => 'varchar',
         'len' => 255
       ],
-      'expenseDate' => [
-        'type' => 'date',
-        'fieldType' => 'date'
+      'category' => [
+        'type' => 'varchar',
+        'default' => 'Other',
+        'fieldType' => 'varchar',
+        'len' => 255
       ],
       'amount' => [
         'type' => 'float',
@@ -32629,10 +32775,15 @@ return [
           ]
         ]
       ],
-      'category' => [
-        'type' => 'varchar',
-        'fieldType' => 'varchar',
-        'len' => 255
+      'expenseDate' => [
+        'type' => 'date',
+        'fieldType' => 'date'
+      ],
+      'isBillable' => [
+        'type' => 'bool',
+        'notNull' => true,
+        'default' => false,
+        'fieldType' => 'bool'
       ],
       'isReimbursable' => [
         'type' => 'bool',
@@ -32643,6 +32794,20 @@ return [
       'description' => [
         'type' => 'text',
         'fieldType' => 'text'
+      ],
+      'notes' => [
+        'type' => 'text',
+        'fieldType' => 'text'
+      ],
+      'createdAt' => [
+        'type' => 'datetime',
+        'notNull' => false,
+        'fieldType' => 'datetime'
+      ],
+      'modifiedAt' => [
+        'type' => 'datetime',
+        'notNull' => false,
+        'fieldType' => 'datetime'
       ],
       'amountCurrency' => [
         'type' => 'varchar',
@@ -32801,24 +32966,6 @@ return [
         'attributeRole' => 'valueConverted',
         'fieldType' => 'currency'
       ],
-      'accountId' => [
-        'len' => 17,
-        'dbType' => 'string',
-        'type' => 'foreignId',
-        'index' => true,
-        'attributeRole' => 'id',
-        'fieldType' => 'link',
-        'notNull' => false
-      ],
-      'accountName' => [
-        'type' => 'foreign',
-        'notStorable' => true,
-        'attributeRole' => 'name',
-        'fieldType' => 'link',
-        'relation' => 'account',
-        'foreign' => 'name',
-        'foreignType' => 'varchar'
-      ],
       'assignedUserId' => [
         'len' => 17,
         'dbType' => 'string',
@@ -32837,21 +32984,59 @@ return [
         'foreign' => 'name',
         'foreignType' => 'varchar'
       ],
-      'teamsIds' => [
-        'type' => 'jsonArray',
-        'notStorable' => true,
-        'isLinkMultipleIdList' => true,
-        'relation' => 'teams',
-        'isUnordered' => true,
-        'attributeRole' => 'idList',
-        'fieldType' => 'linkMultiple'
+      'accountId' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'foreignId',
+        'index' => true,
+        'attributeRole' => 'id',
+        'fieldType' => 'link',
+        'notNull' => false
       ],
-      'teamsNames' => [
-        'type' => 'jsonObject',
+      'accountName' => [
+        'type' => 'foreign',
         'notStorable' => true,
-        'isLinkMultipleNameMap' => true,
-        'attributeRole' => 'nameMap',
-        'fieldType' => 'linkMultiple'
+        'attributeRole' => 'name',
+        'fieldType' => 'link',
+        'relation' => 'account',
+        'foreign' => 'name',
+        'foreignType' => 'varchar'
+      ],
+      'createdById' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'foreignId',
+        'index' => true,
+        'attributeRole' => 'id',
+        'fieldType' => 'link',
+        'notNull' => false
+      ],
+      'createdByName' => [
+        'type' => 'foreign',
+        'notStorable' => true,
+        'attributeRole' => 'name',
+        'fieldType' => 'link',
+        'relation' => 'createdBy',
+        'foreign' => 'name',
+        'foreignType' => 'varchar'
+      ],
+      'modifiedById' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'foreignId',
+        'index' => true,
+        'attributeRole' => 'id',
+        'fieldType' => 'link',
+        'notNull' => false
+      ],
+      'modifiedByName' => [
+        'type' => 'foreign',
+        'notStorable' => true,
+        'attributeRole' => 'name',
+        'fieldType' => 'link',
+        'relation' => 'modifiedBy',
+        'foreign' => 'name',
+        'foreignType' => 'varchar'
       ],
       'isFollowed' => [
         'type' => 'bool',
@@ -32871,51 +33056,17 @@ return [
       ]
     ],
     'relations' => [
-      'teams' => [
-        'type' => 'manyMany',
-        'entity' => 'Team',
-        'relationName' => 'entityTeam',
-        'midKeys' => [
-          0 => 'entityId',
-          1 => 'teamId'
-        ],
-        'conditions' => [
-          'entityType' => 'Expense'
-        ],
-        'additionalColumns' => [
-          'entityType' => [
-            'type' => 'varchar',
-            'len' => 100
-          ]
-        ],
-        'indexes' => [
-          'entityId' => [
-            'columns' => [
-              0 => 'entityId'
-            ],
-            'key' => 'IDX_ENTITY_ID'
-          ],
-          'teamId' => [
-            'columns' => [
-              0 => 'teamId'
-            ],
-            'key' => 'IDX_TEAM_ID'
-          ],
-          'entityId_teamId_entityType' => [
-            'type' => 'unique',
-            'columns' => [
-              0 => 'entityId',
-              1 => 'teamId',
-              2 => 'entityType'
-            ],
-            'key' => 'UNIQ_ENTITY_ID_TEAM_ID_ENTITY_TYPE'
-          ]
-        ]
-      ],
-      'assignedUser' => [
+      'modifiedBy' => [
         'type' => 'belongsTo',
         'entity' => 'User',
-        'key' => 'assignedUserId',
+        'key' => 'modifiedById',
+        'foreignKey' => 'id',
+        'foreign' => NULL
+      ],
+      'createdBy' => [
+        'type' => 'belongsTo',
+        'entity' => 'User',
+        'key' => 'createdById',
         'foreignKey' => 'id',
         'foreign' => NULL
       ],
@@ -32925,15 +33076,22 @@ return [
         'key' => 'accountId',
         'foreignKey' => 'id',
         'foreign' => NULL
+      ],
+      'assignedUser' => [
+        'type' => 'belongsTo',
+        'entity' => 'User',
+        'key' => 'assignedUserId',
+        'foreignKey' => 'id',
+        'foreign' => NULL
       ]
     ],
     'indexes' => [
-      'number' => [
-        'type' => 'unique',
+      'assignedUserId' => [
+        'type' => 'index',
         'columns' => [
-          0 => 'number'
+          0 => 'assignedUserId'
         ],
-        'key' => 'UNIQ_NUMBER'
+        'key' => 'IDX_ASSIGNED_USER_ID'
       ],
       'accountId' => [
         'type' => 'index',
@@ -32942,16 +33100,23 @@ return [
         ],
         'key' => 'IDX_ACCOUNT_ID'
       ],
-      'assignedUserId' => [
+      'createdById' => [
         'type' => 'index',
         'columns' => [
-          0 => 'assignedUserId'
+          0 => 'createdById'
         ],
-        'key' => 'IDX_ASSIGNED_USER_ID'
+        'key' => 'IDX_CREATED_BY_ID'
+      ],
+      'modifiedById' => [
+        'type' => 'index',
+        'columns' => [
+          0 => 'modifiedById'
+        ],
+        'key' => 'IDX_MODIFIED_BY_ID'
       ]
     ],
     'collection' => [
-      'orderBy' => 'expenseDate',
+      'orderBy' => 'createdAt',
       'order' => 'DESC'
     ]
   ],
@@ -32964,9 +33129,8 @@ return [
       ],
       'name' => [
         'type' => 'varchar',
-        'len' => 255,
-        'index' => true,
-        'fieldType' => 'varchar'
+        'fieldType' => 'varchar',
+        'len' => 255
       ],
       'deleted' => [
         'type' => 'bool',
@@ -32974,26 +33138,14 @@ return [
       ],
       'number' => [
         'type' => 'varchar',
-        'len' => 36,
-        'unique' => true,
-        'index' => true,
-        'fieldType' => 'varchar'
+        'fieldType' => 'varchar',
+        'len' => 255
       ],
       'status' => [
         'type' => 'varchar',
         'default' => 'Draft',
         'fieldType' => 'varchar',
         'len' => 255
-      ],
-      'invoiceDate' => [
-        'type' => 'date',
-        'notNull' => false,
-        'fieldType' => 'date'
-      ],
-      'dueDate' => [
-        'type' => 'date',
-        'notNull' => false,
-        'fieldType' => 'date'
       ],
       'amount' => [
         'type' => 'float',
@@ -33022,7 +33174,6 @@ return [
       ],
       'taxAmount' => [
         'type' => 'float',
-        'default' => 0,
         'fieldType' => 'currency',
         'attributeRole' => 'value',
         'order' => [
@@ -33048,7 +33199,6 @@ return [
       ],
       'discountAmount' => [
         'type' => 'float',
-        'default' => 0,
         'fieldType' => 'currency',
         'attributeRole' => 'value',
         'order' => [
@@ -33072,15 +33222,8 @@ return [
           ]
         ]
       ],
-      'grandTotal' => [
-        'type' => 'float',
-        'notStorable' => true,
-        'fieldType' => 'currency',
-        'attributeRole' => 'value'
-      ],
       'paidAmount' => [
         'type' => 'float',
-        'default' => 0,
         'fieldType' => 'currency',
         'attributeRole' => 'value',
         'order' => [
@@ -33104,11 +33247,14 @@ return [
           ]
         ]
       ],
-      'balanceAmount' => [
-        'type' => 'float',
-        'notStorable' => true,
-        'fieldType' => 'currency',
-        'attributeRole' => 'value'
+      'invoiceDate' => [
+        'type' => 'date',
+        'fieldType' => 'date'
+      ],
+      'dueDate' => [
+        'type' => 'date',
+        'notNull' => false,
+        'fieldType' => 'date'
       ],
       'description' => [
         'type' => 'text',
@@ -33118,15 +33264,9 @@ return [
         'type' => 'text',
         'fieldType' => 'text'
       ],
-      'createdAt' => [
-        'type' => 'datetime',
-        'notNull' => false,
-        'fieldType' => 'datetime'
-      ],
-      'modifiedAt' => [
-        'type' => 'datetime',
-        'notNull' => false,
-        'fieldType' => 'datetime'
+      'notes' => [
+        'type' => 'text',
+        'fieldType' => 'text'
       ],
       'amountCurrency' => [
         'type' => 'varchar',
@@ -33146,23 +33286,9 @@ return [
         'fieldType' => 'currency',
         'attributeRole' => 'currency'
       ],
-      'grandTotalCurrency' => [
-        'type' => 'varchar',
-        'len' => 3,
-        'notStorable' => true,
-        'fieldType' => 'currency',
-        'attributeRole' => 'currency'
-      ],
       'paidAmountCurrency' => [
         'type' => 'varchar',
         'len' => 3,
-        'fieldType' => 'currency',
-        'attributeRole' => 'currency'
-      ],
-      'balanceAmountCurrency' => [
-        'type' => 'varchar',
-        'len' => 3,
-        'notStorable' => true,
         'fieldType' => 'currency',
         'attributeRole' => 'currency'
       ],
@@ -33234,6 +33360,42 @@ return [
         'type' => 'datetime',
         'notNull' => false,
         'fieldType' => 'datetime'
+      ],
+      'accountId' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'foreignId',
+        'index' => true,
+        'attributeRole' => 'id',
+        'fieldType' => 'link',
+        'notNull' => false
+      ],
+      'accountName' => [
+        'type' => 'foreign',
+        'notStorable' => true,
+        'attributeRole' => 'name',
+        'fieldType' => 'link',
+        'relation' => 'account',
+        'foreign' => 'name',
+        'foreignType' => 'varchar'
+      ],
+      'contactId' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'foreignId',
+        'index' => true,
+        'attributeRole' => 'id',
+        'fieldType' => 'link',
+        'notNull' => false
+      ],
+      'contactName' => [
+        'type' => 'foreign',
+        'notStorable' => true,
+        'attributeRole' => 'name',
+        'fieldType' => 'link',
+        'relation' => 'contact',
+        'foreign' => 'name',
+        'foreignType' => 'varchar'
       ],
       'amountConverted' => [
         'type' => 'float',
@@ -33819,78 +33981,6 @@ return [
         'attributeRole' => 'valueConverted',
         'fieldType' => 'currency'
       ],
-      'accountId' => [
-        'len' => 17,
-        'dbType' => 'string',
-        'type' => 'foreignId',
-        'index' => true,
-        'attributeRole' => 'id',
-        'fieldType' => 'link',
-        'notNull' => false
-      ],
-      'accountName' => [
-        'type' => 'foreign',
-        'notStorable' => true,
-        'attributeRole' => 'name',
-        'fieldType' => 'link',
-        'relation' => 'account',
-        'foreign' => 'name',
-        'foreignType' => 'varchar'
-      ],
-      'contactId' => [
-        'len' => 17,
-        'dbType' => 'string',
-        'type' => 'foreignId',
-        'index' => true,
-        'attributeRole' => 'id',
-        'fieldType' => 'link',
-        'notNull' => false
-      ],
-      'contactName' => [
-        'type' => 'foreign',
-        'notStorable' => true,
-        'attributeRole' => 'name',
-        'fieldType' => 'link',
-        'relation' => 'contact',
-        'foreign' => 'name',
-        'foreignType' => 'varchar'
-      ],
-      'opportunityId' => [
-        'len' => 17,
-        'dbType' => 'string',
-        'type' => 'foreignId',
-        'index' => true,
-        'attributeRole' => 'id',
-        'fieldType' => 'link',
-        'notNull' => false
-      ],
-      'opportunityName' => [
-        'type' => 'foreign',
-        'notStorable' => true,
-        'attributeRole' => 'name',
-        'fieldType' => 'link',
-        'relation' => 'opportunity',
-        'foreign' => 'name',
-        'foreignType' => 'varchar'
-      ],
-      'quoteId' => [
-        'len' => 17,
-        'dbType' => 'string',
-        'type' => 'foreignId',
-        'index' => true,
-        'attributeRole' => 'id',
-        'fieldType' => 'link',
-        'notNull' => false
-      ],
-      'quoteName' => [
-        'type' => 'foreign',
-        'notStorable' => true,
-        'attributeRole' => 'name',
-        'fieldType' => 'link',
-        'relation' => 'quote',
-        'foreign' => 'name',
-        'foreignType' => 'varchar'
-      ],
       'assignedUserId' => [
         'len' => 17,
         'dbType' => 'string',
@@ -33909,58 +33999,6 @@ return [
         'foreign' => 'name',
         'foreignType' => 'varchar'
       ],
-      'teamsIds' => [
-        'type' => 'jsonArray',
-        'notStorable' => true,
-        'isLinkMultipleIdList' => true,
-        'relation' => 'teams',
-        'isUnordered' => true,
-        'attributeRole' => 'idList',
-        'fieldType' => 'linkMultiple'
-      ],
-      'teamsNames' => [
-        'type' => 'jsonObject',
-        'notStorable' => true,
-        'isLinkMultipleNameMap' => true,
-        'attributeRole' => 'nameMap',
-        'fieldType' => 'linkMultiple'
-      ],
-      'createdById' => [
-        'len' => 17,
-        'dbType' => 'string',
-        'type' => 'foreignId',
-        'index' => true,
-        'attributeRole' => 'id',
-        'fieldType' => 'link',
-        'notNull' => false
-      ],
-      'createdByName' => [
-        'type' => 'foreign',
-        'notStorable' => true,
-        'attributeRole' => 'name',
-        'fieldType' => 'link',
-        'relation' => 'createdBy',
-        'foreign' => 'name',
-        'foreignType' => 'varchar'
-      ],
-      'modifiedById' => [
-        'len' => 17,
-        'dbType' => 'string',
-        'type' => 'foreignId',
-        'index' => true,
-        'attributeRole' => 'id',
-        'fieldType' => 'link',
-        'notNull' => false
-      ],
-      'modifiedByName' => [
-        'type' => 'foreign',
-        'notStorable' => true,
-        'attributeRole' => 'name',
-        'fieldType' => 'link',
-        'relation' => 'modifiedBy',
-        'foreign' => 'name',
-        'foreignType' => 'varchar'
-      ],
       'isFollowed' => [
         'type' => 'bool',
         'notStorable' => true,
@@ -33976,61 +34014,22 @@ return [
         'type' => 'jsonObject',
         'notStorable' => true,
         'notExportable' => true
-      ],
-      'documentsIds' => [
-        'type' => 'jsonArray',
-        'notStorable' => true,
-        'isLinkStub' => true
-      ],
-      'documentsNames' => [
-        'type' => 'jsonObject',
-        'notStorable' => true,
-        'isLinkStub' => true
-      ],
-      'paymentsIds' => [
-        'type' => 'jsonArray',
-        'notStorable' => true,
-        'isLinkStub' => true
-      ],
-      'paymentsNames' => [
-        'type' => 'jsonObject',
-        'notStorable' => true,
-        'isLinkStub' => true
       ]
     ],
     'relations' => [
-      'documents' => [
-        'type' => 'hasMany',
-        'entity' => 'Document',
-        'foreignKey' => 'invoicesId',
-        'foreign' => 'invoices'
-      ],
-      'payments' => [
-        'type' => 'hasMany',
-        'entity' => 'Payment',
-        'foreignKey' => 'invoiceId',
-        'foreign' => 'invoice'
-      ],
-      'quote' => [
+      'assignedUser' => [
         'type' => 'belongsTo',
-        'entity' => 'Quote',
-        'key' => 'quoteId',
+        'entity' => 'User',
+        'key' => 'assignedUserId',
         'foreignKey' => 'id',
-        'foreign' => 'invoices'
-      ],
-      'opportunity' => [
-        'type' => 'belongsTo',
-        'entity' => 'Opportunity',
-        'key' => 'opportunityId',
-        'foreignKey' => 'id',
-        'foreign' => 'invoices'
+        'foreign' => NULL
       ],
       'contact' => [
         'type' => 'belongsTo',
         'entity' => 'Contact',
         'key' => 'contactId',
         'foreignKey' => 'id',
-        'foreign' => 'invoices'
+        'foreign' => NULL
       ],
       'account' => [
         'type' => 'belongsTo',
@@ -34038,120 +34037,9 @@ return [
         'key' => 'accountId',
         'foreignKey' => 'id',
         'foreign' => 'invoices'
-      ],
-      'modifiedBy' => [
-        'type' => 'belongsTo',
-        'entity' => 'User',
-        'key' => 'modifiedById',
-        'foreignKey' => 'id',
-        'foreign' => NULL
-      ],
-      'createdBy' => [
-        'type' => 'belongsTo',
-        'entity' => 'User',
-        'key' => 'createdById',
-        'foreignKey' => 'id',
-        'foreign' => NULL
-      ],
-      'teams' => [
-        'type' => 'manyMany',
-        'entity' => 'Team',
-        'relationName' => 'entityTeam',
-        'midKeys' => [
-          0 => 'entityId',
-          1 => 'teamId'
-        ],
-        'conditions' => [
-          'entityType' => 'Invoice'
-        ],
-        'additionalColumns' => [
-          'entityType' => [
-            'type' => 'varchar',
-            'len' => 100
-          ]
-        ],
-        'indexes' => [
-          'entityId' => [
-            'columns' => [
-              0 => 'entityId'
-            ],
-            'key' => 'IDX_ENTITY_ID'
-          ],
-          'teamId' => [
-            'columns' => [
-              0 => 'teamId'
-            ],
-            'key' => 'IDX_TEAM_ID'
-          ],
-          'entityId_teamId_entityType' => [
-            'type' => 'unique',
-            'columns' => [
-              0 => 'entityId',
-              1 => 'teamId',
-              2 => 'entityType'
-            ],
-            'key' => 'UNIQ_ENTITY_ID_TEAM_ID_ENTITY_TYPE'
-          ]
-        ]
-      ],
-      'assignedUser' => [
-        'type' => 'belongsTo',
-        'entity' => 'User',
-        'key' => 'assignedUserId',
-        'foreignKey' => 'id',
-        'foreign' => NULL
       ]
     ],
     'indexes' => [
-      'name' => [
-        'columns' => [
-          0 => 'name',
-          1 => 'deleted'
-        ],
-        'key' => 'IDX_NAME'
-      ],
-      'status' => [
-        'columns' => [
-          0 => 'status',
-          1 => 'deleted'
-        ],
-        'key' => 'IDX_STATUS'
-      ],
-      'assignedUser' => [
-        'columns' => [
-          0 => 'assignedUserId',
-          1 => 'deleted'
-        ],
-        'key' => 'IDX_ASSIGNED_USER'
-      ],
-      'createdAt' => [
-        'columns' => [
-          0 => 'createdAt',
-          1 => 'deleted'
-        ],
-        'key' => 'IDX_CREATED_AT'
-      ],
-      'number' => [
-        'columns' => [
-          0 => 'number',
-          1 => 'deleted'
-        ],
-        'key' => 'IDX_NUMBER'
-      ],
-      'invoiceDate' => [
-        'columns' => [
-          0 => 'invoiceDate',
-          1 => 'deleted'
-        ],
-        'key' => 'IDX_INVOICE_DATE'
-      ],
-      'dueDate' => [
-        'columns' => [
-          0 => 'dueDate',
-          1 => 'deleted'
-        ],
-        'key' => 'IDX_DUE_DATE'
-      ],
       'accountId' => [
         'type' => 'index',
         'columns' => [
@@ -34166,45 +34054,13 @@ return [
         ],
         'key' => 'IDX_CONTACT_ID'
       ],
-      'opportunityId' => [
-        'type' => 'index',
-        'columns' => [
-          0 => 'opportunityId'
-        ],
-        'key' => 'IDX_OPPORTUNITY_ID'
-      ],
-      'quoteId' => [
-        'type' => 'index',
-        'columns' => [
-          0 => 'quoteId'
-        ],
-        'key' => 'IDX_QUOTE_ID'
-      ],
       'assignedUserId' => [
         'type' => 'index',
         'columns' => [
           0 => 'assignedUserId'
         ],
         'key' => 'IDX_ASSIGNED_USER_ID'
-      ],
-      'createdById' => [
-        'type' => 'index',
-        'columns' => [
-          0 => 'createdById'
-        ],
-        'key' => 'IDX_CREATED_BY_ID'
-      ],
-      'modifiedById' => [
-        'type' => 'index',
-        'columns' => [
-          0 => 'modifiedById'
-        ],
-        'key' => 'IDX_MODIFIED_BY_ID'
       ]
-    ],
-    'collection' => [
-      'orderBy' => 'createdAt',
-      'order' => 'DESC'
     ]
   ],
   'Payment' => [
@@ -34216,29 +34072,23 @@ return [
       ],
       'name' => [
         'type' => 'varchar',
-        'len' => 255,
-        'fieldType' => 'varchar'
+        'fieldType' => 'varchar',
+        'len' => 255
       ],
       'deleted' => [
         'type' => 'bool',
         'default' => false
       ],
       'number' => [
-        'type' => 'int',
-        'autoincrement' => true,
-        'unique' => true,
-        'fieldType' => 'int',
-        'len' => 11
+        'type' => 'varchar',
+        'fieldType' => 'varchar',
+        'len' => 255
       ],
       'status' => [
         'type' => 'varchar',
         'default' => 'Pending',
         'fieldType' => 'varchar',
         'len' => 255
-      ],
-      'paymentDate' => [
-        'type' => 'date',
-        'fieldType' => 'date'
       ],
       'amount' => [
         'type' => 'float',
@@ -34265,6 +34115,10 @@ return [
           ]
         ]
       ],
+      'paymentDate' => [
+        'type' => 'date',
+        'fieldType' => 'date'
+      ],
       'paymentMethod' => [
         'type' => 'varchar',
         'fieldType' => 'varchar',
@@ -34272,8 +34126,8 @@ return [
       ],
       'reference' => [
         'type' => 'varchar',
-        'len' => 100,
-        'fieldType' => 'varchar'
+        'fieldType' => 'varchar',
+        'len' => 255
       ],
       'description' => [
         'type' => 'text',
@@ -34289,6 +34143,42 @@ return [
         'type' => 'datetime',
         'notNull' => false,
         'fieldType' => 'datetime'
+      ],
+      'accountId' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'foreignId',
+        'index' => true,
+        'attributeRole' => 'id',
+        'fieldType' => 'link',
+        'notNull' => false
+      ],
+      'accountName' => [
+        'type' => 'foreign',
+        'notStorable' => true,
+        'attributeRole' => 'name',
+        'fieldType' => 'link',
+        'relation' => 'account',
+        'foreign' => 'name',
+        'foreignType' => 'varchar'
+      ],
+      'invoiceId' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'foreignId',
+        'index' => true,
+        'attributeRole' => 'id',
+        'fieldType' => 'link',
+        'notNull' => false
+      ],
+      'invoiceName' => [
+        'type' => 'foreign',
+        'notStorable' => true,
+        'attributeRole' => 'name',
+        'fieldType' => 'link',
+        'relation' => 'invoice',
+        'foreign' => 'name',
+        'foreignType' => 'varchar'
       ],
       'amountConverted' => [
         'type' => 'float',
@@ -34436,42 +34326,6 @@ return [
         'attributeRole' => 'valueConverted',
         'fieldType' => 'currency'
       ],
-      'accountId' => [
-        'len' => 17,
-        'dbType' => 'string',
-        'type' => 'foreignId',
-        'index' => true,
-        'attributeRole' => 'id',
-        'fieldType' => 'link',
-        'notNull' => false
-      ],
-      'accountName' => [
-        'type' => 'foreign',
-        'notStorable' => true,
-        'attributeRole' => 'name',
-        'fieldType' => 'link',
-        'relation' => 'account',
-        'foreign' => 'name',
-        'foreignType' => 'varchar'
-      ],
-      'invoiceId' => [
-        'len' => 17,
-        'dbType' => 'string',
-        'type' => 'foreignId',
-        'index' => true,
-        'attributeRole' => 'id',
-        'fieldType' => 'link',
-        'notNull' => false
-      ],
-      'invoiceName' => [
-        'type' => 'foreign',
-        'notStorable' => true,
-        'attributeRole' => 'name',
-        'fieldType' => 'link',
-        'relation' => 'invoice',
-        'foreign' => 'name',
-        'foreignType' => 'varchar'
-      ],
       'assignedUserId' => [
         'len' => 17,
         'dbType' => 'string',
@@ -34489,22 +34343,6 @@ return [
         'relation' => 'assignedUser',
         'foreign' => 'name',
         'foreignType' => 'varchar'
-      ],
-      'teamsIds' => [
-        'type' => 'jsonArray',
-        'notStorable' => true,
-        'isLinkMultipleIdList' => true,
-        'relation' => 'teams',
-        'isUnordered' => true,
-        'attributeRole' => 'idList',
-        'fieldType' => 'linkMultiple'
-      ],
-      'teamsNames' => [
-        'type' => 'jsonObject',
-        'notStorable' => true,
-        'isLinkMultipleNameMap' => true,
-        'attributeRole' => 'nameMap',
-        'fieldType' => 'linkMultiple'
       ],
       'isFollowed' => [
         'type' => 'bool',
@@ -34524,47 +34362,6 @@ return [
       ]
     ],
     'relations' => [
-      'teams' => [
-        'type' => 'manyMany',
-        'entity' => 'Team',
-        'relationName' => 'entityTeam',
-        'midKeys' => [
-          0 => 'entityId',
-          1 => 'teamId'
-        ],
-        'conditions' => [
-          'entityType' => 'Payment'
-        ],
-        'additionalColumns' => [
-          'entityType' => [
-            'type' => 'varchar',
-            'len' => 100
-          ]
-        ],
-        'indexes' => [
-          'entityId' => [
-            'columns' => [
-              0 => 'entityId'
-            ],
-            'key' => 'IDX_ENTITY_ID'
-          ],
-          'teamId' => [
-            'columns' => [
-              0 => 'teamId'
-            ],
-            'key' => 'IDX_TEAM_ID'
-          ],
-          'entityId_teamId_entityType' => [
-            'type' => 'unique',
-            'columns' => [
-              0 => 'entityId',
-              1 => 'teamId',
-              2 => 'entityType'
-            ],
-            'key' => 'UNIQ_ENTITY_ID_TEAM_ID_ENTITY_TYPE'
-          ]
-        ]
-      ],
       'assignedUser' => [
         'type' => 'belongsTo',
         'entity' => 'User',
@@ -34584,17 +34381,10 @@ return [
         'entity' => 'Account',
         'key' => 'accountId',
         'foreignKey' => 'id',
-        'foreign' => NULL
+        'foreign' => 'payments'
       ]
     ],
     'indexes' => [
-      'number' => [
-        'type' => 'unique',
-        'columns' => [
-          0 => 'number'
-        ],
-        'key' => 'UNIQ_NUMBER'
-      ],
       'accountId' => [
         'type' => 'index',
         'columns' => [
@@ -34616,10 +34406,6 @@ return [
         ],
         'key' => 'IDX_ASSIGNED_USER_ID'
       ]
-    ],
-    'collection' => [
-      'orderBy' => 'paymentDate',
-      'order' => 'DESC'
     ]
   ],
   'Quote' => [
@@ -34631,35 +34417,23 @@ return [
       ],
       'name' => [
         'type' => 'varchar',
-        'len' => 255,
-        'fieldType' => 'varchar'
+        'fieldType' => 'varchar',
+        'len' => 255
       ],
       'deleted' => [
         'type' => 'bool',
         'default' => false
       ],
       'number' => [
-        'type' => 'int',
-        'autoincrement' => true,
-        'unique' => true,
-        'index' => true,
-        'fieldType' => 'int',
-        'len' => 11
+        'type' => 'varchar',
+        'fieldType' => 'varchar',
+        'len' => 255
       ],
       'status' => [
         'type' => 'varchar',
         'default' => 'Draft',
         'fieldType' => 'varchar',
         'len' => 255
-      ],
-      'quoteDate' => [
-        'type' => 'date',
-        'fieldType' => 'date'
-      ],
-      'expirationDate' => [
-        'type' => 'date',
-        'notNull' => false,
-        'fieldType' => 'date'
       ],
       'amount' => [
         'type' => 'float',
@@ -34761,19 +34535,18 @@ return [
           ]
         ]
       ],
+      'quoteDate' => [
+        'type' => 'date',
+        'fieldType' => 'date'
+      ],
+      'expirationDate' => [
+        'type' => 'date',
+        'notNull' => false,
+        'fieldType' => 'date'
+      ],
       'description' => [
         'type' => 'text',
         'fieldType' => 'text'
-      ],
-      'createdAt' => [
-        'type' => 'datetime',
-        'notNull' => false,
-        'fieldType' => 'datetime'
-      ],
-      'modifiedAt' => [
-        'type' => 'datetime',
-        'notNull' => false,
-        'fieldType' => 'datetime'
       ],
       'amountCurrency' => [
         'type' => 'varchar',
@@ -34803,6 +34576,42 @@ return [
         'type' => 'datetime',
         'notNull' => false,
         'fieldType' => 'datetime'
+      ],
+      'accountId' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'foreignId',
+        'index' => true,
+        'attributeRole' => 'id',
+        'fieldType' => 'link',
+        'notNull' => false
+      ],
+      'accountName' => [
+        'type' => 'foreign',
+        'notStorable' => true,
+        'attributeRole' => 'name',
+        'fieldType' => 'link',
+        'relation' => 'account',
+        'foreign' => 'name',
+        'foreignType' => 'varchar'
+      ],
+      'contactId' => [
+        'len' => 17,
+        'dbType' => 'string',
+        'type' => 'foreignId',
+        'index' => true,
+        'attributeRole' => 'id',
+        'fieldType' => 'link',
+        'notNull' => false
+      ],
+      'contactName' => [
+        'type' => 'foreign',
+        'notStorable' => true,
+        'attributeRole' => 'name',
+        'fieldType' => 'link',
+        'relation' => 'contact',
+        'foreign' => 'name',
+        'foreignType' => 'varchar'
       ],
       'amountConverted' => [
         'type' => 'float',
@@ -35388,60 +35197,6 @@ return [
         'attributeRole' => 'valueConverted',
         'fieldType' => 'currency'
       ],
-      'accountId' => [
-        'len' => 17,
-        'dbType' => 'string',
-        'type' => 'foreignId',
-        'index' => true,
-        'attributeRole' => 'id',
-        'fieldType' => 'link',
-        'notNull' => false
-      ],
-      'accountName' => [
-        'type' => 'foreign',
-        'notStorable' => true,
-        'attributeRole' => 'name',
-        'fieldType' => 'link',
-        'relation' => 'account',
-        'foreign' => 'name',
-        'foreignType' => 'varchar'
-      ],
-      'contactId' => [
-        'len' => 17,
-        'dbType' => 'string',
-        'type' => 'foreignId',
-        'index' => true,
-        'attributeRole' => 'id',
-        'fieldType' => 'link',
-        'notNull' => false
-      ],
-      'contactName' => [
-        'type' => 'foreign',
-        'notStorable' => true,
-        'attributeRole' => 'name',
-        'fieldType' => 'link',
-        'relation' => 'contact',
-        'foreign' => 'name',
-        'foreignType' => 'varchar'
-      ],
-      'opportunityId' => [
-        'len' => 17,
-        'dbType' => 'string',
-        'type' => 'foreignId',
-        'index' => true,
-        'attributeRole' => 'id',
-        'fieldType' => 'link',
-        'notNull' => false
-      ],
-      'opportunityName' => [
-        'type' => 'foreign',
-        'notStorable' => true,
-        'attributeRole' => 'name',
-        'fieldType' => 'link',
-        'relation' => 'opportunity',
-        'foreign' => 'name',
-        'foreignType' => 'varchar'
-      ],
       'assignedUserId' => [
         'len' => 17,
         'dbType' => 'string',
@@ -35459,22 +35214,6 @@ return [
         'relation' => 'assignedUser',
         'foreign' => 'name',
         'foreignType' => 'varchar'
-      ],
-      'teamsIds' => [
-        'type' => 'jsonArray',
-        'notStorable' => true,
-        'isLinkMultipleIdList' => true,
-        'relation' => 'teams',
-        'isUnordered' => true,
-        'attributeRole' => 'idList',
-        'fieldType' => 'linkMultiple'
-      ],
-      'teamsNames' => [
-        'type' => 'jsonObject',
-        'notStorable' => true,
-        'isLinkMultipleNameMap' => true,
-        'attributeRole' => 'nameMap',
-        'fieldType' => 'linkMultiple'
       ],
       'isFollowed' => [
         'type' => 'bool',
@@ -35494,60 +35233,12 @@ return [
       ]
     ],
     'relations' => [
-      'teams' => [
-        'type' => 'manyMany',
-        'entity' => 'Team',
-        'relationName' => 'entityTeam',
-        'midKeys' => [
-          0 => 'entityId',
-          1 => 'teamId'
-        ],
-        'conditions' => [
-          'entityType' => 'Quote'
-        ],
-        'additionalColumns' => [
-          'entityType' => [
-            'type' => 'varchar',
-            'len' => 100
-          ]
-        ],
-        'indexes' => [
-          'entityId' => [
-            'columns' => [
-              0 => 'entityId'
-            ],
-            'key' => 'IDX_ENTITY_ID'
-          ],
-          'teamId' => [
-            'columns' => [
-              0 => 'teamId'
-            ],
-            'key' => 'IDX_TEAM_ID'
-          ],
-          'entityId_teamId_entityType' => [
-            'type' => 'unique',
-            'columns' => [
-              0 => 'entityId',
-              1 => 'teamId',
-              2 => 'entityType'
-            ],
-            'key' => 'UNIQ_ENTITY_ID_TEAM_ID_ENTITY_TYPE'
-          ]
-        ]
-      ],
       'assignedUser' => [
         'type' => 'belongsTo',
         'entity' => 'User',
         'key' => 'assignedUserId',
         'foreignKey' => 'id',
         'foreign' => NULL
-      ],
-      'opportunity' => [
-        'type' => 'belongsTo',
-        'entity' => 'Opportunity',
-        'key' => 'opportunityId',
-        'foreignKey' => 'id',
-        'foreign' => 'quotes'
       ],
       'contact' => [
         'type' => 'belongsTo',
@@ -35565,13 +35256,6 @@ return [
       ]
     ],
     'indexes' => [
-      'number' => [
-        'type' => 'unique',
-        'columns' => [
-          0 => 'number'
-        ],
-        'key' => 'UNIQ_NUMBER'
-      ],
       'accountId' => [
         'type' => 'index',
         'columns' => [
@@ -35586,13 +35270,6 @@ return [
         ],
         'key' => 'IDX_CONTACT_ID'
       ],
-      'opportunityId' => [
-        'type' => 'index',
-        'columns' => [
-          0 => 'opportunityId'
-        ],
-        'key' => 'IDX_OPPORTUNITY_ID'
-      ],
       'assignedUserId' => [
         'type' => 'index',
         'columns' => [
@@ -35600,10 +35277,6 @@ return [
         ],
         'key' => 'IDX_ASSIGNED_USER_ID'
       ]
-    ],
-    'collection' => [
-      'orderBy' => 'createdAt',
-      'order' => 'DESC'
     ]
   ],
   'EmailEmailAccount' => [

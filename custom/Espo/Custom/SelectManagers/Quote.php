@@ -1,4 +1,5 @@
 <?php
+
 namespace Espo\Custom\SelectManagers;
 
 class Quote extends \Espo\Core\SelectManagers\Base
@@ -21,6 +22,20 @@ class Quote extends \Espo\Core\SelectManagers\Base
     {
         $result['whereClause'][] = [
             'status' => 'Accepted'
+        ];
+    }
+    
+    protected function filterRejected(&$result)
+    {
+        $result['whereClause'][] = [
+            'status' => 'Rejected'
+        ];
+    }
+    
+    protected function filterExpired(&$result)
+    {
+        $result['whereClause'][] = [
+            'status' => 'Expired'
         ];
     }
     

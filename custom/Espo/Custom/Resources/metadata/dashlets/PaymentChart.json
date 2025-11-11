@@ -1,0 +1,5 @@
+{
+    "view": "custom:views/dashlets/payment-chart",
+    "aclScope": "Payment",
+    "entityType": "Payment"
+}

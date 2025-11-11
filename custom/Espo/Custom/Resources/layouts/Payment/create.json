@@ -1,0 +1,29 @@
+{
+    "type": "detail",
+    "blocks": [
+        {
+            "label": "Payment Information",
+            "rows": [
+                [{"name": "name"}],
+                [{"name": "account"}],
+                [{"name": "invoice"}]
+            ]
+        },
+        {
+            "label": "Payment Details",
+            "rows": [
+                [{"name": "paymentDate"}],
+                [{"name": "amount"}],
+                [{"name": "paymentMethod"}],
+                [{"name": "reference"}]
+            ]
+        },
+        {
+            "label": "Additional Information",
+            "rows": [
+                [{"name": "description"}],
+                [{"name": "assignedUser"}]
+            ]
+        }
+    ]
+}

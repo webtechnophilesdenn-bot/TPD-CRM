@@ -1,0 +1,5 @@
+{
+    "view": "custom:views/dashlets/quote-chart",
+    "aclScope": "Quote",
+    "entityType": "Quote"
+}

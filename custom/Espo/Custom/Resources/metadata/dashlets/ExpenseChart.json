@@ -1,0 +1,5 @@
+{
+    "view": "custom:views/dashlets/expense-chart",
+    "aclScope": "Expense",
+    "entityType": "Expense"
+}

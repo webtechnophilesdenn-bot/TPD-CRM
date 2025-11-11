@@ -1,0 +1,52 @@
+[
+    {
+        "rows": [
+            [
+                {
+                    "name": "number",
+                    "span": 1
+                },
+                {
+                    "name": "status",
+                    "span": 1
+                }
+            ],
+            [
+                {
+                    "name": "name",
+                    "span": 2
+                }
+            ],
+            [
+                {
+                    "name": "priority",
+                    "span": 1
+                },
+                {
+                    "name": "type",
+                    "span": 1
+                }
+            ],
+            [
+                {
+                    "name": "assignedUser",
+                    "span": 1
+                },
+                {
+                    "name": "dueDate",
+                    "span": 1
+                }
+            ],
+            [
+                {
+                    "name": "account",
+                    "span": 1
+                },
+                {
+                    "name": "contact",
+                    "span": 1
+                }
+            ]
+        ]
+    }
+]

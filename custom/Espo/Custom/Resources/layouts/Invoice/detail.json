@@ -1,0 +1,64 @@
+[
+    {
+        "label": "Invoice Information",
+        "rows": [
+            [
+                {"name": "name"},
+                {"name": "number"}
+            ],
+            [
+                {"name": "status"},
+                {"name": "account"}
+            ],
+            [
+                {"name": "contact"},
+                {"name": "assignedUser"}
+            ]
+        ]
+    },
+    {
+        "label": "Dates",
+        "rows": [
+            [
+                {"name": "invoiceDate"},
+                {"name": "dueDate"}
+            ]
+        ]
+    },
+    {
+        "label": "Financial Information",
+        "rows": [
+            [
+                {"name": "amount"},
+                {"name": "taxAmount"}
+            ],
+            [
+                {"name": "discountAmount"},
+                {"name": "paidAmount"}
+            ]
+        ]
+    },
+    {
+        "label": "Billing Details",
+        "rows": [
+            [
+                {"name": "billingAddress"},
+                {"name": "shippingAddress"}
+            ]
+        ]
+    },
+    {
+        "label": "Description",
+        "rows": [
+            [
+                {"name": "description"}
+            ],
+            [
+                {"name": "termsAndConditions"}
+            ],
+            [
+                {"name": "notes"}
+            ]
+        ]
+    }
+]

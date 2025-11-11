@@ -3,6 +3,20 @@
     "iconClass": "fas fa-ticket-alt",
     "color": "#3498db",
     "kanbanViewMode": true,
+    "sidePanels": {
+        "detail": [
+            {
+                "name": "info",
+                "label": "Ticket Info",
+                "view": "custom:views/ticket/panels/info",
+                "notRefreshable": false,
+                "isForm": false,
+                "options": {
+                    "style": "default"
+                }
+            }
+        ]
+    },
     "dynamicLogic": {
         "fields": {
             "resolution": {
@@ -25,6 +39,39 @@
                         }
                     ]
                 }
+            },
+            "satisfactionRating": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "status",
+                            "value": "Closed"
+                        }
+                    ]
+                }
+            },
+            "customerFeedback": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "status",
+                            "value": "Closed"
+                        }
+                    ]
+                }
+            },
+            "escalatedTo": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "isEscalated",
+                            "value": true
+                        }
+                    ]
+                }
             }
         }
     },
@@ -32,15 +79,39 @@
         "all",
         {
             "name": "open",
-            "label": "Open"
+            "label": "Open Tickets"
+        },
+        {
+            "name": "myOpen",
+            "label": "My Open Tickets"
+        },
+        {
+            "name": "new",
+            "label": "New Tickets"
+        },
+        {
+            "name": "urgent",
+            "label": "Urgent Tickets"
+        },
+        {
+            "name": "escalated",
+            "label": "Escalated"
+        },
+        {
+            "name": "overdue",
+            "label": "Overdue"
+        },
+        {
+            "name": "unassigned",
+            "label": "Unassigned"
+        },
+        {
+            "name": "pendingCustomer",
+            "label": "Pending Customer"
         },
         {
             "name": "closed",
             "label": "Closed"
-        },
-        {
-            "name": "new",
-            "label": "New"
         }
     ],
     "boolFilterList": [
@@ -49,33 +120,15 @@
     "selectDefaultFilters": {
         "filter": "open"
     },
-    "sidePanels": {
-        "detail": [
-            {
-                "name": "activities",
-                "label": "Activities",
-                "view": "crm:views/record/panels/activities",
-                "aclScope": "Activities"
-            },
-            {
-                "name": "history",
-                "label": "History",
-                "view": "crm:views/record/panels/history",
-                "aclScope": "Activities"
-            },
-            {
-                "name": "tasks",
-                "label": "Tasks",
-                "view": "crm:views/record/panels/tasks",
-                "aclScope": "Task"
-            }
-        ]
-    },
     "relationshipPanels": {
         "documents": {
             "create": true,
+            "select": true
+        },
+        "childTickets": {
+            "create": true,
             "select": true,
-            "view": "views/record/panels/relationship"
+            "label": "Related Tickets"
         }
     }
 }

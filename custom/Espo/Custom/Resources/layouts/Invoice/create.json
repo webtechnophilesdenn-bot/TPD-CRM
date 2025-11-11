@@ -1,0 +1,75 @@
+{
+    "type": "detail",
+    "blocks": [
+        {
+            "label": "Invoice Information",
+            "rows": [
+                [
+                    {
+                        "name": "name"
+                    }
+                ],
+                [
+                    {
+                        "name": "account"
+                    }
+                ],
+                [
+                    {
+                        "name": "contact"
+                    }
+                ]
+            ]
+        },
+        {
+            "label": "Financial Information",
+            "rows": [
+                [
+                    {
+                        "name": "amount"
+                    }
+                ],
+                [
+                    {
+                        "name": "taxAmount"
+                    }
+                ],
+                [
+                    {
+                        "name": "discountAmount"
+                    }
+                ]
+            ]
+        },
+        {
+            "label": "Dates",
+            "rows": [
+                [
+                    {
+                        "name": "invoiceDate"
+                    }
+                ],
+                [
+                    {
+                        "name": "dueDate"
+                    }
+                ]
+            ]
+        },
+        {
+            "label": "Additional Information",
+            "rows": [
+                [
+                    {
+                        "name": "description"
+                    }
+                ],
+                [
+                    {
+                        "name": "assignedUser"
+                    }
+                ]
+            ]
+        }
+    ]
+}
