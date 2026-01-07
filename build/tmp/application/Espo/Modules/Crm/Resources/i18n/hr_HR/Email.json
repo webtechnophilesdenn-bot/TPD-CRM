@@ -1,0 +1,10 @@
+{
+  "labels": {
+    "Create Lead": "NapOpportunities ti izvor",
+    "Create Contact": "NapOpportunities ti kontakt",
+    "Create Task": "NapOpportunities ti zadatak",
+    "Create Case": "Kreiranje prijave problema",
+    "Add to Contact": "Dodaj u Kontakt",
+    "Add to Lead": "Dodaj u Izvor"
+  }
+}

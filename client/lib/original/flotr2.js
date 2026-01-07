@@ -1440,7 +1440,7 @@ Text.prototype = {
     var div = D.create('div');
 
     D.setStyles(div, { 'position' : 'absolute', 'top' : '-10000px' });
-    D.setStyles(div, {'top' : '0px', 'left' : '-10000px' }); // TPD-CRM fix line
+    D.setStyles(div, {'top' : '0px', 'left' : '-10000px' }); // EspoCRM fix line
     D.insert(div, '<div style="'+style+'" class="'+className+' flotr-dummy-div">' + text + '</div>');
     D.insert(this.o.element, div);
 
@@ -1722,7 +1722,7 @@ Graph.prototype = {
       context.translate(this.plotOffset.left, this.plotOffset.top);
 
       for (i = 0; i < this.series.length; i++) {
-        this.series[i].index = i; // TPD-CRM fix stacked
+        this.series[i].index = i; // EspoCRM fix stacked
         if (!this.series[i].hide) this.drawSeries(this.series[i]);
       }
 
@@ -1741,7 +1741,7 @@ Graph.prototype = {
 
     function drawChart (series, typeKey) {
       var options = this.getOptions(series, typeKey);
-      options.index = series.index; // TPD-CRM fix stacked
+      options.index = series.index; // EspoCRM fix stacked
       this[typeKey].draw(options);
     }
 
@@ -2034,7 +2034,7 @@ Graph.prototype = {
         this.lastMousePos = pos;
       }, this));
 
-    }// else { TPD-CRM fix
+    }// else { EspoCRM fix
       this.
         observe(this.overlay, 'mousedown', _.bind(this.mouseDownHandler, this)).
         observe(el, 'mousemove', _.bind(this.mouseMoveHandler, this)).
@@ -2042,7 +2042,7 @@ Graph.prototype = {
         observe(el, 'mouseout', function (e) {
           E.fire(el, 'flotr:mouseout', e);
         });
-    //} TPD-CRM fix
+    //} EspoCRM fix
   },
 
   /**
@@ -2991,7 +2991,7 @@ Flotr.addType('bars', {
 
     for (i = 0; i < data.length; i++) {
 
-      geometry = this.getBarGeometry(data[i][0], data[i][1], options, true); // TPD-CRM fix stacked
+      geometry = this.getBarGeometry(data[i][0], data[i][1], options, true); // EspoCRM fix stacked
       if (geometry === null) continue;
 
       left    = geometry.left;
@@ -3019,7 +3019,7 @@ Flotr.addType('bars', {
     }
   },
 
-  getBarGeometry : function (x, y, options, fillStack) { // TPD-CRM fix stacked
+  getBarGeometry : function (x, y, options, fillStack) { // EspoCRM fix stacked
 
     var
       horizontal    = options.horizontal,
@@ -3048,7 +3048,7 @@ Flotr.addType('bars', {
       stackValue          = yValue > 0 ? stack.positive : stack.negative;
       stackOffset         = stackValue[xValue] || stackOffset;
 
-      // TPD-CRM fix stacked start
+      // EspoCRM fix stacked start
       if (fillStack) {
         this.stackData = this.stackData || {};
         this.stackData[options.index] = this.stackData[options.index] || {};
@@ -3058,9 +3058,9 @@ Flotr.addType('bars', {
             stackOffset = this.stackData[options.index][xValue];
           }
       }
-      // TPD-CRM fix stacked end
+      // EspoCRM fix stacked end
 
-      if (fillStack) // TPD-CRM fix stacked
+      if (fillStack) // EspoCRM fix stacked
       stackValue[xValue]  = stackOffset + yValue;
     }
 
@@ -3076,7 +3076,7 @@ Flotr.addType('bars', {
     // if (right < xa.min || left > xa.max || top < ya.min || bottom > ya.max) continue;
 
     return (x === null || y === null) ? null : {
-      bottom: bottom, // TPD-CRM fix stacked
+      bottom: bottom, // EspoCRM fix stacked
       x         : xValue,
       y         : yValue,
       xScale    : xScale,
@@ -3108,7 +3108,7 @@ Flotr.addType('bars', {
         // Height:
         (
           // Positive Bars:
-          // TPD-CRM fix stacked start
+          // EspoCRM fix stacked start
           (
             (
               options.stacked && !options.horizontal &&
@@ -3121,7 +3121,7 @@ Flotr.addType('bars', {
               hitGeometry.yScale(hitGeometry.y) < geometry.top
             )
           ) || !options.stacked &&
-          // TPD-CRM fix stacked end
+          // EspoCRM fix stacked end
           (height > 0 && height < geometry.y) ||
           // Negative Bars:
           (height < 0 && height > geometry.y)
@@ -3132,7 +3132,7 @@ Flotr.addType('bars', {
         n.x = data[i][0];
         n.y = data[i][1];
 
-        // TPD-CRM fix stacked start
+        // EspoCRM fix stacked start
         if (options.stacked) {
           if (!options.horizontal) {
             n.y = options.yInverse(geometry.top);
@@ -3142,7 +3142,7 @@ Flotr.addType('bars', {
             n.bottom = geometry.bottom;
           }
         }
-        // TPD-CRM fix stacked end
+        // EspoCRM fix stacked end
 
         n.index = i;
         n.seriesIndex = options.index;
@@ -3170,24 +3170,24 @@ Flotr.addType('bars', {
     context.beginPath();
     context.moveTo(left, top + height);
 
-    // TPD-CRM fix stacked start
+    // EspoCRM fix stacked start
     if (options.stacked) {
       context.moveTo(left, options.args.bottom);
     }
-    // TPD-CRM fix stacked end
+    // EspoCRM fix stacked end
 
     context.lineTo(left, top);
     context.lineTo(left + width, top);
 
-    if (!options.stacked) // TPD-CRM fix stacked
+    if (!options.stacked) // EspoCRM fix stacked
     context.lineTo(left + width, top + height);
 
-    // TPD-CRM fix stacked start
+    // EspoCRM fix stacked start
     if (options.stacked) {
       context.lineTo(left + width, options.args.bottom);
       context.lineTo(left, options.args.bottom);
     }
-    // TPD-CRM fix stacked end
+    // EspoCRM fix stacked end
 
     if (options.fill) {
       context.fillStyle = options.fillStyle;
@@ -4985,11 +4985,11 @@ Flotr.addPlugin('hit', {
         );
       }
       D.hide(this.mouseTrack);
-      // TPD-CRM fix start
+      // EspoCRM fix start
       if (this.options && this.options.mouse && this.options.mouse.cursorPointer) {
         $(this.el).css('cursor', '');
       }
-      // TPD-CRM fix end
+      // EspoCRM fix end
       this.prevHit = null;
     }
     octx.restore();
@@ -5191,22 +5191,22 @@ Flotr.addPlugin('hit', {
     if (_.isNull(content) || _.isUndefined(content)) {
       D.hide(mouseTrack);
 
-      // TPD-CRM fix start
+      // EspoCRM fix start
       if (this.options && this.options.mouse && this.options.mouse.cursorPointer) {
         $(this.el).css('cursor', '');
       }
-      // TPD-CRM fix end
+      // EspoCRM fix end
 
       return;
     } else {
       mouseTrack.innerHTML = content;
       D.show(mouseTrack);
 
-      // TPD-CRM fix start
+      // EspoCRM fix start
       if (this.options && this.options.mouse && this.options.mouse.cursorPointer) {
         $(this.el).css('cursor', 'pointer');
       }
-      // TPD-CRM fix end
+      // EspoCRM fix end
     }
 
     // Positioning
@@ -5235,13 +5235,13 @@ Flotr.addPlugin('hit', {
           x: (this.plotWidth)/2,
           y: (this.plotHeight)/2
         },
-        radius = (Math.min(this.canvasWidth, this.canvasHeight) * s.pie.sizeRatio), // TPD-CRM fix line
+        radius = (Math.min(this.canvasWidth, this.canvasHeight) * s.pie.sizeRatio), // EspoCRM fix line
         bisection = n.sAngle<n.eAngle ? (n.sAngle + n.eAngle) / 2: (n.sAngle + n.eAngle + 2* Math.PI) / 2;
 
       pos += 'bottom:' + (m - top - center.y - Math.sin(bisection) * radius/2 + this.canvasHeight) + 'px;top:auto;';
       pos += 'left:' + (m + left + center.x + Math.cos(bisection) * radius/2) + 'px;right:auto;';
 
-      // TPD-CRM fix start
+      // EspoCRM fix start
       var bottom = m - top - center.y - Math.sin(bisection) * radius/2 + this.canvasHeight;
 
       if (bottom > this.canvasHeight * 0.5 + this.canvasHeight * 0.25) {
@@ -5250,12 +5250,12 @@ Flotr.addPlugin('hit', {
           pos = 'bottom:' + bottom + 'px;top:auto;';
           pos += 'left:' + (m + left + center.x + Math.cos(bisection) * radius/2) + 'px;right:auto;';
       }
-      // TPD-CRM fix end
+      // EspoCRM fix end
 
     // Default
     } else {
 
-      // TPD-CRM fix start
+      // EspoCRM fix start
       if (n.mouse.autoPositionHorizontal) {
 
         if (n.xaxis.d2p(n.x) > this.plotWidth * 2 / 3) {
@@ -5313,7 +5313,7 @@ Flotr.addPlugin('hit', {
           p += 'e';
         }
       }
-      // TPD-CRM fix end
+      // EspoCRM fix end
 
       pos += 'top:';
       if (/n/.test(p)) pos += (oTop - m + top + n.yaxis.d2p(n.y) - size.height);
@@ -5709,7 +5709,7 @@ Flotr.addPlugin('labels', {
         style, offset;
 
       style = {
-        size: axis.options.fontSize || Flotr.defaultOptions.fontSize, // TPD-CRM fix
+        size: axis.options.fontSize || Flotr.defaultOptions.fontSize, // EspoCRM fix
         color        : axis.options.color || options.grid.color,
         angle        : Flotr.toRad(axis.options.labelsAngle),
         textBaseline : 'middle'

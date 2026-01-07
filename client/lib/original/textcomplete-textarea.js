@@ -358,7 +358,7 @@ define('@textcomplete/textarea', ['@textcomplete/core'], (function (require$$2) 
 	function requireDist$1 () {
 		if (hasRequiredDist$1) return dist;
 		hasRequiredDist$1 = 1;
-		(function (exports) {
+		(function (exports$1) {
 			var __createBinding = (dist && dist.__createBinding) || (Object.create ? (function(o, m, k, k2) {
 			    if (k2 === undefined) k2 = k;
 			    var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -370,13 +370,13 @@ define('@textcomplete/textarea', ['@textcomplete/core'], (function (require$$2) 
 			    if (k2 === undefined) k2 = k;
 			    o[k2] = m[k];
 			}));
-			var __exportStar = (dist && dist.__exportStar) || function(m, exports) {
-			    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+			var __exportStar = (dist && dist.__exportStar) || function(m, exports$1) {
+			    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports$1, p)) __createBinding(exports$1, m, p);
 			};
-			Object.defineProperty(exports, "__esModule", { value: true });
-			__exportStar(requireCalculateElementOffset(), exports);
-			__exportStar(requireGetLineHeightPx(), exports);
-			__exportStar(requireIsSafari(), exports);
+			Object.defineProperty(exports$1, "__esModule", { value: true });
+			__exportStar(requireCalculateElementOffset(), exports$1);
+			__exportStar(requireGetLineHeightPx(), exports$1);
+			__exportStar(requireIsSafari(), exports$1);
 			
 		} (dist));
 		return dist;
@@ -503,11 +503,11 @@ define('@textcomplete/textarea', ['@textcomplete/core'], (function (require$$2) 
 	function requireDist () {
 		if (hasRequiredDist) return dist$2;
 		hasRequiredDist = 1;
-		(function (exports) {
-			Object.defineProperty(exports, "__esModule", { value: true });
-			exports.TextareaEditor = void 0;
+		(function (exports$1) {
+			Object.defineProperty(exports$1, "__esModule", { value: true });
+			exports$1.TextareaEditor = void 0;
 			var TextareaEditor_1 = requireTextareaEditor();
-			Object.defineProperty(exports, "TextareaEditor", { enumerable: true, get: function () { return TextareaEditor_1.TextareaEditor; } });
+			Object.defineProperty(exports$1, "TextareaEditor", { enumerable: true, get: function () { return TextareaEditor_1.TextareaEditor; } });
 			
 		} (dist$2));
 		return dist$2;

@@ -19,33 +19,33 @@ You can try the CRM on an online [demo](https://www.TPDCRM.com/demo/).
 
 ### Requirements
 
-* PHP 8.2 - 8.4;
-* MySQL 8.0 (and later), or MariaDB 10.3 (and later);
-* PostgreSQL 15 (and later).
+-   PHP 8.2 - 8.4;
+-   MySQL 8.0 (and later), or MariaDB 10.3 (and later);
+-   PostgreSQL 15 (and later).
 
 For more information about server configuration, see [this article](https://docs.TPDCRM.com/administration/server-configuration/).
 
 ### Why TPDCRM?
 
-* Open-source transparency. TPDCRM's source code is open and accessible, so anyone can inspect it and see how data is being managed within the CRM.
-* Customization freedom. You can develop features, create custom entities, fields, relationships, buttons to make the system fit your specific needs. TPDCRM is more than a CRM – it's a platform for building custom business applications.
-* Clean user interface. TPDCRM offers an uncluttered, minimalist, and fast user interface, which is easy to navigate and has a short learning curve.
-* Straightforward REST API. It can be easily integrated with other applications using a REST API.
+-   Open-source transparency. TPDCRM's source code is open and accessible, so anyone can inspect it and see how data is being managed within the CRM.
+-   Customization freedom. You can develop features, create custom entities, fields, relationships, buttons to make the system fit your specific needs. TPDCRM is more than a CRM – it's a platform for building custom business applications.
+-   Clean user interface. TPDCRM offers an uncluttered, minimalist, and fast user interface, which is easy to navigate and has a short learning curve.
+-   Straightforward REST API. It can be easily integrated with other applications using a REST API.
 
 ### Who is TPDCRM for?
 
-* Startups, small & medium-sized businesses. It's an affordable solution that is flexible and fully customizable.
-* Developers & tech enthusiasts. You can extend functionalities, build extensions, and create custom integrations.
-* Anyone seeking a free CRM. If you're looking for a user-friendly and secure CRM platform, it can be a good option.
+-   Startups, small & medium-sized businesses. It's an affordable solution that is flexible and fully customizable.
+-   Developers & tech enthusiasts. You can extend functionalities, build extensions, and create custom integrations.
+-   Anyone seeking a free CRM. If you're looking for a user-friendly and secure CRM platform, it can be a good option.
 
 ### Installing stable version
 
 See installation instructions:
 
-* [Manual installation](https://docs.TPDCRM.com/administration/installation/)
-* [Installation by script](https://docs.TPDCRM.com/administration/installation-by-script/)
-* [Installation with Docker](https://docs.TPDCRM.com/administration/docker/installation/)
-* [Installation with Traefik](https://docs.TPDCRM.com/administration/docker/traefik/)
+-   [Manual installation](https://docs.TPDCRM.com/administration/installation/)
+-   [Installation by script](https://docs.TPDCRM.com/administration/installation-by-script/)
+-   [Installation with Docker](https://docs.TPDCRM.com/administration/docker/installation/)
+-   [Installation with Traefik](https://docs.TPDCRM.com/administration/docker/traefik/)
 
 ### Download
 
@@ -85,9 +85,9 @@ Before we can merge your pull request, you need to accept our CLA [here](https:/
 
 Branches:
 
-* *fix* – upcoming maintenance release; minor fixes should be pushed to this branch;
-* *master* – develop branch; new features should be pushed to this branch;
-* *stable* – last stable release.
+-   _fix_ – upcoming maintenance release; minor fixes should be pushed to this branch;
+-   _master_ – develop branch; new features should be pushed to this branch;
+-   _stable_ – last stable release.
 
 ### Language
 

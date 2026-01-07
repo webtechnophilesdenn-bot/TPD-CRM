@@ -137,8 +137,13 @@ libs.forEach(item => {
 
 buildUtils.getBundleLibList(libs, true).forEach(item => {
     const src = item.src;
-
     const dest = originalLibDir + '/' + item.file;
+
+    // Check if source file exists before copying
+    if (!fs.existsSync(src)) {
+        console.warn(`Warning: Source file not found, skipping: ${src}`);
+        return;
+    }
 
     fs.copyFileSync(src, dest);
     stripSourceMappingUrl(dest);
@@ -157,6 +162,12 @@ buildUtils.getBundleLibList(libs, true).forEach(item => {
 buildUtils.getCopyLibDataList(libs)
     .filter(item => item.minify)
     .forEach(item => {
+        // Check if source file exists before copying
+        if (!fs.existsSync(item.src)) {
+            console.warn(`Warning: Source file not found, skipping: ${item.src}`);
+            return;
+        }
+
         fs.copyFileSync(item.src, item.originalDest);
         stripSourceMappingUrl(item.originalDest);
 

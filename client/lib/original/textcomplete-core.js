@@ -427,11 +427,11 @@ define('@textcomplete/core', (function () { 'use strict';
 	function requireStrategy () {
 		if (hasRequiredStrategy) return Strategy;
 		hasRequiredStrategy = 1;
-		(function (exports) {
-			Object.defineProperty(exports, "__esModule", { value: true });
-			exports.Strategy = exports.DEFAULT_INDEX = void 0;
+		(function (exports$1) {
+			Object.defineProperty(exports$1, "__esModule", { value: true });
+			exports$1.Strategy = exports$1.DEFAULT_INDEX = void 0;
 			const SearchResult_1 = requireSearchResult();
-			exports.DEFAULT_INDEX = 1;
+			exports$1.DEFAULT_INDEX = 1;
 			class Strategy {
 			    constructor(props) {
 			        this.props = props;
@@ -449,7 +449,7 @@ define('@textcomplete/core', (function () { 'use strict';
 			        const match = this.matchWithContext(beforeCursor);
 			        if (!match)
 			            return false;
-			        const term = match[(_a = this.props.index) !== null && _a !== void 0 ? _a : exports.DEFAULT_INDEX];
+			        const term = match[(_a = this.props.index) !== null && _a !== void 0 ? _a : exports$1.DEFAULT_INDEX];
 			        this.search(term, (results) => {
 			            callback(results.map((result) => new SearchResult_1.SearchResult(result, term, this)));
 			        }, match);
@@ -500,7 +500,7 @@ define('@textcomplete/core', (function () { 'use strict';
 			        }
 			    }
 			}
-			exports.Strategy = Strategy;
+			exports$1.Strategy = Strategy;
 			
 		} (Strategy));
 		return Strategy;
@@ -571,22 +571,22 @@ define('@textcomplete/core', (function () { 'use strict';
 	function requireDropdown () {
 		if (hasRequiredDropdown) return Dropdown;
 		hasRequiredDropdown = 1;
-		(function (exports) {
-			Object.defineProperty(exports, "__esModule", { value: true });
-			exports.Dropdown = exports.DEFAULT_DROPDOWN_ITEM_ACTIVE_CLASS_NAME = exports.DEFAULT_DROPDOWN_ITEM_CLASS_NAME = exports.DEFAULT_DROPDOWN_CLASS_NAME = exports.DEFAULT_DROPDOWN_PLACEMENT = exports.DEFAULT_DROPDOWN_MAX_COUNT = void 0;
+		(function (exports$1) {
+			Object.defineProperty(exports$1, "__esModule", { value: true });
+			exports$1.Dropdown = exports$1.DEFAULT_DROPDOWN_ITEM_ACTIVE_CLASS_NAME = exports$1.DEFAULT_DROPDOWN_ITEM_CLASS_NAME = exports$1.DEFAULT_DROPDOWN_CLASS_NAME = exports$1.DEFAULT_DROPDOWN_PLACEMENT = exports$1.DEFAULT_DROPDOWN_MAX_COUNT = void 0;
 			const eventemitter3_1 = requireEventemitter3();
 			const utils_1 = requireUtils();
 			// Default constants for Dropdown
-			exports.DEFAULT_DROPDOWN_MAX_COUNT = 10;
-			exports.DEFAULT_DROPDOWN_PLACEMENT = "auto";
-			exports.DEFAULT_DROPDOWN_CLASS_NAME = "dropdown-menu textcomplete-dropdown";
+			exports$1.DEFAULT_DROPDOWN_MAX_COUNT = 10;
+			exports$1.DEFAULT_DROPDOWN_PLACEMENT = "auto";
+			exports$1.DEFAULT_DROPDOWN_CLASS_NAME = "dropdown-menu textcomplete-dropdown";
 			// Default constants for DropdownItem
-			exports.DEFAULT_DROPDOWN_ITEM_CLASS_NAME = "textcomplete-item";
-			exports.DEFAULT_DROPDOWN_ITEM_ACTIVE_CLASS_NAME = `${exports.DEFAULT_DROPDOWN_ITEM_CLASS_NAME} active`;
+			exports$1.DEFAULT_DROPDOWN_ITEM_CLASS_NAME = "textcomplete-item";
+			exports$1.DEFAULT_DROPDOWN_ITEM_ACTIVE_CLASS_NAME = `${exports$1.DEFAULT_DROPDOWN_ITEM_CLASS_NAME} active`;
 			class Dropdown extends eventemitter3_1.EventEmitter {
 			    static create(option) {
 			        const ul = document.createElement("ul");
-			        ul.className = option.className || exports.DEFAULT_DROPDOWN_CLASS_NAME;
+			        ul.className = option.className || exports$1.DEFAULT_DROPDOWN_CLASS_NAME;
 			        Object.assign(ul.style, {
 			            display: "none",
 			            position: "absolute",
@@ -619,7 +619,7 @@ define('@textcomplete/core', (function () { 'use strict';
 			        if (searchResults.length === 0)
 			            return this.hide();
 			        this.items = searchResults
-			            .slice(0, this.option.maxCount || exports.DEFAULT_DROPDOWN_MAX_COUNT)
+			            .slice(0, this.option.maxCount || exports$1.DEFAULT_DROPDOWN_MAX_COUNT)
 			            .map((r, index) => { var _a; return new DropdownItem(this, index, r, ((_a = this.option) === null || _a === void 0 ? void 0 : _a.item) || {}); });
 			        this.setStrategyId(searchResults[0])
 			            .renderEdge(searchResults, "header")
@@ -752,7 +752,7 @@ define('@textcomplete/core', (function () { 'use strict';
 			                this.el.style.right = `${cursorOffset.right}px`;
 			            }
 			            let forceTop = false;
-			            const placement = this.option.placement || exports.DEFAULT_DROPDOWN_PLACEMENT;
+			            const placement = this.option.placement || exports$1.DEFAULT_DROPDOWN_PLACEMENT;
 			            if (placement === "auto") {
 			                const dropdownHeight = this.items.length * cursorOffset.lineHeight;
 			                forceTop =
@@ -814,7 +814,7 @@ define('@textcomplete/core', (function () { 'use strict';
 			        return this;
 			    }
 			}
-			exports.Dropdown = Dropdown;
+			exports$1.Dropdown = Dropdown;
 			class DropdownItem {
 			    constructor(dropdown, index, searchResult, props) {
 			        this.dropdown = dropdown;
@@ -826,9 +826,9 @@ define('@textcomplete/core', (function () { 'use strict';
 			            e.preventDefault();
 			            this.dropdown.select(this);
 			        };
-			        this.className = this.props.className || exports.DEFAULT_DROPDOWN_ITEM_CLASS_NAME;
+			        this.className = this.props.className || exports$1.DEFAULT_DROPDOWN_ITEM_CLASS_NAME;
 			        this.activeClassName =
-			            this.props.activeClassName || exports.DEFAULT_DROPDOWN_ITEM_ACTIVE_CLASS_NAME;
+			            this.props.activeClassName || exports$1.DEFAULT_DROPDOWN_ITEM_ACTIVE_CLASS_NAME;
 			        const li = document.createElement("li");
 			        li.className = this.active ? this.activeClassName : this.className;
 			        const span = document.createElement("span");
@@ -1134,7 +1134,7 @@ define('@textcomplete/core', (function () { 'use strict';
 	function requireDist () {
 		if (hasRequiredDist) return dist;
 		hasRequiredDist = 1;
-		(function (exports) {
+		(function (exports$1) {
 			var __createBinding = (dist && dist.__createBinding) || (Object.create ? (function(o, m, k, k2) {
 			    if (k2 === undefined) k2 = k;
 			    var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -1146,17 +1146,17 @@ define('@textcomplete/core', (function () { 'use strict';
 			    if (k2 === undefined) k2 = k;
 			    o[k2] = m[k];
 			}));
-			var __exportStar = (dist && dist.__exportStar) || function(m, exports) {
-			    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+			var __exportStar = (dist && dist.__exportStar) || function(m, exports$1) {
+			    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports$1, p)) __createBinding(exports$1, m, p);
 			};
-			Object.defineProperty(exports, "__esModule", { value: true });
-			__exportStar(requireCompleter(), exports);
-			__exportStar(requireDropdown(), exports);
-			__exportStar(requireEditor(), exports);
-			__exportStar(requireSearchResult(), exports);
-			__exportStar(requireStrategy(), exports);
-			__exportStar(requireTextcomplete(), exports);
-			__exportStar(requireUtils(), exports);
+			Object.defineProperty(exports$1, "__esModule", { value: true });
+			__exportStar(requireCompleter(), exports$1);
+			__exportStar(requireDropdown(), exports$1);
+			__exportStar(requireEditor(), exports$1);
+			__exportStar(requireSearchResult(), exports$1);
+			__exportStar(requireStrategy(), exports$1);
+			__exportStar(requireTextcomplete(), exports$1);
+			__exportStar(requireUtils(), exports$1);
 			
 		} (dist));
 		return dist;
