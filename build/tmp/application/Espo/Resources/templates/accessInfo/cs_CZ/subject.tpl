@@ -1,1 +1,0 @@
-TPDCRM Informace k uživatelskému přístupu

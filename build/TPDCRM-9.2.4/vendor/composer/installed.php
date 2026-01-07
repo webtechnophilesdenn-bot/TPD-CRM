@@ -3,7 +3,7 @@
         'name' => 'tpdcrm/tpdcrm',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '68954d598876991da00a7dcb6cc0b79cf07bdf55',
+        'reference' => 'ece1fc8060001d71c7ec1fbb543f4db0c15fec5e',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -1105,7 +1105,7 @@
         'tpdcrm/tpdcrm' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '68954d598876991da00a7dcb6cc0b79cf07bdf55',
+            'reference' => 'ece1fc8060001d71c7ec1fbb543f4db0c15fec5e',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
