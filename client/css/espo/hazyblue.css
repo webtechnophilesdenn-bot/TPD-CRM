@@ -14776,7 +14776,7 @@ fieldset[disabled] .datepicker table tr td span.active:hover:hover {
         format("woff2");
 }
 body:not([data-navbar="side"]) {
-    padding-top: calc(var(--10px) * 5 + var(--2px));
+    padding-top: 0;
     height: 100%;
 }
 body:not([data-navbar="side"]) > .content {
