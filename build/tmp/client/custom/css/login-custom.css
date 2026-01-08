@@ -1,0 +1,449 @@
+/* ============================================
+   MODERN SPLIT-SCREEN LOGIN PAGE
+   ============================================ */
+
+/* Reset default body styles for login */
+body.login {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #f5f7fa;
+}
+
+body.login .container.content {
+    padding: 0;
+    margin: 0;
+    max-width: none;
+}
+
+body.login .container-centering {
+    display: flex;
+    align-items: stretch;
+    min-height: 100vh;
+    padding: 0;
+}
+
+/* Main Container */
+.custom-login-container {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* ============================================
+   LEFT PANEL - CRM Information
+   ============================================ */
+
+.login-left-panel {
+    flex: 1;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 60px;
+    overflow-y: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-content {
+    max-width: 600px;
+    width: 100%;
+}
+
+/* Logo Section */
+.logo-section {
+    margin-bottom: 50px;
+}
+
+.logo-section .main-logo {
+    max-width: 180px;
+    filter: brightness(0) invert(1); /* Makes logo white */
+}
+
+/* Welcome Text */
+.welcome-text {
+    margin-bottom: 60px;
+}
+
+.welcome-text h1 {
+    font-size: 48px;
+    font-weight: 700;
+    margin: 0 0 15px 0;
+    line-height: 1.2;
+}
+
+.welcome-text .subtitle {
+    font-size: 20px;
+    opacity: 0.9;
+    margin: 0;
+    font-weight: 300;
+}
+
+/* Features Section */
+.features-section {
+    margin-bottom: 60px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 35px;
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+.feature-item:nth-child(1) { animation-delay: 0.1s; }
+.feature-item:nth-child(2) { animation-delay: 0.2s; }
+.feature-item:nth-child(3) { animation-delay: 0.3s; }
+.feature-item:nth-child(4) { animation-delay: 0.4s; }
+
+.feature-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.feature-icon i {
+    font-size: 24px;
+}
+
+.feature-text h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+}
+
+.feature-text p {
+    font-size: 14px;
+    opacity: 0.85;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Stats Section */
+.stats-section {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-item h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+}
+
+.stat-item p {
+    font-size: 14px;
+    opacity: 0.85;
+    margin: 0;
+}
+
+/* ============================================
+   RIGHT PANEL - Login Form
+   ============================================ */
+
+.login-right-panel {
+    width: 480px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.05);
+}
+
+.login-form-container {
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-form-header {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.login-form-header h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #2d3748;
+    margin: 0 0 10px 0;
+}
+
+.login-form-header p {
+    font-size: 14px;
+    color: #718096;
+    margin: 0;
+}
+
+/* Form Wrapper */
+.login-form-wrapper {
+    background: transparent;
+}
+
+#login .panel {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    margin: 0;
+}
+
+#login .panel-body {
+    padding: 0;
+}
+
+/* Form Groups */
+#login .form-group {
+    margin-bottom: 24px;
+}
+
+#login label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #2d3748;
+    margin-bottom: 8px;
+}
+
+/* Input Fields with Icons */
+.input-with-icon {
+    position: relative;
+}
+
+.input-with-icon i.fas,
+.input-with-icon i.far {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a0aec0;
+    font-size: 16px;
+}
+
+.input-with-icon input.form-control {
+    padding-left: 45px;
+    padding-right: 45px;
+}
+
+#login input.form-control {
+    height: 48px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: #f7fafc;
+}
+
+#login input.form-control:focus {
+    background: white;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    outline: none;
+}
+
+#login input.form-control::placeholder {
+    color: #a0aec0;
+}
+
+/* Password Toggle */
+.password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a0aec0;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.password-toggle:hover {
+    color: #667eea;
+}
+
+/* Remember Me */
+.remember-section {
+    margin-bottom: 24px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 400;
+    color: #4a5568;
+}
+
+.checkbox-label input[type="checkbox"] {
+    margin-right: 8px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+/* Login Button */
+.btn-login {
+    width: 100%;
+    height: 48px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    transition: all 0.3s ease;
+    margin-bottom: 16px;
+}
+
+.btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
+.btn-login:active {
+    transform: translateY(0);
+}
+
+/* Forgot Password */
+.forgot-password-section {
+    text-align: center;
+    margin-top: 16px;
+}
+
+.forgot-password-link {
+    color: #667eea;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.forgot-password-link:hover {
+    color: #764ba2;
+    text-decoration: none;
+}
+
+/* Login Footer */
+.login-footer {
+    margin-top: 30px;
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.login-footer p {
+    color: #718096;
+    font-size: 14px;
+    margin: 0;
+}
+
+.signup-link {
+    color: #667eea;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.signup-link:hover {
+    color: #764ba2;
+    text-decoration: none;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 1024px) {
+    .login-left-panel {
+        padding: 40px;
+    }
+    
+    .welcome-text h1 {
+        font-size: 36px;
+    }
+    
+    .login-right-panel {
+        width: 420px;
+    }
+}
+
+@media (max-width: 768px) {
+    .custom-login-container {
+        flex-direction: column;
+    }
+    
+    .login-left-panel {
+        min-height: auto;
+        padding: 40px 20px;
+    }
+    
+    .welcome-text h1 {
+        font-size: 28px;
+    }
+    
+    .welcome-text .subtitle {
+        font-size: 16px;
+    }
+    
+    .features-section {
+        margin-bottom: 40px;
+    }
+    
+    .stats-section {
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    
+    .stat-item {
+        flex: 1;
+        min-width: 100px;
+    }
+    
+    .login-right-panel {
+        width: 100%;
+        padding: 40px 20px;
+    }
+}
+
+/* ============================================
+   FOOTER OVERRIDE
+   ============================================ */
+
+body.login footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: transparent;
+    padding: 20px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 12px;
+}
+
+body.login footer a {
+    color: white;
+}

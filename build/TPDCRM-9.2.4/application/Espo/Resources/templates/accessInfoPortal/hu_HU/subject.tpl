@@ -1,1 +1,0 @@
-TPDCRM felhasználói hozzáférési információ

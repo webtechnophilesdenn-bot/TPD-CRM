@@ -1,0 +1,91 @@
+/* Theme Toggle Styles */
+.theme-toggle-container {
+    display: inline-flex;
+    align-items: center;
+    padding: 0;
+}
+
+.theme-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    color: inherit;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none !important;
+    font-size: 14px;
+}
+
+.theme-toggle-btn:hover {
+    background: rgba(52, 152, 219, 0.1);
+    border-color: #3498db;
+    color: #3498db;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2);
+}
+
+.theme-toggle-btn .theme-icon {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+
+.theme-toggle-btn .theme-label {
+    font-weight: 500;
+    font-size: 13px;
+}
+
+/* Dark Mode Styles */
+body[data-theme="Dark"] .theme-toggle-btn {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #ecf0f1;
+}
+
+body[data-theme="Dark"] .theme-toggle-btn:hover {
+    background: rgba(52, 152, 219, 0.2);
+    border-color: #3498db;
+    color: #3498db;
+}
+
+/* Navbar Item Integration */
+.navbar-right [data-item="themeToggle"] {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+}
+
+/* Side Navbar Adjustment */
+.navbar.navbar-side [data-item="themeToggle"] {
+    padding: 10px 15px;
+}
+
+.navbar.navbar-side .theme-toggle-btn {
+    width: 100%;
+    justify-content: flex-start;
+    border-radius: 4px;
+}
+
+/* Animation for icon change */
+.theme-toggle-btn .theme-icon i {
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle-btn:hover .theme-icon i {
+    transform: rotate(20deg);
+}
+
+/* Responsive - Mobile */
+@media (max-width: 768px) {
+    .theme-toggle-btn {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+    
+    .theme-toggle-btn .theme-icon {
+        font-size: 14px;
+    }
+}
