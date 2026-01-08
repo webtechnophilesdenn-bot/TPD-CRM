@@ -8,7 +8,7 @@
     },
     "scripts": {
         "postinstall": "node -e \"if (process.env.VERCEL !== '1' && process.env.CI !== 'true') { require('child_process').execSync('node js/scripts/postinstall-cleanup && node js/scripts/prepare-lib-original.js', {stdio: 'inherit'}); }\"",
-        "build": "grunt",
+        "build": "grunt --force",
         "build-dev": "grunt dev",
         "build-test": "grunt test",
         "build-frontend": "grunt internal",
