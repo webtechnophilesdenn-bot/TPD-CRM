@@ -5,7 +5,7 @@
     "homepage": "https://github.com/TPDCRM/TPDCRM.git",
     "license": "AGPL-3.0-or-later",
     "require": {
-        "php": ">=8.2.0 <8.5.0",
+        "php": ">=8.2.0 <8.6.0",
         "ext-openssl": "*",
         "ext-json": "*",
         "ext-zip": "*",
@@ -131,5 +131,10 @@
         "post-install-cmd": [
             "php dev/vendor-cleanup.php"
         ]
+    },
+    "config": {
+        "platform": {
+            "php": "8.4.0"
+        }
     }
 }

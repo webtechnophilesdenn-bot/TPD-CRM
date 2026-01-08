@@ -367,6 +367,10 @@ final class FileSystemHelper implements FileSystemWithRootFolderHelperInterface
             $this->copyFileContentsToTarget($worksheetFilePath, $worksheetFilePointer);
             fwrite($worksheetFilePointer, '</sheetData>');
 
+            if (null !== $sheet->getSheetProtection()) {
+                fwrite($worksheetFilePointer, $sheet->getSheetProtection()->getXml());
+            }
+
             // AutoFilter tag
             if (null !== $autofilter) {
                 $autoFilterRange = \sprintf(
@@ -407,10 +411,6 @@ final class FileSystemHelper implements FileSystemWithRootFolderHelperInterface
 
             // Add the legacy drawing for comments
             fwrite($worksheetFilePointer, '<legacyDrawing r:id="rId_comments_vml1"/>');
-
-            if (null !== $sheet->getSheetProtection()) {
-                fwrite($worksheetFilePointer, $sheet->getSheetProtection()->getXml());
-            }
 
             fwrite($worksheetFilePointer, '</worksheet>');
             fclose($worksheetFilePointer);
@@ -615,7 +615,7 @@ final class FileSystemHelper implements FileSystemWithRootFolderHelperInterface
     {
         $relationshipsXmlContents = <<<'EOD'
             <Relationship Id="rIdWorkbook" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>
-            <Relationship Id="rIdCore" Type="http://schemas.openxmlformats.org/officedocument/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/>
+            <Relationship Id="rIdCore" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/>
             <Relationship Id="rIdApp" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties" Target="docProps/app.xml"/>
             EOD;
 
